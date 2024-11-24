@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  class_name: MyString
+  description: MyText
+  youtube_playlist_id: MyString
+  price: 1
+  rating: 1
+  like: 1
+  level: MyString
+  certificate: false
+  sessions_count: 1
+  provider: MyString
+
+two:
+  class_name: MyString
+  description: MyText
+  youtube_playlist_id: MyString
+  price: 1
+  rating: 1
+  like: 1
+  level: MyString
+  certificate: false
+  sessions_count: 1
+  provider: MyString

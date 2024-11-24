@@ -1,0 +1,67 @@
+<%= form_with(model: course, local: true) do |form| %>
+  <% if course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+        <% course.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :class_name %>
+    <%= form.text_field :class_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :youtube_playlist_id %>
+    <%= form.text_field :youtube_playlist_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= form.label :like %>
+    <%= form.number_field :like %>
+  </div>
+
+  <div class="field">
+    <%= form.label :level %>
+    <%= form.text_field :level %>
+  </div>
+
+  <div class="field">
+    <%= form.label :certificate %>
+    <%= form.check_box :certificate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sessions_count %>
+    <%= form.number_field :sessions_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :provider %>
+    <%= form.text_field :provider %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
