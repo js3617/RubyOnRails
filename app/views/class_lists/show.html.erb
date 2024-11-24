@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @class_list.course_id %>
+</p>
+
+<p>
+  <strong>Lesson name:</strong>
+  <%= @class_list.lesson_name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @class_list.description %>
+</p>
+
+<p>
+  <strong>Youtube video:</strong>
+  <%= @class_list.youtube_video_id %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @class_list.duration %>
+</p>
+
+<%= link_to 'Edit', edit_class_list_path(@class_list) %> |
+<%= link_to 'Back', class_lists_path %>

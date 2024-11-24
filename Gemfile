@@ -25,7 +25,18 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-gem 'pg'
+gem 'pg' # PostgreSQL
+gem 'devise' # 로그인/회원가입
+gem 'omniauth' # 소셜 로그인
+gem 'omniauth-google-oauth2', '~> 0.8.2' # 구글 소셜 로그인
+gem 'omniauth-kakao', git: "https://github.com/DevStarSJ/omniauth-kakao" # 카카오 소셜 로그인
+gem 'dotenv-rails' # 환경변수 설정
+gem 'figaro'
+
+gem 'google-api-client', '0.53.0' # Youtube Data API
+gem 'signet', '0.18.0'
+gem 'addressable', '~> 2.8'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

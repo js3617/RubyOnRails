@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GoormRailsApp</title>
+    <title>Inflearn</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+	
   <body>
+	  <div>
+		  <% if user_signed_in? %>
+		  	<%= link_to "회원정보", edit_user_registration_path %> |
+		  	<%= link_to "로그아웃", destroy_user_session_path, method: :delete %> |
+		    아이디 : <%= current_user.email %> |
+		    유저 NO. : <%= current_user.id %>
+		  <% else %>
+		    <%= link_to "로그인", user_session_path %>
+		    <%= link_to "회원가입", "/users/sign_up" %>
+		  <% end %>
+	  </div>
+	  <hr/>
+	  
     <%= yield %>
   </body>
 </html>

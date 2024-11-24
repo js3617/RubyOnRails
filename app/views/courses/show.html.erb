@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+
+<h2>강의 정보</h2>
+
+<p>
+  <strong>강좌 명:</strong>
+  <%= @course.class_name %>
+</p>
+
+<p>
+  <strong>강의 설명:</strong>
+  <%= @course.description %>
+</p>
+
+<p>
+  <strong>Youtube playlist:</strong>
+  <%= @course.youtube_playlist_id %>
+</p>
+
+<p>
+  <strong>가격:</strong>
+  <%= @course.price %>
+</p>
+
+<p>
+  <strong>평점:</strong>
+  <%= @course.rating %>
+</p>
+
+<p>
+  <strong>좋아요:</strong>
+  <%= @course.like %>
+</p>
+
+<p>
+  <strong>난이도:</strong>
+  <%= @course.level %>
+</p>
+
+<p>
+  <strong>수료증 제공 여부:</strong>
+  <%= @course.certificate ? '예' : '아니오' %>
+</p>
+
+<p>
+  <strong>강의수:</strong>
+  <%= @course.class_lists.count %>
+</p>
+
+<p>
+  <strong>강의 제공자:</strong>
+  <%= @course.provider %>
+</p>
+
+<h2>강의 목록</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>썸네일</th>
+      <th>강의명</th>
+      <th>강의 설명</th>
+      <th>영상 길이</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @course.class_lists.each do |lesson| %>
+      <tr>
+        <td>
+          <% if lesson.thumbnail_url.present? %>
+            <img src="<%= lesson.thumbnail_url %>" alt="Thumbnail" style="width: 120px; height: auto;">
+          <% else %>
+            <span>썸네일 없음</span>
+          <% end %>
+        </td>
+        <td><%= lesson.lesson_name %></td>
+        <td><%= lesson.description %></td>
+        <td><%= lesson.duration %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-primary' %> |
+<%= link_to 'Back', courses_path, class: 'btn btn-secondary' %>

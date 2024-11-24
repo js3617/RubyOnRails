@@ -1,0 +1,38 @@
+<h1>강의 목록</h1>
+
+<%= form_with url: import_youtube_courses_path, method: :post, local: true do |f| %>
+  <div>
+    <%= f.label :playlist_url, '유튜브 재생목록 URL:' %>
+    <%= f.text_field :playlist_url, placeholder: 'https://www.youtube.com/playlist?list=PLAYLIST_ID' %>
+    <%= f.submit 'YouTube 가져오기', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>썸네일</th>
+      <th>강의명</th>
+      <th>제공자</th>
+      <th>수업 수</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td>
+          <% if course.thumbnail_url.present? %>
+            <img src="<%= course.thumbnail_url %>" alt="Thumbnail" style="width: 120px; height: auto;">
+          <% else %>
+            <img src="/assets/default_thumbnail.png" alt="Default Thumbnail" style="width: 120px; height: auto;">
+          <% end %>
+        </td>
+        <td><%= course.class_name %></td>
+        <td><%= course.provider %></td>
+        <td><%= course.sessions_count %></td>
+        <td><%= link_to '보기', course_path(course) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
