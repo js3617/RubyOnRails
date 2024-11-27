@@ -7,7 +7,8 @@ class User < ApplicationRecord
 	
   # username은 반드시 입력되어야 함
   validates :username, presence: true	
-	
+  
+  # users
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.uid = auth.uid
