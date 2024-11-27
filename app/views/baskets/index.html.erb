@@ -1,0 +1,21 @@
+<h1>수강바구니</h1>
+
+<% if @basket_courses.any? %>
+  <ul>
+    <% @basket_courses.each do |basket| %>
+      <li>
+        <!-- 강의 제목 -->
+        <h3><%= link_to basket.course.title, course_path(basket.course) %></h3>
+        
+        <!-- 강의 설명 -->
+        <p><%= basket.course.description %></p>
+        
+        <!-- 삭제 버튼 -->
+        <%= button_to '삭제', basket_path(basket), method: :delete, class: 'btn btn-danger' %>
+      </li>
+      <hr>
+    <% end %>
+  </ul>
+<% else %>
+  <p>수강바구니에 담긴 강의가 없습니다.</p>
+<% end %>

@@ -1,0 +1,9 @@
+<h1><%= @course.title %></h1>
+<p><%= @course.description %></p>
+
+<!-- 수강바구니 추가/상태 확인 -->
+<% if current_user.baskets.exists?(course_id: @course.id) %>
+  <p>이미 수강바구니에 추가된 강의입니다.</p>
+<% else %>
+  <%= button_to '수강바구니에 추가', baskets_path(course_id: @course.id), method: :post, class: 'btn btn-primary' %>
+<% end %>

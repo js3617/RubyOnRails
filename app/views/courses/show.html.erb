@@ -2,6 +2,12 @@
 
 <h2>강의 정보</h2>
 
+<% if current_user.baskets.exists?(course_id: @course.id) %>
+  <button class="btn btn-secondary" disabled>이미 수강신청된 강의</button>
+<% else %>
+  <%= button_to '수강신청', baskets_path(course_id: @course.id), method: :post, class: "btn btn-primary" %>
+<% end %>
+
 <p>
   <strong>강좌 명:</strong>
   <%= @course.class_name %>
