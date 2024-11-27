@@ -13,5 +13,4 @@ Rails.application.routes.draw do
   # root to: 'dashboard#index' # 기본 루트 경로
   root 'courses#index'
   get 'dashboard', to: 'dashboard#index', as: :dashboard
-
 end

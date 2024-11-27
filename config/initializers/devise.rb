@@ -312,16 +312,17 @@ Devise.setup do |config|
  
   # config/initializers/devise.rb
   Devise.setup do |config|
+    # 구글 소셜 로그인
     config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'], {
-    	scope: 'userinfo.email, userinfo.profile',
-    	prompt: 'select_account',
-    	access_type: 'offline'
-  	}
+      scope: 'userinfo.email, userinfo.profile',
+      prompt: 'select_account',
+      access_type: 'offline'
+    } 
+
+    # 카카오 소셜 로그인
+    config.omniauth :kakao, ENV['KAKAO_REST_API_KEY'], :redirect_path => "/users/auth/kakao/callback"
   end
-  config.omniauth :kakao, ENV['KAKAO_CLIENT_ID'], {
-	redirect_path: '/users/auth/kakao/callback',
-  	scope: 'profile_nickname'
-  }
+
 	
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
