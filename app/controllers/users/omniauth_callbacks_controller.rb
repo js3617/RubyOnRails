@@ -16,11 +16,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 	
-  #카카오 소셜 로그인	
+  #카카오 소셜 로그인
   def kakao
-	Rails.logger.info "Kakao callback phase initiated"
-    auth_data = request.env['omniauth.auth']
-    Rails.logger.info "Auth data: #{auth_data.inspect}"
+	puts "Callback URL: #{request.original_url}"
+ 	puts "Kakao callback phase initiated"
+  	auth_data = request.env['omniauth.auth']
+  	puts "Auth data: #{auth_data.inspect}"
 	  
     @user = User.from_omniauth(request.env['omniauth.auth'])
     if @user.persisted?
