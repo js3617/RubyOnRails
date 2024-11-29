@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-3">
+      <ul class="nav flex-column ml-3">
+        <li class="nav-item ">
+          <h5>
+            <a class="nav-link text-dark" href="#">마이페이지</a>
+          </h5>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link">마이페이지</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">나만의 패키지</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">내가 쓴 리뷰</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">문의내역</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link" href="#">구매 정보</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">쿠폰</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">포인트</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">주문/배송 확인</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link">설정</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">회원정보 수정</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">카카오톡 알림 설정</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-6">
+          <div class="card mx-5 shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">내 프로필</h5>
+              <div class="d-flex justify-content-around">
+                <div>
+                  <h3>인프런</h3>
+                  <a href="/users/edit" class="btn btn-warning btn-sm px-4 d-block mb-1 shadow">수정</a>
+                  <a href="#" class="btn btn-warning btn-sm px-4 d-block shadow">쿠폰 0개</a>
+                </div>
+                <div>
+                  <p><%= @user.email %></p>
+				  <a href="/users/sign_out" class="btn btn-dark btn-sm px-4 d-block shadow mt-3" data-method="delete">로그아웃</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+		  <div class="card mx-5 shadow-sm">
+            <div class="card-body">
+			  <h5 class="card-title">수강바구니</h5>
+			  <a href="/baskets" class="btn btn-warning px-5 shadow">수강바구니 확인</a>
+              <h5 class="card-title">결제내역</h5>
+              <p class="card-text">총 <%= @user.payments.count %>건의 결제 내역이 있습니다</p>
+			  <a href="/payments" class="btn btn-warning px-5 shadow">내역 조회</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

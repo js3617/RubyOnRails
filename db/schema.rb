@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_27_011417) do
+ActiveRecord::Schema.define(version: 2024_11_29_160717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,38 @@ ActiveRecord::Schema.define(version: 2024_11_27_011417) do
     t.string "thumbnail_url"
   end
 
+  create_table "payment_items", force: :cascade do |t|
+    t.bigint "payment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "course_id", null: false
+    t.index ["course_id"], name: "index_payment_items_on_course_id"
+    t.index ["payment_id"], name: "index_payment_items_on_payment_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.string "status", default: "pending", null: false
+    t.string "transaction_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "payment_method"
+    t.string "pg_provider"
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "take_courses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "start_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_take_courses_on_course_id"
+    t.index ["user_id", "course_id"], name: "index_take_courses_on_user_id_and_course_id", unique: true
+    t.index ["user_id"], name: "index_take_courses_on_user_id"
+  end
+
   create_table "tests", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -77,4 +109,9 @@ ActiveRecord::Schema.define(version: 2024_11_27_011417) do
   add_foreign_key "baskets", "courses"
   add_foreign_key "baskets", "users"
   add_foreign_key "class_lists", "courses"
+  add_foreign_key "payment_items", "courses"
+  add_foreign_key "payment_items", "payments"
+  add_foreign_key "payments", "users"
+  add_foreign_key "take_courses", "courses"
+  add_foreign_key "take_courses", "users"
 end

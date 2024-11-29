@@ -37,6 +37,11 @@ gem 'google-api-client', '0.53.0' # Youtube Data API
 gem 'signet', '0.18.0'
 gem 'addressable', '~> 2.8'
 
+gem 'httparty'
+# gem 'iamport' # 아임포트 결제 API
+gem 'rest-client'
+
+gem 'rails-erd', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
