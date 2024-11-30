@@ -77,7 +77,18 @@
 	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 	<%= stylesheet_link_tag 'Login', media: 'all', 'data-turbolinks-track': 'reload' %>
 	<%= javascript_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	
+	<script>
+	  var navDropdownItems = <%= @nav_dropdown_items.to_json.html_safe %>;
+	</script>
 
+	<script>
+		document.addEventListener("turbolinks:load", function() {
+		  $('.profile-img').on('click', function() {
+			$('.profile-details').toggle(); // 내용 토글
+		  });
+		});
+	</script>
 
   <!-- Link JavaScript -->
   <script src="./js/main.js" defer type="module"></script>
@@ -170,14 +181,27 @@
           </div>
           <div class="nav-btns">
             <% if user_signed_in? %>
-				<%= link_to "회원정보", edit_user_registration_path %> |
-			  	<%= button_to '로그아웃', destroy_user_session_path, method: :delete, class: "logoutbtn" %>
+			  	<button class="dashbord">대시보드</button>
+			  <i class="fa-light fa-play" aria-hidden="true"></i>
+			  <div class="profile">
+				  <!-- <img src="https://cdn.inflearn.com/public/main/profile/default_profile.png" alt="profile_img" class="profile-img"> -->
+				  <!-- <div class="profile-details" style="display: none;"> -->
+					<!-- 토글될 내용 -->
+					<%= link_to "회원정보", edit_user_registration_path %> |
+			  		<%= button_to '로그아웃', destroy_user_session_path, method: :delete, class: "logoutbtn" %>
+					<p>학생</p>
+					<!-- 추가적인 내용 -->
+				  </div>
+				</div>
+
+				<!-- <%= link_to "회원정보", edit_user_registration_path %> |
+			  	<%= button_to '로그아웃', destroy_user_session_path, method: :delete, class: "logoutbtn" %> -->
 
 				<!-- 아이디 : <%= current_user.email %> -->
 				<!-- 유저 NO. : <%= current_user.id %> -->
 		  <% else %>
-				<%= link_to "로그인", user_session_path %>
-				<%= link_to "회원가입", "/users/sign_up" %>
+				<%= link_to "로그인", user_session_path, class: "login" %>
+				<!-- <%= link_to "회원가입", "/users/sign_up" %> -->
 		  <% end %>
           </div>
         </div>
@@ -478,92 +502,79 @@
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper1.png" alt="부트캠프">
-                <p># 부트캠프</p> 
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper2.png" alt="스프링">
+                <img src="https://cdn.inflearn.com/public/curation/x2/spring.png" class="new-curation-card__icon new-curation-card__icon--left">
                 <p># 스프링</p>
               </a>
             </div>
-            <div class="swiper-slide">
+		  	<div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper3.png" alt="게임개발">
-                <p># 게임개발</p>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper4.png" alt="UX UI">
+                <img src="https://cdn.inflearn.com/public/curation/x2/ux-ui.png" class="new-curation-card__icon new-curation-card__icon--left">
                 <p># UX UI</p>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper5.png" alt="ChatGPT">
-                <p># ChatGPT</p>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper6.png" alt="신규강의">
+                <img src="https://cdn.inflearn.com/public/curation/x2/new-button.png" class="new-curation-card__icon new-curation-card__icon--left">
                 <p># 신규강의</p>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper7.png" alt="# 코딩테스트">
-                <p># 코딩테스트</p>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper8.png" alt="# 마케팅">
-                <p># 마케팅</p>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper9.png" alt="# 보안">
+                <img src="https://cdn.inflearn.com/public/curation/x2/locked.png" class="new-curation-card__icon new-curation-card__icon--left">
                 <p># 보안</p>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper10.png" alt="# 엑셀">
-                <p># 엑셀</p>
+                <img src="https://cdn.inflearn.com/public/curation/x2/gukbi.png" class="new-curation-card__icon new-curation-card__icon--left">
+                <p># 국비지원교육</p>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper11.png" alt="# 파이썬">
-                <p># 파이썬</p>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper12.png" alt="# 데브옵스">
+                <img src="https://cdn.inflearn.com/public/curation/x2/dev-ops.png" class="new-curation-card__icon new-curation-card__icon--left">
                 <p># 데브옵스</p>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper13.png" alt="# 데이터">
+                <img src="https://cdn.inflearn.com/public/curation/x2/course-python.png" class="new-curation-card__icon new-curation-card__icon--left">
+                <p># 파이썬</p>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="javascript:void(0)">
+                <img src="https://cdn.inflearn.com/public/curation/x2/byManage.png" class="new-curation-card__icon new-curation-card__icon--left">
+                <p># 부트캠프</p>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="javascript:void(0)">
+                <img src="https://cdn.inflearn.com/public/curation/x2/course-excel.png" class="new-curation-card__icon new-curation-card__icon--left">
+                <p># 엑셀</p>
+              </a>
+            <div class="swiper-slide">
+              <a href="javascript:void(0)">
+                <img src="https://cdn.inflearn.com/public/curation/x2/globe-with-meridians.png" class="new-curation-card__icon new-curation-card__icon--left">
                 <p># 데이터</p>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper14.png" alt="# 프론트엔드">
+                <img src="https://cdn.inflearn.com/public/curation/x2/ChatGPT.png" class="new-curation-card__icon new-curation-card__icon--left">
+                <p># ChatGPT</p>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="javascript:void(0)">
+                <img src="https://cdn.inflearn.com/public/curation/x2/front-end.png" class="new-curation-card__icon new-curation-card__icon--left">
                 <p># 프론트엔드</p>
               </a>
             </div>
             <div class="swiper-slide">
               <a href="javascript:void(0)">
-                <img src="./images/new_curation_swiper15.png" alt="# 모바일">
-                <p># 모바일</p>
+                <img src="https://cdn.inflearn.com/public/curation/x2/joystick.png" class="new-curation-card__icon new-curation-card__icon--left">
+                <p># 게임개발</p>
               </a>
             </div>
           </div>
@@ -593,11 +604,11 @@
               <div class="course-card">
                 <div class="course-card-item">
                   <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper1.png" alt="[30만 수강생 기념] 1/31 김영한님 온라인 밋업 Live">
+                    <img loading="lazy" src="https://cdn.inflearn.com/public/courses/332505/cover/c32e770b-b417-436d-afd0-e2285ac6e514/332505.png?w=420" data-src="https://cdn.inflearn.com/public/courses/332505/cover/c32e770b-b417-436d-afd0-e2285ac6e514/332505.png?w=420" class="swiper-lazy" alt="332505.png">
                   </div>
                   <div class="course-card-item__content">
-                    <h4>[30만 수강생 기념] 1/31 김영한님 온라인 밋업 Live</h4>
-                    <div class="instructor">인프런</div>
+                    <h4>김영한의 자바 입문 - 코드로 시작하는 자바 첫걸음</h4>
+                    <div class="instructor">김영한</div>
                     <div class="rating">
                       <div class="rating-star">
                         <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
@@ -606,18 +617,18 @@
                         <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
                         <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
                       </div>
-                      <span class="review-cnt">(55)</span>
+                      <span class="review-cnt">(1,434)</span>
                     </div>
                     <div class="price">무료</div>
                     <div class="tags">
-                      <div class="tag participant">+3,200명</div>
+                      <div class="tag participant">+41,000명</div>
                       <div class="tag">업데이트</div>
                     </div>
                   </div>
                 </div>
                 <a href="javascript:void(0)" class="course-card-cover">
                   <div class="course-card-cover__content">
-                    <h4>[30만 수강생 기념] 1/31 김영한님 온라인 밋업 Live</h4>
+                    <h4>김영한의 자바 입문 - 코드로 시작하는 자바 첫걸음</h4>
                     <div class="infos">
                       <div class="level">
                         <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
@@ -630,6 +641,9 @@
                     </div>
                   </div>
                   <div class="course-card-cover__btns">
+					<div class="cart-btn">
+					  <span class="material-symbols-outlined">add_shopping_cart</span>
+					</div>
                     <div class="like-btn">
                       <i class="fa fa-heart-o" aria-hidden="true"></i>
                     </div>
@@ -2129,10 +2143,10 @@
               <div class="course-card">
                 <div class="course-card-item">
                   <div class="course-card-item__image">
-                    <img src="./images/roadmap_swiper1.png" alt="성장하고 싶은 디자이너를 위한 실전 강의">
+                    <img src="https://cdn.inflearn.com/public/roadmaps/f992d012-594e-4291-aba6-cf60554e063a/roadmap-21.png" alt="로드맵 대표 이미지">
                   </div>
                   <div class="course-card-item__content">
-                    <h5>성장하고 싶은 디자이너를 위한 실전 강의</h5>
+                    <h5>우아한형제들 백엔드 개발자 취업 로드맵</h5>
                   </div>
                 </div>
               </div>
@@ -2141,7 +2155,7 @@
               <div class="course-card">
                 <div class="course-card-item">
                   <div class="course-card-item__image">
-                    <img src="./images/roadmap_swiper2.png" alt="프로그래밍 시작하기 - 파이썬 입문부터 인공지능, 머신러닝까지">
+                    <img src="https://cdn.inflearn.com/public/roadmaps/270f825f-69b8-4afe-ac7d-4ed76cbce70f/roadmap-66.png" alt="로드맵 대표 이미지">
                   </div>
                   <div class="course-card-item__content">
                     <h5>프로그래밍 시작하기 - 파이썬 입문부터 인공지능, 머신러닝까지</h5>
@@ -2153,10 +2167,10 @@
               <div class="course-card">
                 <div class="course-card-item">
                   <div class="course-card-item__image">
-                    <img src="./images/roadmap_swiper3.png" alt="[인프런x코드캠프] 가장 쉽게 배우는 실무중심 풀스택">
+                    <img src="https://cdn.inflearn.com/public/roadmaps/744/cover/a636e663-a6da-43b9-884a-42fc17b5890f/744-thumbnail.png" alt="로드맵 대표 이미지">
                   </div>
                   <div class="course-card-item__content">
-                    <h5>[인프런x코드캠프] 가장 쉽게 배우는 실무중심 풀스택</h5>
+                    <h5>김영한의 실전 자바</h5>
                   </div>
                 </div>
               </div>
@@ -2165,10 +2179,10 @@
               <div class="course-card">
                 <div class="course-card-item">
                   <div class="course-card-item__image">
-                    <img src="./images/roadmap_swiper4.png" alt="김영한의 실전 자바">
+                    <img src="https://cdn.inflearn.com/public/roadmaps/f450d6bc-656a-4f4c-8ec7-dc49e1c81a52/roadmap-5.png" alt="로드맵 대표 이미지">
                   </div>
                   <div class="course-card-item__content">
-                    <h5>김영한의 실전 자바</h5>
+                    <h5>마이크로소프트 개발자가 알려주는 자바 스프링(Spring) 완전 정복</h5>
                   </div>
                 </div>
               </div>
@@ -3300,7 +3314,7 @@
   </footer>
 
   <!-- Chat -->
-  <section class="chat">
+  <!-- <section class="chat">
     <div class="chat__toggler">
       <span class="material-symbols-outlined icon icon--question">question_mark</span>
       <span class="material-symbols-outlined icon icon--close">close</span>
@@ -3358,6 +3372,6 @@
         </a>
       </div>
     </div>
-  </section>
+  </section> -->
 </body>
 </html>

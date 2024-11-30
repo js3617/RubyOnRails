@@ -1,45 +1,60 @@
-<h2>회원가입</h2>
+<div class="siginup">
+	<h2>회원가입</h2>
+	<div class="css-145ug2 mantine-1avyp1d"><div class="css-0 mantine-5n4x4z"><span class="mantine-Text-root css-fa7ybv mantine-1r7ictg">인프런과 랠릿에서 가치를 높이고 성장해 보세요</span><span class="mantine-Text-root css-fa7ybv mantine-1r7ictg">인프런에서 다양한 학습의 기회를 얻으세요</span></div></div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  
-  <div class="field">
-    <%= f.label :username, "실명" %><br />
-    <%= f.text_field :username, autocomplete: "username"%>
-  </div>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+	  <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-	  <%= f.label :이메일 %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "이메일"%>
-  </div>
+	  <div class="field">
+		<%= f.label :username, "실명" %>
+		<%= f.text_field :username, autocomplete: "username"%>
+	  </div>
 
-  <div class="field">
-    <%= f.label :비밀번호 %>
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "******" %>
-  	<% if @minimum_password_length %>
-    	<em><%= @minimum_password_length %>자 이상 32자 이하 입력 (공백 제외)</em>
-    <% end %><br />
-  </div>
+	  <div class="field">
+		  <%= f.label :이메일 %>
+		<%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@inflab.com"%>
+	  </div>
 
-  <div class="field">
-    <%= f.label :비밀번호확인 %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "******" %>
-  </div>
+	  <div class="field">
+		<%= f.label :비밀번호 %>
+		<%= f.password_field :password, autocomplete: "new-password", placeholder: "******" %>
+		<% if @minimum_password_length %>
+			<em><%= @minimum_password_length %>자 이상 32자 이하 입력 (공백 제외)</em>
+		<% end %><br />
+	  </div>
 
-  <div class="actions">
-    <%= f.submit "가입하기", class: "loginbtn"%>
-  </div>
-<% end %>
-<div>
-	<p>
-		해당 계정은 통합 계정으로 인프런과 랠릿에서 제공하는 서비스를 모두 이용하실 수 있습니다. 가입 시, 통합 계정 및 서비스 이용약관 (인프런 / 랠릿), 개인정보처리 방침에 동의하는 것으로 간주합니다.
-	</p>
+	  <div class="field">
+		<%= f.label :비밀번호확인 %>
+		<%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "******" %>
+	  </div>
+
+	  <div class="actions">
+		<%= f.submit "가입하기", class: "siginupbtn"%>
+	  </div>
+	<% end %>
+	<div class="mantine-18vo9vz">
+		<p class="mantine-Text-root mantine-1jefh0h">해당 계정은 
+			<a target="_blank" class="css-1u21ho4" href="https://www.inflearn.com/policy">통합 계정
+			</a>으로 인프런과 랠릿에서 제공하는 서비스를 모두 이용하실 수 있습니다. 가입 시, 통합 계정 및 서비스 이용약관 (
+			<a target="_blank" class="css-1u21ho4" href="https://www.inflearn.com/policy/terms-of-service">인프런</a> / 
+			<a target="_blank" class="css-1u21ho4" href="https://www.rallit.com/terms-of-service">랠릿</a>), 
+			<a target="_blank" class="css-1u21ho4" href="https://www.inflearn.com/policy/privacy">개인정보처리 방침</a>
+			에 동의하는 것으로 간주합니다.</p>
+		<div class="mantine-Checkbox-root mantine-kx6ox4">
+			<div class="mantine-hqx0d1 mantine-Checkbox-body">
+				<div class="mantine-13uu19v mantine-Checkbox-inner">
+					<input id="mantine-l63tgjcfa" type="checkbox" class="mantine-2f2szu mantine-Checkbox-input" name="allowedMarketing">
+					<svg viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg" class="___ref-icon mantine-q9qwbl mantine-Checkbox-icon">
+						<path d="M4 4.586L1.707 2.293A1 1 0 1 0 .293 3.707l3 3a.997.997 0 0 0 1.414 0l5-5A1 1 0 1 0 8.293.293L4 4.586z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg></div><div class="mantine-fvbwhu mantine-Checkbox-labelWrapper"><label class="mantine-1cy1n70 mantine-Checkbox-label" for="mantine-l63tgjcfa">통합회원 할인 혜택 및 유용한 채용 소식을 받아볼래요.</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+	  <h3>간편 회원가입</h3>
+	  <%= link_to "Sign up with Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-danger" %><br />
+	  <%= link_to "Sign up with Kakao", user_kakao_omniauth_authorize_path, class: "btn btn-warning" %>
+	</div>
 </div>
-
-<div>
-  <h3>간편 회원가입</h3>
-  <%= link_to "Sign up with Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-danger" %><br />
-  <%= link_to "Sign up with Kakao", user_kakao_omniauth_authorize_path, class: "btn btn-warning" %>
-</div>
-
 <%= render "devise/shared/links" %>

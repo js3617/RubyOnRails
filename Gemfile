@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'jquery-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2'
 # Use sqlite3 as the database for Active Record
@@ -37,6 +38,11 @@ gem 'google-api-client', '0.53.0' # Youtube Data API
 gem 'signet', '0.18.0'
 gem 'addressable', '~> 2.8'
 
+gem 'httparty'
+# gem 'iamport' # 아임포트 결제 API
+gem 'rest-client'
+
+gem 'rails-erd', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

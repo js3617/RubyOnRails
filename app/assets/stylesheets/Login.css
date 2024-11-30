@@ -1,5 +1,23 @@
+#icon_brand_logo path {
+    fill: #1dc078;
+}
+
+.css-145ug2 {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    white-space: nowrap;
+}
+.css-4rsf0l {
+    animation: 3000ms ease-in-out 0s 1 normal none running animation-1djmi26;
+}
+
+.css-fa7ybv {
+    display: inline-block;
+    width: 100%;
+}
+
 .login-form-container {
-  background: #FFFFFF;
   width: 400px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -38,6 +56,29 @@
 	border-radius: 4px;
 }
 
+.siginupbtn{
+	padding: 0px 1.625rem;
+    appearance: none;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    height: 3.125rem;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    position: relative;
+    line-height: 1;
+    font-size: 1.125rem;
+    user-select: none;
+    cursor: pointer;
+    border: 0.0625rem solid transparent;
+    background-color: rgb(0, 196, 113);
+    color: rgb(255, 255, 255);
+}
+
 .close-button {
   border: none;
   background: none;
@@ -46,12 +87,25 @@
 }
 
 .field input {
-  width: 312px;
-	height: 48px;
-  padding: 10px;
-  margin-bottom: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    height: 3.125rem;
+    -webkit-tap-highlight-color: transparent;
+    line-height: calc(3rem);
+    appearance: none;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 1.125rem;
+    width: 40vh;
+    color: rgb(0, 0, 0);
+    display: block;
+    text-align: left;
+    border: 0.0625rem solid rgb(206, 212, 218);
+    background-color: rgb(255, 255, 255);
+    transition: border-color 100ms;
+    min-height: 3.125rem;
+    padding-left: calc(1.04167rem);
+    padding-right: calc(1.04167rem);
+    border-radius: 0.5rem;
 }
 
 .remember-me {
@@ -64,65 +118,178 @@
   margin-right: 5px;
 }
 
-.social-login p {
-  text-align: center;
-  margin: 20px 0;
+.btnwrap{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	column-gap: 12px;
+}
+.textwrap{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
 }
 
-.social-icons {
-  display: flex;
-  justify-content: center;
+.atext{
+	line-height: 1.38;
+    letter-spacing: -.3px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #616568;
+    border-bottom: 1px solid #858a8d;
+    cursor: pointer;
 }
 
-.social-icon {
+.more-action-divider {
+    margin: 0 8px;
+    width: 1px;
+    height: 10px;
+    background-color: #858a8d;
+    pointer-events: none;
+}
+
+.social-line {
+    position: relative;
+    bottom: -8px;
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #f1f3f5;
+    border: none;
+}
+
+.social-title {
+    padding: 0 8px;
+    margin-bottom: 16px;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: -.3px;
+    color: #abb0b5;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.btn-auth {
   display: inline-block;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  margin: 0 5px;
-  background: #ddd;
-  color: #666;
-  text-align: center;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-
-.social-login-buttons {
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background-color: transparent;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16); /* 그림자 효과 */
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.social-login-btn {
-  border: none;
-  color: white;
-  padding: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  border: none;
+  cursor: pointer;
+  margin-right: 8px; /* 버튼 사이 간격 */
+	justify-content:center;
 }
 
-.kakao-btn {
-  background-color: #FEE500;
+
+.btn-kakao {
+  background-color: #fae500;
+  border: none;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+    cursor: pointer;
 }
 
-.google-btn {
-  background-color: #DB4437;
+.btn-google {
+  background-color: #f8f8f8;
+  border: none;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .2);
+    cursor: pointer;
 }
 
-.github-btn {
-  background-color: #333;
+.siginup{
+	margin-right: auto;
+    margin-left: auto;
+    padding: 4.5rem 1rem;
+    width: 22.5rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.apple-btn {
-  background-color: black;
+.mantine-18vo9vz {
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+	width: 40vh;
 }
 
-.social-login-btn i {
-  font-size: 20px;
+.mantine-1jefh0h {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    color: rgb(134, 142, 150);
+    font-size: 0.75rem;
+    text-decoration: none;
+    line-height: 1.5;
+    text-underline-position: under;
+}
+
+.css-1u21ho4 {
+    color: rgb(28, 126, 214);
+}
+
+.mantine-kx6ox4 {
+    display: flex;
+}
+
+.mantine-13uu19v {
+    position: relative;
+    width: 1rem;
+    height: 1rem;
+    order: 1;
+}
+
+.mantine-fvbwhu {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    display: inline-flex;
+    flex-direction: column;
+    -webkit-tap-highlight-color: transparent;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgb(0, 0, 0);
+    cursor: default;
+    order: 2;
+}
+
+.mantine-2f2szu:checked {
+    background-color: rgb(0, 196, 113);
+    border-color: rgb(0, 196, 113);
+}
+
+.mantine-1cy1n70 {
+    padding-left: 0.75rem;
+    cursor: pointer;
+}
+
+.mantine-2f2szu:checked + .___ref-icon {
+    opacity: 1;
+    color: rgb(255, 255, 255);
+    transform: translateY(0px) scale(1);
+}
+.mantine-hqx0d1 {
+    display: flex;
 }

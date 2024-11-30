@@ -1,0 +1,14 @@
+<h1>내학습</h1>
+
+<% if @take_courses.any? %>
+  <ul>
+    <% @take_courses.each do |take_course| %>
+      <li>
+        <h3><%= link_to take_course.course.class_name, course_path(take_course.course.id) %></h3>
+        <p>수강 시작일: <%= take_course.start_date.strftime('%Y-%m-%d %H:%M') %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>현재 수강 중인 강의가 없습니다.</p>
+<% end %>

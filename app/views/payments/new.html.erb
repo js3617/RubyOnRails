@@ -1,0 +1,43 @@
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const IMP = window.IMP; // Portone 객체 확인
+    const merchantCode = "<%= ENV['PORTONE_MERCHANT_CODE'] || 'imp25246564' %>"; // 기본값 설정
+
+    console.log("가맹점 코드 확인:", merchantCode); // 가맹점 코드 디버깅
+
+    IMP.init(merchantCode); // Portone SDK 초기화
+
+    console.log("Portone 초기화 완료");
+  });
+
+  function requestPay() {
+    const IMP = window.IMP;
+    IMP.request_pay(
+      {
+        pg: "html5_inicis", // PG사
+        pay_method: "card", // 결제수단
+        merchant_uid: "<%= SecureRandom.uuid %>", // 고유 주문번호
+        name: "테스트 결제 상품",
+        amount: 1000, // 금액
+        buyer_email: "test@example.com",
+        buyer_name: "홍길동",
+        buyer_tel: "010-1234-5678",
+        buyer_addr: "서울특별시 강남구",
+        buyer_postcode: "123-456",
+      },
+      function (rsp) {
+        if (rsp.success) {
+          alert("결제가 완료되었습니다. 결제 금액: " + rsp.paid_amount);
+          console.log("결제 성공:", rsp);
+        } else {
+          alert("결제 실패: " + rsp.error_msg);
+          console.log("결제 실패:", rsp);
+        }
+      }
+    );
+  }
+</script>
+
+<button onclick="requestPay()">결제하기</button>

@@ -7,6 +7,12 @@ class User < ApplicationRecord
 	
   has_many :baskets, dependent: :destroy
   has_many :courses, through: :baskets
+  
+  has_many :payments, dependent: :destroy
+  has_many :payment_items, through: :payments
+	
+  has_many :take_courses, dependent: :destroy
+  has_many :courses, through: :take_courses	
 	
   # username은 반드시 입력되어야 함
   validates :username, presence: true	

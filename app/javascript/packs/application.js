@@ -16,8 +16,7 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import navDropdownItems from "../data/navDropdownItems"
-import heroBulletNames from "../data/heroBulletNames"
+import navDropdownItems from "../data/navDropdownItems.js"
 
 // Nav Dropdown Render
 const navMenuLectureEl = document.querySelector("nav .menu .lecture")
