@@ -1,0 +1,128 @@
+.login-form-container {
+  background: #FFFFFF;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.login-form .form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.loginlogo {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.logincontent{
+	margin-top: 24px;
+	display: flex;
+	justify-content: center;
+	align-items:center;
+}
+
+.loginbtn{
+	border-color: #00c471;
+    font-weight: 700;
+    background-color: #00c471;
+	margin: 12px 0;
+    width: 312px;
+    height: 48px;
+	border: 1px solid;
+    color: #fff;
+	border-radius: 4px;
+}
+
+.close-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.field input {
+  width: 312px;
+	height: 48px;
+  padding: 10px;
+  margin-bottom: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.remember-me input {
+  margin-right: 5px;
+}
+
+.social-login p {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 5px;
+  background: #ddd;
+  color: #666;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.social-login-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.social-login-btn {
+  border: none;
+  color: white;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kakao-btn {
+  background-color: #FEE500;
+}
+
+.google-btn {
+  background-color: #DB4437;
+}
+
+.github-btn {
+  background-color: #333;
+}
+
+.apple-btn {
+  background-color: black;
+}
+
+.social-login-btn i {
+  font-size: 20px;
+}

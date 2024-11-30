@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 	  end
   end
 	
+  resources :courses, only: [:show] # 강의 상세 페이지
+  resources :baskets, only: [:index, :create, :destroy] # 수강바구니 추가 액션
   resources :class_lists
   
   devise_for :users, controllers: {

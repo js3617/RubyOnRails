@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
 		 :omniauthable, omniauth_providers: [:google_oauth2, :kakao]
 	
+  has_many :baskets, dependent: :destroy
+  has_many :courses, through: :baskets
+	
   # username은 반드시 입력되어야 함
   validates :username, presence: true	
 	
