@@ -1,29 +1,21 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @class_list.lesson_name %></h2>
+<p><%= @class_list.description %></p>
+
+<div class="youtube-player">
+  <iframe
+    width="100%"
+    height="400"
+    src="https://www.youtube.com/embed/<%= @class_list.youtube_video_id %>"
+    title="<%= @class_list.lesson_name %>"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
 
 <p>
-  <strong>Course:</strong>
-  <%= @class_list.course_id %>
-</p>
-
-<p>
-  <strong>Lesson name:</strong>
-  <%= @class_list.lesson_name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @class_list.description %>
-</p>
-
-<p>
-  <strong>Youtube video:</strong>
-  <%= @class_list.youtube_video_id %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
+  <strong>영상 길이:</strong>
   <%= @class_list.duration %>
 </p>
 
-<%= link_to 'Edit', edit_class_list_path(@class_list) %> |
-<%= link_to 'Back', class_lists_path %>
+<%= link_to "뒤로 가기", course_path(@course), class: "btn btn-secondary" %>

@@ -13,7 +13,7 @@ class BasketsController < ApplicationController
 	)
 	
 	if basket.save
-		flash[:notice] = "장바구니에 상품이 담겼습니다."
+		flash[:notice] = "수강바구니에 상품이 담겼습니다."
 	else
 		flash[:notice] = "문제가 생겼습니다. 개발자에게 문의해주세요."
 	end

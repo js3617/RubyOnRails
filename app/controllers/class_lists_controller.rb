@@ -1,5 +1,8 @@
 class ClassListsController < ApplicationController
   before_action :set_class_list, only: [:show, :edit, :update, :destroy]
+  before_action :find_course
+  before_action :find_class_list
+  before_action :ensure_user_enrolled_in_course
 
   # GET /class_lists
   # GET /class_lists.json
@@ -64,11 +67,28 @@ class ClassListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_class_list
-      @class_list = ClassList.find(params[:id])
+      	@class_list = ClassList.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def class_list_params
-      params.require(:class_list).permit(:course_id, :lesson_name, :description, :youtube_video_id, :duration)
+      	params.require(:class_list).permit(:course_id, :lesson_name, :description, :youtube_video_id, :duration)
     end
+	
+	private
+
+  	def find_course
+    	@course = Course.find(params[:course_id])
+  	end
+
+  	def find_class_list
+    	@class_list = @course.class_lists.find(params[:id])
+  	end
+	
+	def ensure_user_enrolled_in_course
+      unless current_user.take_courses.exists?(course_id: @course.id)
+      	flash[:alert] = "강의를 수강 중인 사용자만 강의 영상을 볼 수 있습니다."
+      	redirect_to course_path(@course)
+    end
+  end
 end

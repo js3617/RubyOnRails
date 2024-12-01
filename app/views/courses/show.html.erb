@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2>강의 정보</h2>
+<h2>강의 상세 페이지</h2>
 
 <% if current_user.baskets.exists?(course_id: @course.id) %>
   <button class="btn btn-secondary" disabled>수강바구니에 담긴 강의</button>
@@ -62,17 +62,18 @@
 
 <h2>강의 목록</h2>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>썸네일</th>
       <th>강의명</th>
       <th>강의 설명</th>
       <th>영상 길이</th>
+      <th>보기</th>
     </tr>
   </thead>
   <tbody>
-    <% @course.class_lists.each do |lesson| %>
+    <% @course.class_lists.order(:created_at).each do |lesson| %> <!-- 정렬 추가 -->
       <tr>
         <td>
           <% if lesson.thumbnail_url.present? %>
@@ -84,10 +85,84 @@
         <td><%= lesson.lesson_name %></td>
         <td><%= lesson.description %></td>
         <td><%= lesson.duration %></td>
+        <td>
+          <% if user_signed_in? && current_user.take_courses.exists?(course_id: @course.id) %>
+            <%= link_to "강의 보기", course_class_list_path(@course, lesson), class: "btn btn-primary" %>
+          <% else %>
+            <span class="text-danger">수강 신청 후 이용 가능</span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<h2>수강평</h2>
+
+<% if @reviews.present? && @reviews.any? %>
+  <ul class="list-group">
+    <% @reviews.each do |review| %>
+      <li class="list-group-item">
+        <strong><%= review.user.username %>:</strong>
+        <p>평점: <%= review.rating %> / 5</p>
+        <p><%= review.review %></p>
+        <p>좋아요: <%= review.likes_count %></p>
+
+        <!-- 좋아요 버튼 -->
+        <% if user_signed_in? %>
+		  <% if session["liked_review_#{review.id}"] %>
+			<%= button_to "좋아요 취소", unlike_course_review_path(@course, review), method: :delete, remote: true, class: "btn btn-outline-danger btn-sm" %>
+		  <% else %>
+			<%= button_to "좋아요", like_course_review_path(@course, review), method: :post, remote: true, class: "btn btn-outline-primary btn-sm" %>
+		  <% end %>
+		<% end %>
+
+        <!-- 대댓글 목록 -->
+        <% if review.replies.any? %>
+          <h4>대댓글</h4>
+          <ul class="list-group">
+            <% review.replies.each do |reply| %>
+              <li class="list-group-item">
+                <strong><%= reply.user.username %>:</strong>
+                <p><%= reply.review %></p>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <!-- 대댓글 작성 -->
+        <% if user_signed_in? %>
+          <%= form_with url: reply_course_review_path(@course, review), method: :post, local: true do |f| %>
+            <div class="form-group">
+              <%= f.text_area :review, placeholder: "대댓글 작성", required: true, class: "form-control" %>
+              <%= f.submit "작성", class: "btn btn-secondary mt-2" %>
+            </div>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>등록된 수강평이 없습니다.</p>
+<% end %>
+
+<!-- 수강평 작성 -->
+<% if user_signed_in? && current_user.take_courses.exists?(course_id: @course.id) %>
+  <h3>수강평 작성</h3>
+  <%= form_with model: @review, url: course_reviews_path(@course), method: :post, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :rating, "평점 (1~5)" %>
+      <%= f.number_field :rating, min: 1, max: 5, required: true, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :review, "수강평" %>
+      <%= f.text_area :review, required: true, class: "form-control" %>
+    </div>
+    <%= f.submit "등록", class: "btn btn-success mt-2" %>
+  <% end %>
+<% else %>
+  <p>수강평을 작성하려면 강의를 수강해야 합니다.</p>
+<% end %>
 
 <%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-primary' %> |
 <%= link_to 'Back', courses_path, class: 'btn btn-secondary' %>

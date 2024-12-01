@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_29_160717) do
+ActiveRecord::Schema.define(version: 2024_12_01_033451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,20 @@ ActiveRecord::Schema.define(version: 2024_11_29_160717) do
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.text "review", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "rating"
+    t.integer "parent_id"
+    t.integer "likes_count", default: 0, null: false
+    t.index ["course_id"], name: "index_reviews_on_course_id"
+    t.index ["parent_id"], name: "index_reviews_on_parent_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "take_courses", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -112,6 +126,8 @@ ActiveRecord::Schema.define(version: 2024_11_29_160717) do
   add_foreign_key "payment_items", "courses"
   add_foreign_key "payment_items", "payments"
   add_foreign_key "payments", "users"
+  add_foreign_key "reviews", "courses"
+  add_foreign_key "reviews", "users"
   add_foreign_key "take_courses", "courses"
   add_foreign_key "take_courses", "users"
 end

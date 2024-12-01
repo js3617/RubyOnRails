@@ -5,6 +5,7 @@ class Course < ApplicationRecord
 	has_many :users, through: :take_courses
     has_many :payment_items, through: :baskets
 	has_many :take_courses, dependent: :destroy
+	has_many :reviews, dependent: :destroy 
 	
     validates :class_name, :youtube_playlist_id, presence: true
     validates :thumbnail_url, presence: true
@@ -12,4 +13,8 @@ class Course < ApplicationRecord
   	def refresh_sessions_count!
     	update(sessions_count: class_lists.size)
   	end
+	
+	def average_rating
+		reviews.average(:rating)&.round(2) || 0.0
+	end
 end

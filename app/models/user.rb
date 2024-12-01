@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :take_courses, dependent: :destroy
   has_many :courses, through: :take_courses	
 	
+  has_many :reviews, dependent: :destroy
   # username은 반드시 입력되어야 함
   validates :username, presence: true	
 	

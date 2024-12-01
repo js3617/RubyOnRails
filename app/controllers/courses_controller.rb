@@ -5,12 +5,14 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+	@courses = Course.all
   end
 
   # GET /courses/1
   # GET /courses/1.json
   def show
+	@course = Course.find(params[:id])
+    @reviews = @course.reviews.includes(:user, :replies).where(parent_id: nil)
   end
 
   def import_youtube
