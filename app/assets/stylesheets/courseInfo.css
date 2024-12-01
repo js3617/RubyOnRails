@@ -1,0 +1,75 @@
+.css-ks8w16 {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.course-basket {
+  width: 80%;
+  margin: auto;
+  font-family: 'Arial', sans-serif;
+}
+
+.basket-container {
+  margin-top: 20px;
+}
+
+.basket-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.check-box {
+  margin-right: 10px;
+}
+
+.check-box input[type="checkbox"] {
+  display: none;
+}
+
+.check-box label span {
+  color: #4CAF50;
+  font-size: 24px;
+}
+
+.course-details {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.course-image {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.course-text h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.course-text p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.delete-button .btn-delete {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button .btn-delete:hover {
+  background-color: #ff6666;
+}

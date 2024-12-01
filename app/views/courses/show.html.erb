@@ -2,63 +2,27 @@
 
 <h2>강의 상세 페이지</h2>
 
-<% if current_user.baskets.exists?(course_id: @course.id) %>
-  <button class="btn btn-secondary" disabled>수강바구니에 담긴 강의</button>
-<% elsif current_user.payment_items.exists?(course_id: @course.id) %>
-  <button class="btn btn-secondary" disabled>이미 수강신청된 강의</button>
-<% else %>
-  <%= button_to '수강신청', baskets_path(course_id: @course.id), method: :post, class: "btn btn-primary" %>
-<% end %>
-
-<p>
-  <strong>강좌 명:</strong>
-  <%= @course.class_name %>
-</p>
-
-<p>
-  <strong>강의 설명:</strong>
-  <%= @course.description %>
-</p>
-
-<p>
-  <strong>Youtube playlist:</strong>
-  <%= @course.youtube_playlist_id %>
-</p>
-
-<p>
-  <strong>가격:</strong>
-  <%= @course.price %>
-</p>
-
-<p>
-  <strong>평점:</strong>
-  <%= @course.rating %>
-</p>
-
-<p>
-  <strong>좋아요:</strong>
-  <%= @course.like %>
-</p>
-
-<p>
-  <strong>난이도:</strong>
-  <%= @course.level %>
-</p>
-
-<p>
-  <strong>수료증 제공 여부:</strong>
-  <%= @course.certificate ? '예' : '아니오' %>
-</p>
-
-<p>
-  <strong>강의수:</strong>
-  <%= @course.class_lists.count %>
-</p>
-
-<p>
-  <strong>강의 제공자:</strong>
-  <%= @course.provider %>
-</p>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-subtitle mb-2 text-muted">가격: <%= @course.price %>원</h6>
+		<% if current_user.baskets.exists?(course_id: @course.id) %>
+        <button class="btn btn-secondary" disabled>수강바구니에 담긴 강의</button>
+      <% elsif current_user.payment_items.exists?(course_id: @course.id) %>
+        <button class="btn btn-secondary" disabled>이미 수강신청된 강의</button>
+      <% else %>
+        <%= button_to '수강신청 하기', baskets_path(course_id: @course.id), method: :post, class: "btn btn-primary" %>
+      <% end %>
+	  <h5 class="card-title"><strong>강좌 명:</strong> <%= @course.class_name %></h5>
+      <p class="card-text"><strong>강의 설명:</strong> <%= @course.description %></p>
+      <p class="card-text"><strong>평점:</strong> <%= @course.rating %> / 좋아요: <%= @course.like %></p>
+      <p class="card-text"><strong>난이도:</strong> <%= @course.level %></p>
+      <p class="card-text"><strong>수료증 제공 여부:</strong> <%= @course.certificate ? '예' : '아니오' %></p>
+      <p class="card-text"><strong>강의수:</strong> <%= @course.class_lists.count %>개</p>
+      <p class="card-text"><strong>강의 제공자:</strong> <%= @course.provider %></p>
+    </div>
+  </div>
+</div>
 
 <h2>강의 목록</h2>
 

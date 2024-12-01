@@ -1,39 +1,42 @@
-<h1>수강바구니</h1>
+<div class="course-basket">
+	<h1>수강바구니</h1>
 
-<% if @basket_courses.present? && @basket_courses.any? %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <ul>
-      <% @basket_courses.each do |basket| %>
-        <% if basket.course.present? %>
-          <li>
-            <!-- 체크박스 -->
-            <div>
-              <%= check_box_tag "selected_basket_ids[]", basket.id %>
-            </div>
+	<% if @basket_courses.present? && @basket_courses.any? %>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<div class="basket-container">
+		  <% @basket_courses.each do |basket| %>
+			<% if basket.course.present? %>
+			  <div class="basket-item">
+				  <div class="course-info">
+					<!-- 체크박스 -->
+					<div >
+					  <%= check_box_tag "selected_basket_ids[]", basket.id %>
+					</div>
+					  <!-- 삭제 버튼 -->
+					<div class="delete-button">
+						<%= button_to '삭제', basket_path(basket.id), method: :delete, class: 'btn btn-delete', data: { confirm: '해당 강의를 수강바구니에서 삭제하시겠습니까?' } %>
+					</div>
+					  <hr>
 
-            <!-- 강의 정보 -->
-            <div>
-              <h3>
-                <%= link_to basket.course.class_name, course_path(basket.course) %>
-              </h3>
-              <p>가격: <%= number_to_currency(basket.course.price, unit: "₩", precision: 0) %></p>
-            </div>
+					<!-- 강의 정보 -->
+					<div class="course-details">
+						<div class="course-text">
+						  <h3><%= link_to basket.course.class_name, course_path(basket.course) %></h3>
+						  <p>가격: <%= number_to_currency(basket.course.price, unit: "₩", precision: 0) %></p>
+						</div>
+					</div>
 
-            <!-- 삭제 버튼 -->
-            <div>
-              <p>Basket ID: <%= basket.id %></p>
-              <p>Course ID: <%= basket.course.id %></p>
-              <%= button_to '삭제', basket_path(basket.id), method: :delete, class: 'btn btn-danger', data: { confirm: '해당 강의를 수강바구니에서 삭제하시겠습니까?' } %>
-            </div>
-          </li>
-          <hr>
-        <% else %>
-          <li>
-            <p>강의 정보를 찾을 수 없습니다.</p>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
+				  </div>
+			  </div>
+			  <hr>
+			<% else %>
+			  <li>
+				<p>강의 정보를 찾을 수 없습니다.</p>
+			  </li>
+			<% end %>
+		  <% end %>
+	</div>
+</div>
 
     <!-- 결제 폼 (숨겨진 필드 포함) -->
     <input type="hidden" name="imp_uid" id="imp_uid">

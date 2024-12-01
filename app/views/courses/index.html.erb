@@ -1,44 +1,3 @@
-<!--<h1>강의 목록</h1>
-
-<%= form_with url: import_youtube_courses_path, method: :post, local: true do |f| %>
-  <div>
-    <%= f.label :playlist_url, '유튜브 재생목록 URL:' %>
-    <%= f.text_field :playlist_url, placeholder: 'https://www.youtube.com/playlist?list=PLAYLIST_ID' %>
-    <%= f.submit 'YouTube 가져오기', class: 'btn btn-primary' %>
-  </div>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>썸네일</th>
-      <th>강의명</th>
-      <th>제공자</th>
-      <th>수업 수</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td>
-          <% if course.thumbnail_url.present? %>
-            <img src="<%= course.thumbnail_url %>" alt="Thumbnail" style="width: 120px; height: auto;">
-          <% else %>
-            <img src="/assets/default_thumbnail.png" alt="Default Thumbnail" style="width: 120px; height: auto;">
-          <% end %>
-        </td>
-        <td><%= course.class_name %></td>
-        <td><%= course.provider %></td>
-        <td><%= course.sessions_count %></td>
-        <td><%= link_to '보기', course_path(course) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
--->
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -48,9 +7,6 @@
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-  <!-- Reset CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
 
   <!-- Font: pretendard -->
   <link 
@@ -84,132 +40,32 @@
 	</script>
 
 	<script>
-		document.addEventListener("turbolinks:load", function() {
-		  $('.profile-img').on('click', function() {
-			$('.profile-details').toggle(); // 내용 토글
-		  });
-		});
+		function toggleVisibility() {
+		  var element = document.querySelector('.heroinner');
+		  if (element.style.display === 'none') {
+			element.style.display = 'block';
+		  } else {
+			element.style.display = 'none';
+		  }
+		}
+	</script>
+	<script>
+		function handleAddToCart() {
+		  <% if user_signed_in? %>
+			// 로그인한 사용자의 경우: 수강바구니에 추가 로직 처리
+			alert('수강바구니에 추가되었습니다.');
+			// 실제 로직을 AJAX 등을 통해 처리
+		  <% else %>
+			// 로그인하지 않은 사용자의 경우: 로그인 페이지로 리다이렉트
+			window.location.href = '<%= new_user_session_path %>';
+		  <% end %>
+		}
 	</script>
 
   <!-- Link JavaScript -->
   <script src="./js/main.js" defer type="module"></script>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="inner">
-      <ul class="inner__service">
-        <li>
-          <a href="/" class="link-main active">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16.4702 7.30208C16.1056 6.46354 15.6135 5.71615 14.9937 5.07813C14.3558 4.4401 13.6267 3.92969 12.7882 3.5651C11.9497 3.20052 11.0383 3 10.0723 3C9.12446 3 8.21308 3.16406 7.35638 3.52865C6.49969 3.89323 5.75236 4.38542 5.09617 5.00521C4.43998 5.64323 3.92961 6.3724 3.56505 7.21094C3.2005 8.04948 3 8.96094 3 9.92708C3 10.875 3.16405 11.7865 3.5286 12.6432C3.89315 13.5 4.38529 14.2474 5.02326 14.9036C5.66122 15.5599 6.40855 16.0703 7.24702 16.4349C8.10371 16.7995 8.99686 17 9.96292 17H16.9988V10.0365C17.017 9.07031 16.8347 8.15885 16.4702 7.30208ZM7.79384 15.1406C7.11943 14.849 6.51792 14.4297 6.00755 13.9193C5.49717 13.3906 5.09617 12.7891 4.80453 12.1146C4.51289 11.4219 4.38529 10.7109 4.38529 9.94531C4.38529 9.16146 4.54934 8.43229 4.84098 7.75781C5.13262 7.08333 5.55186 6.5 6.06223 5.98958C6.59083 5.47917 7.19234 5.09635 7.86676 4.80469C8.5594 4.51302 9.27028 4.38542 10.0358 4.38542C10.8196 4.38542 11.5487 4.54948 12.2231 4.84115C12.8976 5.13281 13.4808 5.53385 13.9912 6.0625C14.5016 6.57292 14.8844 7.17448 15.176 7.84896C15.4676 8.52344 15.5952 9.25261 15.5952 10.0365V14.7396L10.5644 9.65365L11.6763 6.59115C11.8039 6.26302 11.6216 5.89844 11.2935 5.77083C10.9654 5.64323 10.6009 5.82552 10.4733 6.15365L9.58015 8.63281L8.01258 7.04688C7.75739 6.79167 7.35638 6.79167 7.11943 7.04688C6.86424 7.30208 6.86424 7.70313 7.11943 7.9401L10.9472 11.8594H8.17662C7.8303 11.8594 7.53866 12.151 7.53866 12.4974C7.53866 12.8438 7.8303 13.1354 8.17662 13.1354H12.1502C12.1685 13.1354 12.1867 13.1354 12.1867 13.1354L14.6656 15.6146H9.96292C9.17914 15.5964 8.48649 15.4505 7.79384 15.1406Z" fill="#00C471"></path>
-            </svg>
-            교육
-          </a>
-        </li>
-        <li>
-          <a href="javascript:void(0)" class="link-career">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M3 10.7626C3 7.3177 5.76662 4.52502 9.17943 4.52502H12.7955V7.11248H9.17943C7.1823 7.11248 5.56332 8.74672 5.56332 10.7626C5.56332 12.7786 7.1823 14.4128 9.17943 14.4128C11.1765 14.4128 12.7955 12.7786 12.7955 10.7626V7.11248H15.3589V10.7626C15.3589 14.2076 12.5922 17.0003 9.17943 17.0003C5.76662 17.0003 3 14.2076 3 10.7626Z" fill="#858a8d"></path>
-              <path d="M15.4272 5.91089C16.2235 5.91089 16.8691 5.25927 16.8691 4.45545C16.8691 3.65163 16.2235 3 15.4272 3C14.6309 3 13.9854 3.65163 13.9854 4.45545V5.91089H15.4272Z" fill="#858a8d"></path>
-            </svg>
-            커리어
-          </a>
-        </li>
-      </ul>
-      <ul class="inner__links">
-        <li>
-          <a href="javascript:void(0)" class="link-b2b">Our story</a> 
-        </li>
-        <li>
-          <a href="javascript:void(0)" class="link-b2b">기업 서비스</a> 
-        </li>
-        <li>
-          <a href="javascript:void(0)" class="link-b2b">지식공유 참여</a>
-        </li>
-      </ul>
-    </div>
-  </header>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="inner">
-      <div class="logo">
-          <a href="/" class="brand_logo">
-            <img src="https://cdn.inflearn.com/assets/brand/logo.png" alt="Inflearn Logo">
-          </a>
-        </div>
-      <div class="menu">
-        <div class="menu__left">
-          <ul>
-            <li class="lecture">
-              <a href="javascript:void(0)">
-                <span>강의</span>
-              </a>
-              <!-- Insert Dropdown via JS -->
-            </li>
-            <li>
-              <a href="javascript:void(0)">
-                <span>로드맵</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)">
-                <span>멘토링</span>
-              </a>
-            </li>
-            <li class="community">
-              <a href="javascript:void(0)">
-                <span>커뮤니티</span>
-              </a>
-              <ul class="dropdown">
-                <li><a href="javascript:void(0)">질문 & 답변</a></li>
-                <li><a href="javascript:void(0)">고민있어요</a></li>
-                <li><a href="javascript:void(0)">스터디</a></li>
-                <li><a href="javascript:void(0)">팀 프로젝트</a></li>
-                <li><a href="javascript:void(0)">수강평</a></li>
-                <li><a href="javascript:void(0)">멘토링 후기</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="menu__right">
-          <div class="search">
-            <input type="text" placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요">
-            <div class="search-icon">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div class="nav-btns">
-            <% if user_signed_in? %>
-			  	<button class="dashbord">대시보드</button>
-			  <i class="fa-light fa-play" aria-hidden="true"></i>
-			  <div class="profile">
-				  <!-- <img src="https://cdn.inflearn.com/public/main/profile/default_profile.png" alt="profile_img" class="profile-img"> -->
-				  <!-- <div class="profile-details" style="display: none;"> -->
-					<!-- 토글될 내용 -->
-					<%= link_to "회원정보", edit_user_registration_path %> |
-			  		<%= button_to '로그아웃', destroy_user_session_path, method: :delete, class: "logoutbtn" %>
-					<p>학생</p>
-					<!-- 추가적인 내용 -->
-				  </div>
-				</div>
-
-				<!-- <%= link_to "회원정보", edit_user_registration_path %> |
-			  	<%= button_to '로그아웃', destroy_user_session_path, method: :delete, class: "logoutbtn" %> -->
-
-				<!-- 아이디 : <%= current_user.email %> -->
-				<!-- 유저 NO. : <%= current_user.id %> -->
-		  <% else %>
-				<%= link_to "로그인", user_session_path, class: "login" %>
-				<!-- <%= link_to "회원가입", "/users/sign_up" %> -->
-		  <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-
   <!-- Main -->
   <main>
     <!-- Hero -->
@@ -456,7 +312,18 @@
             <div class="swiper-pagination-container">
               <div class="swiper-pagination">
                 <div class="swiper-pagination-wrapper">
-            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets" style="transform: translate(0px, 0px);"><span class="swiper-pagination-bullet hero-bullet swiper-pagination-bullet-active" data-id="1131" tabindex="0">2024 블프런</span><span class="swiper-pagination-bullet hero-bullet" data-id="1132" tabindex="0">Java pt.2</span><span class="swiper-pagination-bullet hero-bullet" data-id="1130" tabindex="0">게임개발</span><span class="swiper-pagination-bullet hero-bullet" data-id="1133" tabindex="0">블렌더 입문</span><span class="swiper-pagination-bullet hero-bullet" data-id="1127" tabindex="0">영한님 40만 달성</span><span class="swiper-pagination-bullet hero-bullet" data-id="60" tabindex="0">지금 할인중 💸</span><span class="swiper-pagination-bullet hero-bullet" data-id="145" tabindex="0">왕초보 모여라 😎</span><span class="swiper-pagination-bullet hero-bullet" data-id="396" tabindex="0">로드맵 🌱</span><span class="swiper-pagination-bullet hero-bullet" data-id="394" tabindex="0">Top 50 👑</span><span class="swiper-pagination-bullet hero-bullet" data-id="1013" tabindex="0">국비지원 부트캠프</span></div>
+            <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets" style="transform: translate(0px, 0px);">
+				<span class="swiper-pagination-bullet hero-bullet swiper-pagination-bullet-active" data-id="1131" tabindex="0">2024 블프런</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="1132" tabindex="0">Java pt.2</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="1130" tabindex="0">게임개발</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="1133" tabindex="0">블렌더 입문</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="1127" tabindex="0">영한님 40만 달성</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="60" tabindex="0">지금 할인중 💸</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="145" tabindex="0">왕초보 모여라 😎</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="396" tabindex="0">로드맵 🌱</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="394" tabindex="0">Top 50 👑</span>
+				<span class="swiper-pagination-bullet hero-bullet" data-id="1013" tabindex="0">국비지원 부트캠프</span>
+			</div>
             <div class="pagination-gradient left-gradient"></div>
             <div class="pagination-gradient right-gradient" style="display: block;"></div>
           </div>
@@ -464,22 +331,37 @@
               <div class="left-gradient"></div>
               <div class="right-gradient"></div>
             </div>
-            <button class="hero-more-toggler">
+            <button class="hero-more-toggler" onclick="toggleVisibility()">
               <div class="material-symbols-outlined">expand_more</div>
             </button>
           </div>
         </div>
       </div>
-      <div class="inner">
-        <div class="hero-more">
-          <div class="hero-more__header">
-            <h3>진행중인 모든 이벤트</h3>
-            <button class="hero-more-hide-btn">닫기</button>
-          </div>
-          <div class="hero-more__items">
-            <div class="swiper-pagination"></div>
-          </div>
+      <div class="heroinner" style="display: none;">
+	  <div class="show-more-box">
+		<div class="show-more-header">
+		  <h3>진행중인 모든 이벤트</h3>
+		  <button class="hero-more-hide-btn" onclick="toggleVisibility()">닫기</button>
+		</div>
+		<div class="show-more-list">
+		  <ul style="display: flex; flex-wrap: wrap;">
+			  <li><span class="pagination-bullet e-select-bullet hero-bullet" data-id="1136">ML/AI취업</span></li>
+
+			  <li><span class="pagination-bullet e-select-bullet hero-bullet" data-id="1132">Java pt.2</span></li>
+
+			  <li><span class="pagination-bullet e-select-bullet hero-bullet" data-id="59">신규 강의 🎁</span></li>
+
+			  <li><span class="pagination-bullet e-select-bullet hero-bullet pagination-bullet-active" data-id="612">3시간 완강 가능!</span></li>
+
+			  <li><span class="pagination-bullet e-select-bullet hero-bullet" data-id="60">지금 할인중 💸</span></li>
+
+			  <li><span class="pagination-bullet e-select-bullet hero-bullet" data-id="1013">국비지원 부트캠프</span></li>
+
+			  <li><span class="pagination-bullet e-select-bullet hero-bullet" data-id="394">Top 50 👑</span></li>
+			</ul>
         </div>
+      </div>
+		  
       </div>
     </section>
 
@@ -599,644 +481,79 @@
           </a>
           <p>무료 강의부터 가볍게 시작해 보세요.</p>
         </div>
-        <div class="free-course__swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img loading="lazy" src="https://cdn.inflearn.com/public/courses/332505/cover/c32e770b-b417-436d-afd0-e2285ac6e514/332505.png?w=420" data-src="https://cdn.inflearn.com/public/courses/332505/cover/c32e770b-b417-436d-afd0-e2285ac6e514/332505.png?w=420" class="swiper-lazy" alt="332505.png">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>김영한의 자바 입문 - 코드로 시작하는 자바 첫걸음</h4>
-                    <div class="instructor">김영한</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(1,434)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+41,000명</div>
-                      <div class="tag">업데이트</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>김영한의 자바 입문 - 코드로 시작하는 자바 첫걸음</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>기타 (개발 · 프로그래밍)</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-					<div class="cart-btn">
-					  <span class="material-symbols-outlined">add_shopping_cart</span>
+		<%= form_with url: import_youtube_courses_path, method: :post, local: true do |f| %>
+		  <div>
+			<%= f.label :playlist_url, '유튜브 재생목록 URL:' %>
+			<%= f.text_field :playlist_url, placeholder: 'https://www.youtube.com/playlist?list=PLAYLIST_ID' %>
+			<%= f.submit 'YouTube 가져오기', class: 'btn btn-primary' %>
+		  </div>
+		<% end %>
+
+		<div class="swiper-container">
+		  <div class="swiper-wrapper">
+			<% @courses.each do |course| %>
+			  <div class="swiper-slide" style="margin-left: 5px;">
+				<div class="course-card">
+				  <div class="course-card-item">
+					<div class="course-card-item__image">
+					  <% if course.thumbnail_url.present? %>
+						<img src="<%= course.thumbnail_url %>" alt="Thumbnail">
+					  <% else %>
+						<img src="/assets/default_thumbnail.png" alt="Default Thumbnail">
+					  <% end %>
 					</div>
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper2.png" alt="인프런 퇴근길 밋업 #04 사이드프로젝트">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>인프런 퇴근길 밋업 #04 사이드프로젝트</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fal" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="5"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM405.8 317.9l27.8 162L288 403.5 142.5 480l27.8-162L52.5 203.1l162.7-23.6L288 32l72.8 147.5 162.7 23.6-117.7 114.8z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fal" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="5"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM405.8 317.9l27.8 162L288 403.5 142.5 480l27.8-162L52.5 203.1l162.7-23.6L288 32l72.8 147.5 162.7 23.6-117.7 114.8z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fal" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="5"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM405.8 317.9l27.8 162L288 403.5 142.5 480l27.8-162L52.5 203.1l162.7-23.6L288 32l72.8 147.5 162.7 23.6-117.7 114.8z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fal" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="5"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM405.8 317.9l27.8 162L288 403.5 142.5 480l27.8-162L52.5 203.1l162.7-23.6L288 32l72.8 147.5 162.7 23.6-117.7 114.8z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fal" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="5"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM405.8 317.9l27.8 162L288 403.5 142.5 480l27.8-162L52.5 203.1l162.7-23.6L288 32l72.8 147.5 162.7 23.6-117.7 114.8z"></path></svg>
-                      </div>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+300명</div>
-                    </div>
-                  </div>
-                </div>
-                <a class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>인프런 퇴근길 밋업 #04 사이드프로젝트</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>초급</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>취업 · 이직, 기타 (커리어), 기타 (개발 · 프로그래밍)</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>커뮤니케이션, 협업</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper3.png" alt="[인프런] 프로덕트 디자인 밋업 (with 강영화)">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>[인프런] 프로덕트 디자인 밋업 (with 강영화)</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(26)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+1,900명</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>[인프런] 프로덕트 디자인 밋업 (with 강영화)</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>UX/UI, 취업 · 이직</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>포트폴리오, 커뮤니케이션</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper4.png" alt="인프콘 2023 다시보기">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>인프콘 2023 다시보기</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(11)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+13,200명</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>인프콘 2023 다시보기</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>기타 (개발 · 프로그래밍), 기타 (커리어)</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>INFCON</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper5.jpg" alt="마케터 이승희 님과 함께 인사이트 찾으러 가기">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>마케터 이승희 님과 함께 인사이트 찾으러 가기</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(7)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+1,100명</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>마케터 이승희 님과 함께 인사이트 찾으러 가기</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>마케팅, 취업 · 이직</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>브랜드 마케팅, 포트폴리오, 콘텐츠 마케팅</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper6.png" alt="시작해보세요! 당신의 첫 지식공유">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>시작해보세요! 당신의 첫 지식공유</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(25)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+900명</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>시작해보세요! 당신의 첫 지식공유</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>기타 (커리어), 교양, 개인 브랜딩, 기타 (개발 · 프로그래밍)</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>콘텐츠 제작, 콘텐츠 기획, 영상제작</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper7.png" alt="김영한의 자바 입문 - 코드로 시작하는 자바 첫걸음">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>김영한의 자바 입문 - 코드로 시작하는 자바 첫걸음</h4>
-                    <div class="instructor">김영한</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(525)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+26,200명</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>김영한의 자바 입문 - 코드로 시작하는 자바 첫걸음</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>
-                          프로그래밍 언어, 웹 개발, 백엔드
-                        </span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>Java, 객체지향</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper8.jpg" alt="언리얼로 만드는 게임사운드 - 개요">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>언리얼로 만드는 게임사운드 - 개요</h4>
-                    <div class="instructor">강사디</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(13)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+400명</div>
-                      <div class="tag">업데이트</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>언리얼로 만드는 게임사운드 - 개요</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>기타 (게임 개발), 게임 아트 · 그래픽</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>Unreal Engine, 음향 시스템, meta sound</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper9.png" alt="인프런 퇴근길 밋업 #05 인프라&AWS">
-                    <div class="type">모임/부트캠프</div>
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>인프런 퇴근길 밋업 #05 인프라&AWS</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="status">모집마감</div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag">새강의</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>인프런 퇴근길 밋업 #05 인프라&AWS</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>입문</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>데브옵스 · 인프라</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>AWS, infrastructure</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper10.png" alt="인프런 워밍업 클럽 - 스터디 0기 모집 (FE, BE)">
-                    <div class="type">모임/부트캠프</div>
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>인프런 워밍업 클럽 - 스터디 0기 모집 (FE, BE)</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="status">모집마감</div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag">새강의</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>인프런 워밍업 클럽 - 스터디 0기 모집 (FE, BE)</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>초급</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>웹 개발, 프론트엔드, 백엔드</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>Java, JavaScript, Spring</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper11.png" alt="인프런 퇴근길 밋업 #03 Flutter with LINE">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>인프런 퇴근길 밋업 #03 Flutter with LINE</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(4)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+700명</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>인프런 퇴근길 밋업 #03 Flutter with LINE</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>초급</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>모바일 앱 개발</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>Flutter, flutter-test, flutter-canvas</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="course-card">
-                <div class="course-card-item">
-                  <div class="course-card-item__image">
-                    <img src="./images/free_course_swiper12.jpg" alt="Kotlin & Spring 네트워킹 밋업 다시보기">
-                  </div>
-                  <div class="course-card-item__content">
-                    <h4>Kotlin & Spring 네트워킹 밋업 다시보기</h4>
-                    <div class="instructor">인프런</div>
-                    <div class="rating">
-                      <div class="rating-star">
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                        <svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
-                      </div>
-                      <span class="review-cnt">(10)</span>
-                    </div>
-                    <div class="price">무료</div>
-                    <div class="tags">
-                      <div class="tag participant">+2,200명</div>
-                    </div>
-                  </div>
-                </div>
-                <a href="javascript:void(0)" class="course-card-cover">
-                  <div class="course-card-cover__content">
-                    <h4>Kotlin & Spring 네트워킹 밋업 다시보기</h4>
-                    <div class="infos">
-                      <div class="level">
-                        <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
-                        <span>초급</span>
-                      </div>
-                      <div class="categories">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
-                        <span>백엔드</span>
-                      </div>
-                      <div class="skills">
-                        <svg width="16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="cubes" class="svg-inline--fa fa-cubes fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M384 215.1V102.5c0-15-9.3-28.4-23.4-33.7l-92-34.5c-8.1-3.1-17.1-3.1-25.3 0l-92 34.5c-14.1 5.3-23.4 18.7-23.4 33.7v112.6L23.4 254.4C9.3 259.6 0 273.1 0 288.1v106.6c0 13.6 7.7 26.1 19.9 32.2l98.6 49.3c10.1 5.1 22.1 5.1 32.2 0L256 423.6l105.3 52.6c10.1 5.1 22.1 5.1 32.2 0l98.6-49.3c12.2-6.1 19.9-18.6 19.9-32.2V288.1c0-15-9.3-28.4-23.4-33.7L384 215.1zm-116 34.8V152l92-31.7v97.6l-92 32zM152 94.2l104-39 104 39v.2L256 131 152 94.3v-.1zm0 26.1l92 31.7v97.9l-92-32v-97.6zm-30 329.4l-96.8-48.4V308l96.8 39.3v102.4zM25.2 280.8v-.2l109.4-41 108.1 40.5v1.2l-108.1 43.9-109.4-44.4zm122 66.5l95.5-38.8V402l-95.5 47.8V347.3zm217.6 102.4L269.3 402v-93.4l95.5 38.8v102.3zm122-48.4L390 449.7V347.3l96.8-39.3v93.3zm0-120.5l-109.4 44.4-108.1-43.9v-1.2l108.1-40.5 109.4 41v.2z"></path></svg>
-                        <span>Kotlin, Spring</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="course-card-cover__btns">
-                    <div class="like-btn">
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
-                    </div>
-                    <div class="add-btn">
-                      <span class="material-symbols-outlined">add</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+					<div class="course-card-item__content">
+					  <h4 style="margin: 0;"><%= course.class_name %></h4>
+					  <div class="instructor"><%= course.provider %></div>
+					  <div class="rating">
+						<div class="rating-star">
+							<svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+							<svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+							<svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+							<svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+							<svg aria-hidden="true" data-prefix="fas" data-icon="star" class="svg-inline--fa fa-star fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" data-value="2"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+						  </div>
+						<span class="review-cnt">(55)</span>
+					  </div>
+					  <div class="price">₩0</div>
+					  <div class="tags">
+						<div class="tag">+참여자 수명</div>
+						<div class="tag">업데이트</div>
+					  </div>
+					</div>
+				  </div>
+				  <a href="<%= course_path(course) %>" class="course-card-cover">
+					<div class="course-card-cover__content">
+					  <h4><%= course.class_name %></h4>
+					  <div class="infos">
+						<div class="level">
+						  <svg width="16" aria-hidden="true" data-prefix="fal" data-icon="signal-alt" class="svg-inline--fa fa-signal-alt fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M576 32v448h-32V32h32M416 160v320h-32V160h32M256 288v192h-32V288h32M96 416v64H64v-64h32M576 0h-32c-17.67 0-32 14.33-32 32v448c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32zM416 128h-32c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V160c0-17.67-14.33-32-32-32zM256 256h-32c-17.67 0-32 14.33-32 32v192c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V288c0-17.67-14.33-32-32-32zM96 384H64c-17.67 0-32 14.33-32 32v64c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-64c0-17.67-14.33-32-32-32z"></path></svg>
+						  <span>입문</span>
+						</div>
+						<div class="categories">
+						  <svg width="16" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="folder-tree" class="svg-inline--fa fa-folder-tree fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 224h224a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32H400L368 0h-80a32 32 0 0 0-32 32v64H64V8a8 8 0 0 0-8-8H40a8 8 0 0 0-8 8v392a16 16 0 0 0 16 16h208v64a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V352a32 32 0 0 0-32-32H400l-32-32h-80a32 32 0 0 0-32 32v64H64V128h192v64a32 32 0 0 0 32 32zm0 96h66.74l32 32H512v128H288zm0-288h66.74l32 32H512v128H288z"></path></svg>
+						  <span>기타 (개발 · 프로그래밍)</span>
+						</div>
+					  </div>
+					  <div class="course-card-cover__btns">
+					    <div class="cart-btn" onclick="handleAddToCart()">
+						  <span class="material-symbols-outlined">add_shopping_cart</span>
+						</div>
+						<div class="like-btn">
+						  <i class="fa fa-heart-o" aria-hidden="true"></i>
+						</div>
+						<div class="add-btn">
+						  <span class="material-symbols-outlined">add</span>
+						</div>
+					  </div>
+					</div>
+				  </a>
+				</div>
+			  </div>
+			<% end %>
+		  </div>
+		</div>
+
         <div class="free-course__prev-btn swiper-prev-btn">
           <div class="material-symbols-outlined">chevron_left</div>
         </div>
@@ -2972,6 +2289,7 @@
     </section>
 
     <!-- Reviews -->
+<% unless user_signed_in? %>
     <section class="review">
       <div class="inner">
         <div class="review__left">
@@ -3106,6 +2424,7 @@
         </div>
       </div>
     </section>
+<% end %>
 
     <!-- Banner -->
     <section class="banner">
@@ -3154,6 +2473,7 @@
     </section>
 
     <!-- B to B -->
+<% unless user_signed_in? %>
     <section class="btob">
       <h3>이미 많은 기업 구성원들이 인프런에서 성장하고 있어요.</h3>
       <div class="btob__logos">
@@ -3181,6 +2501,7 @@
         </div>
       </div>
     </section>
+<% end %>
 
     <!-- Service -->
     <section class="service">
