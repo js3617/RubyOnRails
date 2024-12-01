@@ -1850,6 +1850,16 @@ nav {
   z-index: 99;
 }
 
+.login{
+	background-color: #00c471;
+    border-color: #00c471;
+	color: #fff;
+	line-height: 2;
+    font-weight: 700;
+	padding: 4px 18px;
+    border-radius: 8px;
+}
+
 nav .inner {
   height: 64px;
   display: flex;
@@ -2094,7 +2104,8 @@ header .inner__links li {
   align-items: center;
 }
 
-header .inner__links li:first-child::after {
+header .inner__links li:nth-child(1)::after,
+header .inner__links li:nth-child(2)::after {
   content: "";
   display: block;
   width: 1px;
@@ -2417,6 +2428,7 @@ header .inner__links li a.active {
   padding: 36px 0;
   background-repeat: no-repeat;
   background-position-x: 40%;
+  cursor:pointer;
 }
 
 .banner__swiper .swiper-wrapper .swiper-slide_1 {
@@ -3323,11 +3335,13 @@ header .inner__links li a.active {
 .roadmap__swiper .swiper-wrapper .course-card-item__image img {
   height: 141.215px;
   object-fit: cover;
-  width: 100%
+  width: 100%;
+  cursor: pointer;
 }
 
 .roadmap__swiper .swiper-wrapper .course-card-item__content {
   padding: 9px 0 0;
+	cursor: pointer;
 }
 
 .roadmap__swiper .swiper-wrapper .course-card-item__content h5 {
