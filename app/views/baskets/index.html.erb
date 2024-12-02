@@ -1,68 +1,100 @@
-<div class="course-basket">
-	<h1>수강바구니</h1>
+<div class="maincontent">
+	<div class="cartcontainer">
+		<div class="bbdt">
+			<div class="rightcart">
+				<h1>수강바구니</h1>
 
-	<% if @basket_courses.present? && @basket_courses.any? %>
-		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-		<div class="basket-container">
-		  <% @basket_courses.each do |basket| %>
-			<% if basket.course.present? %>
-			  <div class="basket-item">
-				  <div class="course-info">
-					<!-- 체크박스 -->
-					<div >
-					  <%= check_box_tag "selected_basket_ids[]", basket.id %>
+				<div class="cartcheck">
+				<% if @basket_courses.present? && @basket_courses.any? %>
+					<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+					<!-- 전체 선택 체크박스 -->
+					<div class="allcheck">
+					  <input type="checkbox" id="select-all" class="select-all">
+					  <label for="select-all">전체 선택</label>
 					</div>
-					  <!-- 삭제 버튼 -->
-					<div class="delete-button">
-						<%= button_to '삭제', basket_path(basket.id), method: :delete, class: 'btn btn-delete', data: { confirm: '해당 강의를 수강바구니에서 삭제하시겠습니까?' } %>
-					</div>
-					  <hr>
+					<ul>
+					  <% @basket_courses.each do |basket| %>
+						<% if basket.course.present? %>
+						  <li>
+							  <div class="chcode">
+								<!-- 체크박스 -->
+								<div>
+								  <%= check_box_tag "selected_basket_ids[]", basket.id, false, class: "basket-checkbox" %>
+								</div>
+								  
+							  <!-- 썸네일 -->
+							  <div>
+								<% if basket.course.thumbnail_url.present? %>
+								  <%= image_tag basket.course.thumbnail_url, alt: "Thumbnail", class: "course-thumbnail" %>
+								<% else %>
+								  <p>이미지 없음</p>
+								<% end %>
+							  </div>
 
-					<!-- 강의 정보 -->
-					<div class="course-details">
-						<div class="course-text">
-						  <h3><%= link_to basket.course.class_name, course_path(basket.course) %></h3>
-						  <p>가격: <%= number_to_currency(basket.course.price, unit: "₩", precision: 0) %></p>
-						</div>
-					</div>
+								<!-- 강의 정보 -->
+								<div>
+								  <h3>
+									<%= link_to basket.course.class_name, course_path(basket.course), class: "linkthumnail" %>
+								  </h3>
+									<p class="thumtext">Basket ID: <%= basket.id %> |
+								  Course ID: <%= basket.course.id %></p>
+								</div>
 
-				  </div>
+								<!-- 삭제 버튼 -->
+								<div>
+								  <%= button_to basket_path(basket.id), method: :delete, data: { confirm: '해당 강의를 수강바구니에서 삭제하시겠습니까?' }, class: 'btn btn-danger delete-icon' do %>
+									<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="xmark" class="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="font-size: 14px; color: rgb(73, 80, 87);">
+									  <path fill="currentColor" d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"></path>
+									</svg>
+								  <% end %>
+								</div>
+								  <p class="pay">가격: <%= number_to_currency(basket.course.price, unit: "₩", precision: 0) %></p>
+							  </div>
+						  </li>
+						  <hr>
+						<% else %>
+						  <li>
+							<p>강의 정보를 찾을 수 없습니다.</p>
+						  </li>
+						<% end %>
+					  <% end %>
+					</ul>		
+				</div>
+			</div>
+
+			<div class="leftcart">
+				<!-- 결제 폼 (숨겨진 필드 포함) -->
+				<input type="hidden" name="imp_uid" id="imp_uid">
+				<input type="hidden" name="merchant_uid" id="merchant_uid">
+				<input type="hidden" name="paid_amount" id="paid_amount">
+				<input type="hidden" name="apply_num" id="apply_num">
+				<input type="hidden" name="error_msg" id="error_msg">
+
+				<!-- 결제 버튼 -->
+				<div class="paycard">
+					<div class="mantine-Stack-root mantine-uet3or"><div class="mantine-hpmcve"><h2 class="mantine-Text-root mantine-Title-root mantine-41a5wz">쿠폰</h2><button class="mantine-UnstyledButton-root mantine-Button-root mantine-bk5znu" type="button" data-button="true" style="color-scheme: unset; forced-color-adjust: unset; mask: unset; math-depth: unset; position: unset; position-anchor: unset; text-size-adjust: unset; appearance: unset; color: unset; font: unset; font-palette: unset; font-synthesis: unset; inset-area: unset; text-orientation: unset; text-rendering: unset; text-spacing-trim: unset; -webkit-font-smoothing: unset; -webkit-locale: unset; -webkit-text-orientation: unset; -webkit-writing-mode: unset; writing-mode: unset; zoom: unset; accent-color: unset; place-content: unset; place-items: unset; place-self: unset; alignment-baseline: unset; anchor-name: unset; animation-composition: unset; animation: unset; app-region: unset; aspect-ratio: unset; backdrop-filter: unset; backface-visibility: unset; background: unset; background-blend-mode: unset; baseline-shift: unset; baseline-source: unset; block-size: unset; border-block: unset; border: unset; border-radius: unset; border-collapse: unset; border-end-end-radius: unset; border-end-start-radius: unset; border-inline: unset; border-start-end-radius: unset; border-start-start-radius: unset; inset: unset; box-shadow: unset; box-sizing: unset; break-after: unset; break-before: unset; break-inside: unset; buffered-rendering: unset; caption-side: unset; caret-color: unset; clear: unset; clip: unset; clip-path: unset; clip-rule: unset; color-interpolation: unset; color-interpolation-filters: unset; color-rendering: unset; columns: unset; column-fill: unset; gap: unset; column-rule: unset; column-span: unset; contain: unset; contain-intrinsic-block-size: unset; contain-intrinsic-size: unset; contain-intrinsic-inline-size: unset; container: unset; content: unset; content-visibility: unset; counter-increment: unset; counter-reset: unset; counter-set: unset; cursor: pointer; cx: unset; cy: unset; d: unset; display: unset; dominant-baseline: unset; empty-cells: unset; field-sizing: unset; fill: unset; fill-opacity: unset; fill-rule: unset; filter: unset; flex: unset; flex-flow: unset; float: unset; flood-color: unset; flood-opacity: unset; grid: unset; grid-area: unset; height: unset; hyphenate-character: unset; hyphenate-limit-chars: unset; hyphens: unset; image-orientation: unset; image-rendering: unset; initial-letter: unset; inline-size: unset; inset-block: unset; inset-inline: unset; isolation: unset; letter-spacing: unset; lighting-color: unset; line-break: unset; list-style: unset; margin-block: unset; margin: unset; margin-inline: unset; marker: unset; mask-type: unset; math-shift: unset; math-style: unset; max-block-size: unset; max-height: unset; max-inline-size: unset; max-width: unset; min-block-size: unset; min-height: unset; min-inline-size: unset; min-width: unset; mix-blend-mode: unset; object-fit: unset; object-position: unset; object-view-box: unset; offset: unset; opacity: unset; order: unset; orphans: unset; outline: unset; outline-offset: unset; overflow-anchor: unset; overflow-clip-margin: unset; overflow-wrap: unset; overflow: unset; overlay: unset; overscroll-behavior-block: unset; overscroll-behavior-inline: unset; overscroll-behavior: unset; padding-block: unset; padding: unset; padding-inline: unset; page: unset; page-orientation: unset; paint-order: unset; perspective: unset; perspective-origin: unset; pointer-events: unset; position-try: unset; position-visibility: unset; quotes: unset; r: unset; resize: unset; rotate: unset; ruby-position: unset; rx: unset; ry: unset; scale: unset; scroll-behavior: unset; scroll-margin-block: unset; scroll-margin: unset; scroll-margin-inline: unset; scroll-padding-block: unset; scroll-padding: unset; scroll-padding-inline: unset; scroll-snap-align: unset; scroll-snap-stop: unset; scroll-snap-type: unset; scroll-timeline: unset; scrollbar-color: unset; scrollbar-gutter: unset; scrollbar-width: unset; shape-image-threshold: unset; shape-margin: unset; shape-outside: unset; shape-rendering: unset; size: unset; speak: unset; stop-color: unset; stop-opacity: unset; stroke: unset; stroke-dasharray: unset; stroke-dashoffset: unset; stroke-linecap: unset; stroke-linejoin: unset; stroke-miterlimit: unset; stroke-opacity: unset; stroke-width: unset; tab-size: unset; table-layout: unset; text-align: unset; text-align-last: unset; text-anchor: unset; text-combine-upright: unset; text-decoration: unset; text-decoration-skip-ink: unset; text-emphasis: unset; text-emphasis-position: unset; text-indent: unset; text-overflow: unset; text-shadow: unset; text-transform: unset; text-underline-offset: unset; text-underline-position: unset; white-space: unset; timeline-scope: unset; touch-action: unset; transform: unset; transform-box: unset; transform-origin: unset; transform-style: unset; transition: unset; translate: unset; user-select: unset; vector-effect: unset; vertical-align: unset; view-timeline: unset; view-transition-class: unset; view-transition-name: unset; visibility: unset; border-spacing: unset; -webkit-box-align: unset; -webkit-box-decoration-break: unset; -webkit-box-direction: unset; -webkit-box-flex: unset; -webkit-box-ordinal-group: unset; -webkit-box-orient: unset; -webkit-box-pack: unset; -webkit-box-reflect: unset; -webkit-line-break: unset; -webkit-line-clamp: unset; -webkit-mask-box-image: unset; -webkit-print-color-adjust: unset; -webkit-rtl-ordering: unset; -webkit-ruby-position: unset; -webkit-tap-highlight-color: unset; -webkit-text-combine: unset; -webkit-text-decorations-in-effect: unset; -webkit-text-fill-color: unset; -webkit-text-security: unset; -webkit-text-stroke: unset; -webkit-user-drag: unset; widows: unset; width: unset; will-change: unset; word-break: unset; word-spacing: unset; x: unset; y: unset; z-index: unset;"><div class="mantine-1yjkc96 mantine-Button-inner"><span class="mantine-1ryt1ht mantine-Button-label"><p class="mantine-Text-root mantine-152n36o">쿠폰</p></span><span class="mantine-Button-icon mantine-Button-rightIcon mantine-euqupz"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="circle-question" class="svg-inline--fa fa-circle-question " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="font-size: 14px; color: rgb(134, 142, 150);"><path fill="currentColor" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"></path></svg></span></div></button><div class="mantine-1jggmkl"><p class="mantine-Text-root mantine-5op4e0">사용가능</p><p class="mantine-Text-root mantine-2t64qu">0</p></div></div><div class="mantine-1uguyhf"><div class="mantine-InputWrapper-root mantine-TextInput-root css-1rr4qq7 mantine-1y7fzyr"><div class="mantine-Input-wrapper mantine-TextInput-wrapper mantine-1v7s5f8"><input class="mantine-Input-input mantine-TextInput-input mantine-ta5dj3" id="mantine-yw6fwbiu5" type="text" readonly="" aria-invalid="false" value="₩0"></div></div><button class="mantine-UnstyledButton-root mantine-Button-root mantine-t611nq" type="button" data-button="true"><div class="mantine-1yjkc96 mantine-Button-inner"><span class="mantine-1ryt1ht mantine-Button-label">쿠폰선택</span></div></button></div></div>
+				  	<div class="mantine-Stack-root mantine-uet3or"><div class="mantine-hpmcve"><h2 class="mantine-Text-root mantine-Title-root mantine-41a5wz">쿠폰</h2><button class="mantine-UnstyledButton-root mantine-Button-root mantine-bk5znu" type="button" data-button="true" style="color-scheme: unset; forced-color-adjust: unset; mask: unset; math-depth: unset; position: unset; position-anchor: unset; text-size-adjust: unset; appearance: unset; color: unset; font: unset; font-palette: unset; font-synthesis: unset; inset-area: unset; text-orientation: unset; text-rendering: unset; text-spacing-trim: unset; -webkit-font-smoothing: unset; -webkit-locale: unset; -webkit-text-orientation: unset; -webkit-writing-mode: unset; writing-mode: unset; zoom: unset; accent-color: unset; place-content: unset; place-items: unset; place-self: unset; alignment-baseline: unset; anchor-name: unset; animation-composition: unset; animation: unset; app-region: unset; aspect-ratio: unset; backdrop-filter: unset; backface-visibility: unset; background: unset; background-blend-mode: unset; baseline-shift: unset; baseline-source: unset; block-size: unset; border-block: unset; border: unset; border-radius: unset; border-collapse: unset; border-end-end-radius: unset; border-end-start-radius: unset; border-inline: unset; border-start-end-radius: unset; border-start-start-radius: unset; inset: unset; box-shadow: unset; box-sizing: unset; break-after: unset; break-before: unset; break-inside: unset; buffered-rendering: unset; caption-side: unset; caret-color: unset; clear: unset; clip: unset; clip-path: unset; clip-rule: unset; color-interpolation: unset; color-interpolation-filters: unset; color-rendering: unset; columns: unset; column-fill: unset; gap: unset; column-rule: unset; column-span: unset; contain: unset; contain-intrinsic-block-size: unset; contain-intrinsic-size: unset; contain-intrinsic-inline-size: unset; container: unset; content: unset; content-visibility: unset; counter-increment: unset; counter-reset: unset; counter-set: unset; cursor: pointer; cx: unset; cy: unset; d: unset; display: unset; dominant-baseline: unset; empty-cells: unset; field-sizing: unset; fill: unset; fill-opacity: unset; fill-rule: unset; filter: unset; flex: unset; flex-flow: unset; float: unset; flood-color: unset; flood-opacity: unset; grid: unset; grid-area: unset; height: unset; hyphenate-character: unset; hyphenate-limit-chars: unset; hyphens: unset; image-orientation: unset; image-rendering: unset; initial-letter: unset; inline-size: unset; inset-block: unset; inset-inline: unset; isolation: unset; letter-spacing: unset; lighting-color: unset; line-break: unset; list-style: unset; margin-block: unset; margin: unset; margin-inline: unset; marker: unset; mask-type: unset; math-shift: unset; math-style: unset; max-block-size: unset; max-height: unset; max-inline-size: unset; max-width: unset; min-block-size: unset; min-height: unset; min-inline-size: unset; min-width: unset; mix-blend-mode: unset; object-fit: unset; object-position: unset; object-view-box: unset; offset: unset; opacity: unset; order: unset; orphans: unset; outline: unset; outline-offset: unset; overflow-anchor: unset; overflow-clip-margin: unset; overflow-wrap: unset; overflow: unset; overlay: unset; overscroll-behavior-block: unset; overscroll-behavior-inline: unset; overscroll-behavior: unset; padding-block: unset; padding: unset; padding-inline: unset; page: unset; page-orientation: unset; paint-order: unset; perspective: unset; perspective-origin: unset; pointer-events: unset; position-try: unset; position-visibility: unset; quotes: unset; r: unset; resize: unset; rotate: unset; ruby-position: unset; rx: unset; ry: unset; scale: unset; scroll-behavior: unset; scroll-margin-block: unset; scroll-margin: unset; scroll-margin-inline: unset; scroll-padding-block: unset; scroll-padding: unset; scroll-padding-inline: unset; scroll-snap-align: unset; scroll-snap-stop: unset; scroll-snap-type: unset; scroll-timeline: unset; scrollbar-color: unset; scrollbar-gutter: unset; scrollbar-width: unset; shape-image-threshold: unset; shape-margin: unset; shape-outside: unset; shape-rendering: unset; size: unset; speak: unset; stop-color: unset; stop-opacity: unset; stroke: unset; stroke-dasharray: unset; stroke-dashoffset: unset; stroke-linecap: unset; stroke-linejoin: unset; stroke-miterlimit: unset; stroke-opacity: unset; stroke-width: unset; tab-size: unset; table-layout: unset; text-align: unset; text-align-last: unset; text-anchor: unset; text-combine-upright: unset; text-decoration: unset; text-decoration-skip-ink: unset; text-emphasis: unset; text-emphasis-position: unset; text-indent: unset; text-overflow: unset; text-shadow: unset; text-transform: unset; text-underline-offset: unset; text-underline-position: unset; white-space: unset; timeline-scope: unset; touch-action: unset; transform: unset; transform-box: unset; transform-origin: unset; transform-style: unset; transition: unset; translate: unset; user-select: unset; vector-effect: unset; vertical-align: unset; view-timeline: unset; view-transition-class: unset; view-transition-name: unset; visibility: unset; border-spacing: unset; -webkit-box-align: unset; -webkit-box-decoration-break: unset; -webkit-box-direction: unset; -webkit-box-flex: unset; -webkit-box-ordinal-group: unset; -webkit-box-orient: unset; -webkit-box-pack: unset; -webkit-box-reflect: unset; -webkit-line-break: unset; -webkit-line-clamp: unset; -webkit-mask-box-image: unset; -webkit-print-color-adjust: unset; -webkit-rtl-ordering: unset; -webkit-ruby-position: unset; -webkit-tap-highlight-color: unset; -webkit-text-combine: unset; -webkit-text-decorations-in-effect: unset; -webkit-text-fill-color: unset; -webkit-text-security: unset; -webkit-text-stroke: unset; -webkit-user-drag: unset; widows: unset; width: unset; will-change: unset; word-break: unset; word-spacing: unset; x: unset; y: unset; z-index: unset;"><div class="mantine-1yjkc96 mantine-Button-inner"><span class="mantine-1ryt1ht mantine-Button-label"><p class="mantine-Text-root mantine-152n36o">포인트</p></span><span class="mantine-Button-icon mantine-Button-rightIcon mantine-euqupz"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="circle-question" class="svg-inline--fa fa-circle-question " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="font-size: 14px; color: rgb(134, 142, 150);"><path fill="currentColor" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"></path></svg></span></div></button><div class="mantine-1jggmkl"><p class="mantine-Text-root mantine-5op4e0">보유</p><p class="mantine-Text-root mantine-2t64qu">0</p></div></div><div class="mantine-1uguyhf"><div class="mantine-InputWrapper-root mantine-TextInput-root css-1rr4qq7 mantine-1y7fzyr"><div class="mantine-Input-wrapper mantine-TextInput-wrapper mantine-1v7s5f8"><input class="mantine-Input-input mantine-TextInput-input mantine-1qjyl0b" id="mantine-7bu2zjyrp" type="text" placeholder="1,000잎 이상 사용" name="point" aria-invalid="false" value=""></div></div><button class="mantine-UnstyledButton-root mantine-Button-root mantine-t611nq" type="button" data-button="true"><div class="mantine-1yjkc96 mantine-Button-inner"><span class="mantine-1ryt1ht mantine-Button-label">전액사용</span></div></button></div></div>
+					<div>
+					  <strong>선택한 강의 총 가격:</strong> <span id="total-price">0</span>원
+					</div>
+					<% if @basket_courses.any? { |basket| basket.course.price > 0 } %>
+					<!-- 유료 강의가 포함된 경우 -->
+					<button type="button" onclick="request_pay()" class="btn-cashe">결제하기</button>
+				  <% else %>
+					<!-- 모든 강의가 무료인 경우 -->
+					<%= form_with url: payments_path, method: :post, id: "free_checkout_form" do %>
+					  <input type="hidden" name="selected_basket_ids[]" value="<%= @basket_courses.map(&:id).join(',') %>">
+					  <%= submit_tag "무료 결제 완료하기", class: "btn btn-success" %>
+					<% end %>
+				  <% end %>
+				</div>
 			  </div>
-			  <hr>
 			<% else %>
-			  <li>
-				<p>강의 정보를 찾을 수 없습니다.</p>
-			  </li>
+			  <p>수강바구니에 담긴 강의가 없습니다.</p>
 			<% end %>
-		  <% end %>
+		</div>
 	</div>
 </div>
-
-    <!-- 결제 폼 (숨겨진 필드 포함) -->
-    <input type="hidden" name="imp_uid" id="imp_uid">
-    <input type="hidden" name="merchant_uid" id="merchant_uid">
-    <input type="hidden" name="paid_amount" id="paid_amount">
-    <input type="hidden" name="apply_num" id="apply_num">
-    <input type="hidden" name="error_msg" id="error_msg">
-
-    <!-- 결제 버튼 -->
-	<div>
-	  <% if @basket_courses.any? { |basket| basket.course.price > 0 } %>
-		<!-- 유료 강의가 포함된 경우 -->
-		<button type="button" onclick="request_pay()" class="btn btn-success">결제하기</button>
-	  <% else %>
-		<!-- 모든 강의가 무료인 경우 -->
-		<%= form_with url: payments_path, method: :post, id: "free_checkout_form" do %>
-		  <input type="hidden" name="selected_basket_ids[]" value="<%= @basket_courses.map(&:id).join(',') %>">
-		  <%= submit_tag "무료 결제 완료하기", class: "btn btn-success" %>
-		<% end %>
-	  <% end %>
-	</div>
-  </form>
-<% else %>
-  <p>수강바구니에 담긴 강의가 없습니다.</p>
-<% end %>
-
 <!-- PortOne 결제 요청 스크립트 -->
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script>
@@ -143,4 +175,39 @@
 	  }
 	});
   }
+  
+  document.addEventListener('DOMContentLoaded', function () {
+  const selectAllCheckbox = document.querySelector('#select-all');
+  const individualCheckboxes = document.querySelectorAll('.basket-checkbox');
+  const totalPriceElement = document.getElementById('total-price');
+
+  // 강의 선택 시 가격 업데이트 함수
+  function updateTotalPrice() {
+    let total = 0;
+    individualCheckboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        const priceElement = checkbox.closest('li').querySelector('.price'); // li 태그 내에 있는 가격 요소 선택
+        const price = parseInt(priceElement.textContent.replace(/[^0-9]/g, ''), 10); // 가격에서 숫자만 추출
+        total += price;
+      }
+    });
+    totalPriceElement.textContent = total.toLocaleString(); // 가격을 콤마로 구분하여 표시
+  }
+
+  // 모든 체크박스에 대한 이벤트 리스너 추가
+  individualCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateTotalPrice);
+  });
+
+  // 전체 선택 체크박스 이벤트 리스너
+  selectAllCheckbox.addEventListener('change', function () {
+    for (let checkbox of individualCheckboxes) {
+      checkbox.checked = this.checked;
+    }
+    updateTotalPrice(); // 가격 업데이트 함수 호출
+  });
+
+  // 초기 페이지 로드 시 총 가격 업데이트
+  updateTotalPrice();
+});
 </script>

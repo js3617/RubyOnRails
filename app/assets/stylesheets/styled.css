@@ -611,6 +611,7 @@ header .inner__links li a.active {
 
 .welcome-course__swiper {
   overflow: hidden;
+	width: 20%
 }
 
 .welcome-course__swiper .swiper-wrapper {
@@ -931,7 +932,7 @@ header .inner__links li a.active {
 
 .new-curation .new-curation__swiper .swiper-wrapper .swiper-slide a p {
   color: #000;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 14px;
   font-weight: 500;
   letter-spacing: normal;
@@ -993,6 +994,7 @@ header .inner__links li a.active {
 
 .new-course .new-course__swiper {
   overflow: hidden;
+	width: 25%;
 }
 
 .new-course .new-course__swiper .swiper-wrapper {

@@ -1,14 +1,13 @@
 <div class="container-fluid">
   <div class="row mt-5">
-    <div class="col-3">
+    <div class="col">
       <ul class="nav flex-column ml-3">
-        <li class="nav-item ">
+        <li class="nav-item">
           <h5>
             <a class="nav-link text-dark" href="#">마이페이지</a>
           </h5>
         </li>
         <li class="nav-item">
-          <h5 class="nav-link">마이페이지</h5>
           <ul class="nav flex-column ml-3">
             <li class="nav-item">
               <a href="#" class="nav-link text-dark">나만의 패키지</a>
@@ -48,37 +47,40 @@
         </li>
       </ul>
     </div>
-    <div class="col-8">
-      <div class="row">
-        <div class="col-6">
+    <div class="carda">
+      <div class="halfs">
+        <div class="cupon">
           <div class="card mx-5 shadow-sm">
             <div class="card-body text-center">
-              <h5 class="card-title">내 프로필</h5>
+              <h2 class="title">내 프로필</h2>
               <div class="d-flex justify-content-around">
+				  <p>이미지
+				  <picture class="css-18ks7za mantine-1slvdou"><div class="mantine-Image-root mantine-yxmaw9" style="width: 100%;"><figure class="mantine-qenwvq mantine-Image-figure"><div class="mantine-1iugybl mantine-Image-imageWrapper"><img src="https://cdn.inflearn.com/public/main/profile/default_profile.png" class="mantine-62uu7b mantine-Image-image" style="object-fit: cover; width: 100px%; height: 100px;"></div></figure></div></picture>
+				  </p>
+				  <p>이메일 | <%= @user.email %></p>
                 <div>
-                  <h3>인프런</h3>
-                  <a href="/users/edit" class="btn btn-warning btn-sm px-4 d-block mb-1 shadow">수정</a>
-                  <a href="#" class="btn btn-warning btn-sm px-4 d-block shadow">쿠폰 0개</a>
+                  <a href="/users/edit" class="btn btn-warning btn-sm px-4 d-block mb-1 shadow cari">회원 정보 수정</a>
+					<br/>
+                  <p href="#" class="btn btn-warning btn-sm px-4 d-block shadow cari">쿠폰 0개</p>
                 </div>
                 <div>
-                  <p><%= @user.email %></p>
-				  <a href="/users/sign_out" class="btn btn-dark btn-sm px-4 d-block shadow mt-3" data-method="delete">로그아웃</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="cupon">
 		  <div class="card mx-5 shadow-sm">
             <div class="card-body">
-			  <h5 class="card-title">수강바구니</h5>
-			  <a href="/baskets" class="btn btn-warning px-5 shadow">수강바구니 확인</a>
-              <h5 class="card-title">결제내역</h5>
+			  <h2 class="title">수강바구니</h2>
+			  <a href="/baskets" class="btn btn-warning px-5 shadow cari">수강바구니 확인</a>
+              <h5 class="title">결제내역</h5>
               <p class="card-text">총 <%= @user.payments.count %>건의 결제 내역이 있습니다</p>
-			  <a href="/payments" class="btn btn-warning px-5 shadow">내역 조회</a>
+			  <a href="/payments" class="btn btn-warning px-5 shadow cari">내역 조회</a>
             </div>
           </div>
         </div>
+		  <a href="/users/sign_out" class="btn btn-dark btn-sm px-4 d-block shadow mt-3 cari out" data-method="delete">로그아웃</a>
       </div>
     </div>
   </div>

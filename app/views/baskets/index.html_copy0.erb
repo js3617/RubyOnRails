@@ -1,0 +1,146 @@
+<div class="course-basket">
+	<h1>수강바구니</h1>
+
+	<% if @basket_courses.present? && @basket_courses.any? %>
+		<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<div class="basket-container">
+		  <% @basket_courses.each do |basket| %>
+			<% if basket.course.present? %>
+			  <div class="basket-item">
+				  <div class="course-info">
+					<!-- 체크박스 -->
+					<div >
+					  <%= check_box_tag "selected_basket_ids[]", basket.id %>
+					</div>
+					  <!-- 삭제 버튼 -->
+					<div class="delete-button">
+						<%= button_to '삭제', basket_path(basket.id), method: :delete, class: 'btn btn-delete', data: { confirm: '해당 강의를 수강바구니에서 삭제하시겠습니까?' } %>
+					</div>
+					  <hr>
+
+					<!-- 강의 정보 -->
+					<div class="course-details">
+						<div class="course-text">
+						  <h3><%= link_to basket.course.class_name, course_path(basket.course) %></h3>
+						  <p>가격: <%= number_to_currency(basket.course.price, unit: "₩", precision: 0) %></p>
+						</div>
+					</div>
+
+				  </div>
+			  </div>
+			  <hr>
+			<% else %>
+			  <li>
+				<p>강의 정보를 찾을 수 없습니다.</p>
+			  </li>
+			<% end %>
+		  <% end %>
+	</div>
+</div>
+
+    <!-- 결제 폼 (숨겨진 필드 포함) -->
+    <input type="hidden" name="imp_uid" id="imp_uid">
+    <input type="hidden" name="merchant_uid" id="merchant_uid">
+    <input type="hidden" name="paid_amount" id="paid_amount">
+    <input type="hidden" name="apply_num" id="apply_num">
+    <input type="hidden" name="error_msg" id="error_msg">
+
+    <!-- 결제 버튼 -->
+	<div>
+	  <% if @basket_courses.any? { |basket| basket.course.price > 0 } %>
+		<!-- 유료 강의가 포함된 경우 -->
+		<button type="button" onclick="request_pay()" class="btn btn-success">결제하기</button>
+	  <% else %>
+		<!-- 모든 강의가 무료인 경우 -->
+		<%= form_with url: payments_path, method: :post, id: "free_checkout_form" do %>
+		  <input type="hidden" name="selected_basket_ids[]" value="<%= @basket_courses.map(&:id).join(',') %>">
+		  <%= submit_tag "무료 결제 완료하기", class: "btn btn-success" %>
+		<% end %>
+	  <% end %>
+	</div>
+  </form>
+<% else %>
+  <p>수강바구니에 담긴 강의가 없습니다.</p>
+<% end %>
+
+<!-- PortOne 결제 요청 스크립트 -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script>
+  function request_pay() {
+    const IMP = window.IMP; // PortOne SDK 객체
+    const merchantCode = "<%= ENV['PORTONE_MERCHANT_CODE'] || 'imp25246564' %>"; // 가맹점 코드
+    IMP.init(merchantCode);
+  
+    // 선택된 강의 ID 확인
+    const selectedBaskets = Array.from(
+      document.querySelectorAll('input[name="selected_basket_ids[]"]:checked')
+    ).map(input => input.value);
+
+    if (selectedBaskets.length === 0) {
+      alert("결제할 강의를 선택해주세요.");
+      return;
+    }
+
+    // 선택된 강의명 추출
+    const selectedCourses = selectedBaskets.map(id => {
+      const courseNameElement = document.querySelector(`input[value="${id}"]`)
+        .closest('li')
+        .querySelector('h3 a');
+      return courseNameElement.textContent.trim();
+    });
+
+    // 강의명 형식 설정 ('강의명 등 2개' 형식)
+    let courseNames = selectedCourses.join(", ");
+    if (selectedCourses.length > 1) {
+      courseNames = `${selectedCourses[0]} 등 ${selectedCourses.length}개`;
+    }
+
+    // 총 결제 금액 계산
+    const totalAmount = selectedBaskets.reduce((sum, id) => {
+      const priceElement = document.querySelector(`input[value="${id}"]`)
+        .closest('li')
+        .querySelector('p');
+      const priceText = priceElement.textContent.replace(/[^0-9]/g, '');
+      return sum + parseInt(priceText, 10);
+    }, 0);
+
+    // 결제 요청	
+    IMP.request_pay({
+	  pg: 'html5_inicis', // PG사
+	  pay_method: 'card', // 결제수단
+	  merchant_uid: 'merchant_' + new Date().getTime(), // 고유 주문번호
+	  name: courseNames, // 선택된 강의명
+	  amount: totalAmount, // 총 결제 금액
+	  buyer_email: '<%= current_user.email %>', // 사용자 이메일
+	}, function (rsp) {
+	  if (rsp.success) {
+		// 서버로 데이터 전송
+		fetch('<%= payments_path %>', {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+			'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+		  },
+		  body: JSON.stringify({
+			imp_uid: rsp.imp_uid, // PortOne 거래 ID
+			paid_amount: rsp.paid_amount, // 결제 금액
+			pay_method: rsp.pay_method, // 결제 수단
+			pg_provider: rsp.pg_provider, // PG사 정보
+			selected_basket_ids: selectedBaskets // 선택된 바구니 ID
+		  })
+		})
+		.then(response => response.json())
+		.then(data => {
+		  if (data.status === 'completed') {
+			alert('결제가 성공적으로 완료되었습니다.');
+			window.location.href = `/payments/${data.payment_id}`; // 결제 상세 페이지로 이동
+		  } else {
+			alert('결제가 처리되지 않았습니다: ' + data.message);
+		  }
+		});
+	  } else {
+		alert('결제에 실패하였습니다. 사유: ' + rsp.error_msg);
+	  }
+	});
+  }
+</script>

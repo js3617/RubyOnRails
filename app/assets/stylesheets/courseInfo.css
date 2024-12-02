@@ -73,3 +73,133 @@
 .delete-button .btn-delete:hover {
   background-color: #ff6666;
 }
+
+.container{
+	padding: 48px 32px;
+    overflow: hidden;
+	background: #101113;
+}
+
+.card-title{
+	font-weight: 700;
+    font-size: 2.125rem;
+    line-height: 1.3;
+    margin: 0;
+	color: #ffffff;
+}
+
+.card-info{
+	font-size: 1rem;
+    line-height: 1.5;
+    text-decoration: none;
+    max-width: 41rem;
+    line-height: 1.5;
+    text-underline-position: under;
+	color: rgba(255, 255, 255, 0.6);;
+}
+
+.rating-container{
+	display: flex;
+	align-items: center;
+}
+
+.rating-container .active-star {
+  color: gold;
+}
+
+.rating-container .inactive-star {
+  color: lightgray;
+}
+
+.rating-container span {
+  font-size: 24px;
+}
+
+.course_info_main{
+	padding: 24px 32px;
+	display: block;
+	margin-right: auto;
+    margin-left: auto;
+	max-width: 700px;
+}
+
+.half{
+	gap: 16px;
+}
+
+/* 옆에 카드 */
+.mantine-1avyp1d{
+	justify-content: flex-start;
+    gap: 1rem;
+    width: 23rem;
+    min-width: 23rem;
+    height: 100%;
+    position: fixed;
+    top: 566px;
+	display: flex;
+	align-items: stretch;
+}
+
+.css-ks8w16 {
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.css-y48vtv {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: unset;
+}
+
+.css-1ncs04q {
+    border-radius: 0 0 8px 8px;
+}
+.mantine-4zwhfa {
+    padding: 1rem;
+    background: #F8F9FA;
+}
+
+.mantine-caxjnw {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.mantine-1dfaauk {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem 0.5rem;
+}
+
+.css-6n12g {
+    font-size: 26px;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.mantine-5jqdej {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    color: inherit;
+    font-size: inherit;
+    text-decoration: none;
+    line-height: 1.5;
+    text-underline-position: under;
+}
+
+.mantine-e3wuc0 {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.mantine-5jqdej {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    color: inherit;
+    font-size: inherit;
+    line-height: 1.5;
+    text-decoration: none;
+    line-height: 1.5;
+    text-underline-position: under;
+}

@@ -1,43 +1,60 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="siginup">
+	<h2><%= resource_name.to_s.humanize %> 정보 변경</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+	  <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+	  <div class="field">
+		<%= f.label :이메일 %>
+		<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+	  </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+	  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+		<div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+	  <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+	  <div class="field">
+		<%= f.label :password, "비밀번호" %>
+		<%= f.password_field :password, autocomplete: "new-password", placeholder: "새로운 비밀번호를 입력해주세요." %>
+		<div class="mantine-7w5tsn">
+			  <div class="mantine-8bv3zy">
+				  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="font-size: 10px; color: rgb(134, 142, 150); height: 14px;">
+					  <path fill="currentColor" d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"></path>
+				  </svg>
+				  <p class="mantine-Text-root mantine-1q4x896">영문/숫자/특수문자 중, 2가지 이상 포함</p>
+			  </div>
+			  <div class="mantine-8bv3zy">
+				  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="font-size: 10px; color: rgb(134, 142, 150); height: 14px;">
+					  <path fill="currentColor" d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"></path>
+				  </svg>
+				  <p class="mantine-Text-root mantine-1q4x896">6자 이상 32자 이하 입력 (공백 제외)</p>
+			  </div>
+			  <div class="mantine-8bv3zy">
+				  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="check" class="svg-inline--fa fa-check " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="font-size: 10px; color: rgb(134, 142, 150); height: 14px;">
+					  <path fill="currentColor" d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"></path>
+				  </svg>
+				  <p class="mantine-Text-root mantine-1q4x896">연속 3자 이상 동일한 문자/숫자 제외</p>
+			  </div>
+		  </div>
+	  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+	  <div class="field">
+		<%= f.label :password_confirmation, "비밀번호 확인" %>
+		<%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "새로운 비밀번호를 입력해주세요." %>
+	  </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+	  <div class="field">
+		<%= f.label :password_confirmation, "현재 비밀번호" %>
+		<%= f.password_field :current_password, autocomplete: "current-password", placeholder: "현재 비밀번호를 입력해주세요." %>
+	  	<i>변경 사항을 확인하려면 현재 비밀번호가 필요합니다.</i>
+	  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+	  <div class="actions">
+		<%= f.submit "변경하기", class: "siginupbtn" %>
+	  </div>
+	<% end %>
 
-<h3>Cancel my account</h3>
+	<!-- <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div> -->
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+	<!-- <%= link_to "Back", :back %> -->
+</div>
