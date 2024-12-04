@@ -113,7 +113,7 @@
     resize: none;
     box-sizing: border-box;
     font-size: 1.125rem;
-    width: 40vh;
+    width: 100%;
     color: rgb(0, 0, 0);
     display: block;
     text-align: left;
