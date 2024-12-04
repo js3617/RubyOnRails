@@ -1,46 +1,126 @@
 <div class="containers">
   <div class="row">
+    <div class="col">
+      <ul class="nav flex-column ml-3">
+        <li class="nav-item">
+          <h5>
+            <h5 class="nav-link" href="#">HOME</h5>
+          </h5>
+        </li>
+        <li class="nav-item">
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">대시보드</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">알림</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link" href="#">학습 관리</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">내학습</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">내 로드맵</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">강의 노트</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">멘토링</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">작성한 게시글</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">수강전 문의</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link">수강신청 관리</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="/baskets" class="nav-link text-dark">수강바구니</a>
+            </li>
+            <li class="nav-item">
+              <a href="/baskets" class="nav-link text-dark">좋아요</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">쿠폰함</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">포인트</a>
+            </li>
+			<li class="nav-item">
+              <a href="/payments" class="nav-link text-dark">구매내역</a>
+            </li>
+          </ul>
+        </li>
+		<li class="nav-item">
+          <h5>
+            <h5 class="nav-link" href="#">설정</h5>
+          </h5>
+        </li>
+        <li class="nav-item">
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="/mypage" class="nav-link text-dark">계정 정보</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">알림 설정</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  <div style="width: 100%;">
+	  
+<div class="containers">
+  <div class="row" style="padding: 0 0 0 40px;">
     <div class="col-12 mt-5">
-      <h2 class="text-center">결제내역</h2>
-      <div class="alert alert-primary mt-4" role="alert">
-        일반구매 내역이 표시됩니다. <br>
-      </div>
+      <h2 class="text-center">구매내역</h2>
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
-      <table class="table">
-        <thead>
-          <tr class="table-info">
-            <th scope="col">주문 번호</th>
-            <th scope="col">주문 일시</th>
-            <th scope="col">결제 항목</th>
-            <th scope="col">결제 금액</th>
-            <th scope="col">주문 상태</th>
-            <th scope="col">상세보기</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @payments.each do |payment| %>
-            <tr>
-              <td><%= payment.id %></td>
-              <td><%= payment.created_at.strftime("%F") %></td>
-              <td>
-                <% if payment.payment_items.any? %>
-                  <% payment.payment_items.each do |item| %>
-                    <p><%= item.course&.class_name || "알 수 없는 항목" %></p>
-                  <% end %>
-                <% else %>
-                  <p>결제 항목이 없습니다.</p>
-                <% end %>
-              </td>
-              <td><%= number_to_currency(payment.amount, unit: "₩", precision: 0) %></td>
-              <td><span class="badge badge-warning"><%= payment.status %></span></td>
-              <td><a href="/payments/<%= payment.id %>" class="btn btn-primary">상세 보기</a></td>
-            </tr>
+    <div class="col-12" style="width: 100%;">
+      <% if @payments.empty? %>
+        <div class="alert alert-info" role="alert">
+          구매 내역이 없습니다.
+        </div>
+      <% else %>
+		<% @payments.each do |payment| %>
+		<div class="dayinfo">
+			<div>주문 날짜 <strong><%= payment.created_at.strftime("%Y.%m.%d") %></strong></div>
+			<div><a href="/payments/<%= payment.id %>" class="btn btn-primary">상세 보기 ></a></div>
+		</div>
+        <div class="payment-detail">
+            <div class="payment-item">
+				<div class="numst">
+				  <div><span class="status-badge"><%= payment.status %></span></div>
+				  <div>주문 번호 <strong><%= payment.id %></strong></div>
+				</div>
+              <div><%= payment.payment_items.map { |item| item.course&.class_name || "알 수 없는 항목" }.join(", ") %></div>
+              <div><strong>결제 금액:</strong> <%= number_to_currency(payment.amount, unit: "₩", precision: 0) %></div>
+            </div>
+			
+			<div class="payment-item" style="width: 230px;">
+              <div style="display: flex;justify-content: space-between;"><strong>금액</strong> <%= number_to_currency(payment.amount, unit: "₩", precision: 0) %></div>
+			  <div style="display: flex;justify-content: end; border-bottom: 1px solid #ddd;"><%= number_to_currency(payment.amount, unit: "₩", precision: 0) %></div>
+			  <div style="display: flex;justify-content: space-between;"><strong>합계</strong> <%= number_to_currency(payment.amount, unit: "₩", precision: 0) %></div>
+            </div>
+			
+			<div class="payment-item">
+              <div class="receipt">영수증</div>
+			  <div class="specification">거래명세서</div>
+            </div>
           <% end %>
-        </tbody>
-      </table>
+        </div>
+      <% end %>
     </div>
   </div>
+</div>
 </div>

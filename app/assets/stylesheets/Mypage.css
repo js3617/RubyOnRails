@@ -19,11 +19,16 @@
 .nav-item{
 	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     color: rgb(173, 181, 189);
-    font-size: 0.75rem;
+    font-size: 0.5rem;
     text-decoration: none;
     margin-bottom: 0.75rem;
     line-height: 1.5;
+	font-weight: 100;
     text-underline-position: under;
+}
+
+.nav-link{
+	font-size: 0.75rem;
 }
 
 .nav-item a{
@@ -38,15 +43,20 @@
     text-decoration: none;
     box-sizing: border-box;
     display: flex;
+	font-weight: 400;
     align-items: center;
     width: 100%;
-    padding: 0.5rem 0.75rem;
     user-select: none;
     border-radius: 4px;
 }
 
 .nav-item a:hover{
 	background-color: #dddddd;
+}
+
+.active-link {
+    background-color: rgb(229, 249, 241);
+    color: rgb(0, 196, 113);
 }
 
 .carda{
@@ -77,4 +87,91 @@
 
 .out{
 	text-align: right;
+}
+
+.containers {
+  font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+.payment-detail {
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid rgb(222, 226, 230);
+  padding: 20px;
+  width: 100%;
+	display: flex;
+  justify-content: space-between;
+}
+
+.payment-item {
+  padding: 10px;
+}
+
+.payment-item div {
+  margin-bottom: 5px;
+}
+
+.status-badge {
+  color: #ffffff;
+  background-color: rgb(0, 196, 113);
+  padding: 3px 7px;
+  border-radius: 5px;
+}
+
+.btn-primary {
+    padding: 0px 1.125rem;
+	align-items:center;
+	justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    height: 2.25rem;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    display: inline-block;
+    /* width: auto; */
+    border-radius: 0.5rem;
+    font-weight: 600;
+    position: relative;
+	display: flex;
+    font-size: 0.875rem;
+    cursor: pointer;
+    /* border: 0.0625rem solid rgb(206, 212, 218); */
+    background-color: rgb(255, 255, 255);
+    color: rgb(33, 37, 41);
+}
+
+.numst{
+	display: flex;
+	gap: 5px;
+}
+
+.dayinfo{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.receipt, .specification{
+	padding: 0px 1.125rem;
+	align-items:center;
+	justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    height: 2.25rem;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    display: inline-block;
+    width: 7rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    position: relative;
+	display: flex;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: 0.0625rem solid rgb(206, 212, 218);
+    background-color: rgb(255, 255, 255);
+    color: rgb(33, 37, 41);
+}
+
+.payment-item > strong{
+	text-align: left;
 }

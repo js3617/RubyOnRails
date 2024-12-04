@@ -38,11 +38,10 @@
 }
 
 .chcode{
-	margin-top: 1rem;
+	padding-top: 20px;
     margin-bottom: 1rem;
     width: 100%;
     display: flex;
-    gap: 0.75rem;
 }
 
 .course-thumbnail{
@@ -53,6 +52,7 @@
 .allcheck{
 	display: flex;
 	gap: 5px;
+	border-bottom: 1px solid rgb(206, 212, 218);;
 }
 
 .linkthumnail{
@@ -138,6 +138,7 @@
     font-weight: bold;
     line-height: 1.5;
     text-underline-position: under;
+	margin: 0 0 0 100px;
 }
 
 .mantine-1jggmkl{
@@ -216,4 +217,32 @@
     padding-left: calc(0.75rem);
     padding-right: calc(0.75rem);
     border-radius: 0.5rem;
+}
+
+.delete-icon{
+	background: transparent;
+    border: none;
+}
+
+.flexc{
+	display: flex;
+	width: 730px;
+    justify-content: space-between;
+	border-right: 1px solid rgb(206, 212, 218);;
+	gap: 5px;
+}
+
+.css-1081t4c {
+    text-decoration: underline;
+}
+
+.mantine-u41gjv {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-size: inherit;
+    line-height: 1.5;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0px;
+    border: 0px;
+    color: rgb(134, 142, 150);
 }

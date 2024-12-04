@@ -898,6 +898,10 @@ header .inner__links li a.active {
   cursor: grab;
 }
 
+.free-course .swiper-container {
+    overflow: hidden;
+}
+
 .new-curation .new-curation__swiper .swiper-wrapper:active {
   cursor: grabbing;
 }
@@ -1957,7 +1961,7 @@ padding: 0 1rem;
   color: rgba(0,0,0,.7);
   font-size: 12px;
   line-height: 18px;
-  width: max-content;
+  width: 222.4px;
   border-radius: 4px;
   padding: 6.4px 12.8px;
   background-color: rgba(255,221,87,.9);

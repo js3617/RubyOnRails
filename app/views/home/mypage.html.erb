@@ -4,44 +4,74 @@
       <ul class="nav flex-column ml-3">
         <li class="nav-item">
           <h5>
-            <a class="nav-link text-dark" href="#">마이페이지</a>
+            <h5 class="nav-link" href="#">HOME</h5>
           </h5>
         </li>
         <li class="nav-item">
           <ul class="nav flex-column ml-3">
             <li class="nav-item">
-              <a href="#" class="nav-link text-dark">나만의 패키지</a>
+              <a href="#" class="nav-link text-dark">대시보드</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link text-dark">내가 쓴 리뷰</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-dark">문의내역</a>
+              <a href="#" class="nav-link text-dark">알림</a>
             </li>
           </ul>
         </li>
         <li class="nav-item">
-          <h5 class="nav-link" href="#">구매 정보</h5>
+          <h5 class="nav-link" href="#">학습 관리</h5>
           <ul class="nav flex-column ml-3">
             <li class="nav-item">
-              <a href="#" class="nav-link text-dark">쿠폰</a>
+              <a href="#" class="nav-link text-dark">내학습</a>
             </li>
             <li class="nav-item">
+              <a href="#" class="nav-link text-dark">내 로드맵</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">강의 노트</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">멘토링</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">작성한 게시글</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">수강전 문의</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link">수강신청 관리</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="/baskets" class="nav-link text-dark <%= 'active-link' if current_page?(baskets_path) %>">수강바구니</a>
+            </li>
+            <li class="nav-item">
+              <a href="/baskets" class="nav-link text-dark <%= 'active-link' if current_page?(baskets_path) %>">좋아요</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">쿠폰함</a>
+            </li>
+			<li class="nav-item">
               <a href="#" class="nav-link text-dark">포인트</a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link text-dark">주문/배송 확인</a>
+			<li class="nav-item">
+              <a href="/payments" class="nav-link text-dark <%= 'active-link' if current_page?(payments_path) %>">구매내역</a>
             </li>
           </ul>
         </li>
+		<li class="nav-item">
+          <h5>
+            <h5 class="nav-link text-dark">설정</h5>
+          </h5>
+        </li>
         <li class="nav-item">
-          <h5 class="nav-link">설정</h5>
           <ul class="nav flex-column ml-3">
             <li class="nav-item">
-              <a href="#" class="nav-link text-dark">회원정보 수정</a>
+              <a href="/mypage" class="nav-link text-dark <%= 'active-link' if current_page?(mypage_path) %>">계정 정보</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link text-dark">카카오톡 알림 설정</a>
+              <a href="#" class="nav-link text-dark">알림 설정</a>
             </li>
           </ul>
         </li>
@@ -72,7 +102,7 @@
         <div class="cupon">
 		  <div class="card mx-5 shadow-sm">
             <div class="card-body">
-			  <h2 class="title">수강바구니</h2>
+			  <h2 class="title">수강 결제</h2>
 			  <a href="/baskets" class="btn btn-warning px-5 shadow cari">수강바구니 확인</a>
               <h5 class="title">결제내역</h5>
               <p class="card-text">총 <%= @user.payments.count %>건의 결제 내역이 있습니다</p>
