@@ -61,6 +61,20 @@
 		  <% end %>
 		}
 	</script>
+	<script>
+	  document.addEventListener("DOMContentLoaded", function () {
+		const swiper = new Swiper('.swiper-container', {
+		  slidesPerView: 3, // 한번에 보여줄 슬라이드 개수
+		  spaceBetween: 10, // 슬라이드 간 간격(px)
+		  navigation: {
+			nextEl: '.swiper-next-btn', // 다음 버튼
+			prevEl: '.swiper-prev-btn', // 이전 버튼
+		  },
+		  loop: true, // 무한 루프 활성화
+		});
+	  });
+	</script>
+
 
   <!-- Link JavaScript -->
   <script src="./js/main.js" defer type="module"></script>

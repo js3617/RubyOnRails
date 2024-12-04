@@ -847,10 +847,6 @@ header .inner__links li a.active {
 
 /* swiper */
 
-.swiper-container{
-	width: 20%;
-}
-
 .swiper-prev-btn,
 .swiper-next-btn {
   width: 44px;
@@ -1885,6 +1881,7 @@ padding: 0 1rem;
 }
 
 .course-card-cover {
+  
   font-size: 13px;
   letter-spacing: normal;
   background-color: rgba(0,0,0,.8);
