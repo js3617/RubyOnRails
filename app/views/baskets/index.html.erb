@@ -68,7 +68,7 @@
     const merchantCode = "<%= ENV['PORTONE_MERCHANT_CODE'] || 'imp25246564' %>"; // 가맹점 코드
     IMP.init(merchantCode);
   
-    // 선택된 강의 ID 확인
+    // 선택된 강의 ID 확인 로직
     const selectedBaskets = Array.from(
       document.querySelectorAll('input[name="selected_basket_ids[]"]:checked')
     ).map(input => input.value);
@@ -100,7 +100,34 @@
       const priceText = priceElement.textContent.replace(/[^0-9]/g, '');
       return sum + parseInt(priceText, 10);
     }, 0);
-
+	  
+	// 0원 강의 처리
+    if (totalAmount === 0) {
+      fetch('<%= payments_path %>', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+          selected_basket_ids: selectedBaskets,
+          paid_amount: totalAmount,
+          pay_method: "free",
+          pg_provider: "none"
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'completed') {
+          alert('무료 결제가 성공적으로 완료되었습니다.');
+          window.location.href = `/payments/${data.payment_id}`;
+        } else {
+          alert('무료 결제가 처리되지 않았습니다: ' + data.message);
+        }
+      });
+      return;
+    }
+	
     // 결제 요청	
     IMP.request_pay({
 	  pg: 'html5_inicis', // PG사

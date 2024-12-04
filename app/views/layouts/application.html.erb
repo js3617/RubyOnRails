@@ -2,28 +2,236 @@
 <html>
   <head>
     <title>Inflearn</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-	<%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
-  </head>
-	
-  <body>
-	  <div>
-		  <% if user_signed_in? %>
-		  	<%= link_to "회원정보", edit_user_registration_path %> |
-		  	<%= link_to "로그아웃", destroy_user_session_path, method: :delete %> |
-		    아이디 : <%= current_user.email %> |
-		    유저 NO. : <%= current_user.id %>
-		  <% else %>
-		    <%= link_to "로그인", user_session_path %>
-		    <%= link_to "회원가입", "/users/sign_up" %>
-		  <% end %>
-	  </div>
-	  <hr/>
+	  <%= csrf_meta_tags %>
+	  <%= csp_meta_tag %>
+	  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	  <% if defined?(Turbo) %>
+		<%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+	  <% else %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+	  <% end %>
 	  
+	  <script>
+	  	function toggleDropdown() {
+		  var dropdown = document.getElementById("dropdown");
+		  if (dropdown.style.display === "none") {
+			dropdown.style.display = "block";
+		  } else {
+			dropdown.style.display = "none";
+		  }
+		}
+	  </script>
+  </head>
+  
+  <body>
+	  <% unless controller_name == 'sessions' && (action_name == 'new' || action_name == 'create') || 
+            controller_name == 'registrations' && (action_name == 'new' || action_name == 'create') || 
+            controller_name == 'passwords' && (action_name == 'new' || action_name == 'create' || action_name == 'edit') %>
+      <header>
+    <div class="inner">
+      <ul class="inner__service">
+        <li>
+          <a href="/" class="link-main active">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.4702 7.30208C16.1056 6.46354 15.6135 5.71615 14.9937 5.07813C14.3558 4.4401 13.6267 3.92969 12.7882 3.5651C11.9497 3.20052 11.0383 3 10.0723 3C9.12446 3 8.21308 3.16406 7.35638 3.52865C6.49969 3.89323 5.75236 4.38542 5.09617 5.00521C4.43998 5.64323 3.92961 6.3724 3.56505 7.21094C3.2005 8.04948 3 8.96094 3 9.92708C3 10.875 3.16405 11.7865 3.5286 12.6432C3.89315 13.5 4.38529 14.2474 5.02326 14.9036C5.66122 15.5599 6.40855 16.0703 7.24702 16.4349C8.10371 16.7995 8.99686 17 9.96292 17H16.9988V10.0365C17.017 9.07031 16.8347 8.15885 16.4702 7.30208ZM7.79384 15.1406C7.11943 14.849 6.51792 14.4297 6.00755 13.9193C5.49717 13.3906 5.09617 12.7891 4.80453 12.1146C4.51289 11.4219 4.38529 10.7109 4.38529 9.94531C4.38529 9.16146 4.54934 8.43229 4.84098 7.75781C5.13262 7.08333 5.55186 6.5 6.06223 5.98958C6.59083 5.47917 7.19234 5.09635 7.86676 4.80469C8.5594 4.51302 9.27028 4.38542 10.0358 4.38542C10.8196 4.38542 11.5487 4.54948 12.2231 4.84115C12.8976 5.13281 13.4808 5.53385 13.9912 6.0625C14.5016 6.57292 14.8844 7.17448 15.176 7.84896C15.4676 8.52344 15.5952 9.25261 15.5952 10.0365V14.7396L10.5644 9.65365L11.6763 6.59115C11.8039 6.26302 11.6216 5.89844 11.2935 5.77083C10.9654 5.64323 10.6009 5.82552 10.4733 6.15365L9.58015 8.63281L8.01258 7.04688C7.75739 6.79167 7.35638 6.79167 7.11943 7.04688C6.86424 7.30208 6.86424 7.70313 7.11943 7.9401L10.9472 11.8594H8.17662C7.8303 11.8594 7.53866 12.151 7.53866 12.4974C7.53866 12.8438 7.8303 13.1354 8.17662 13.1354H12.1502C12.1685 13.1354 12.1867 13.1354 12.1867 13.1354L14.6656 15.6146H9.96292C9.17914 15.5964 8.48649 15.4505 7.79384 15.1406Z" fill="#00C471"></path>
+            </svg>
+            교육
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="link-career">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3 10.7626C3 7.3177 5.76662 4.52502 9.17943 4.52502H12.7955V7.11248H9.17943C7.1823 7.11248 5.56332 8.74672 5.56332 10.7626C5.56332 12.7786 7.1823 14.4128 9.17943 14.4128C11.1765 14.4128 12.7955 12.7786 12.7955 10.7626V7.11248H15.3589V10.7626C15.3589 14.2076 12.5922 17.0003 9.17943 17.0003C5.76662 17.0003 3 14.2076 3 10.7626Z" fill="#858a8d"></path>
+              <path d="M15.4272 5.91089C16.2235 5.91089 16.8691 5.25927 16.8691 4.45545C16.8691 3.65163 16.2235 3 15.4272 3C14.6309 3 13.9854 3.65163 13.9854 4.45545V5.91089H15.4272Z" fill="#858a8d"></path>
+            </svg>
+            커리어
+          </a>
+        </li>
+      </ul>
+      <ul class="inner__links">
+        <li>
+          <a href="javascript:void(0)" class="link-b2b">Our story</a> 
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="link-b2b">기업 서비스</a> 
+        </li>
+        <li>
+          <a href="javascript:void(0)" class="link-b2b">지식공유 참여</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="inner">
+      <div class="logo">
+          <a href="/" class="brand_logo">
+            <img src="https://cdn.inflearn.com/assets/brand/logo.png" alt="Inflearn Logo">
+          </a>
+        </div>
+      <div class="menu">
+        <div class="menu__left">
+          <ul>
+            <li class="lecture">
+              <a href="javascript:void(0)">
+                <span>강의</span>
+              </a>
+              <ul class="dropdown">
+                <li><a href="javascript:void(0)">개발·프로그래밍</a>
+					<ul class="dropdown">
+						<li><a href="javascript:void(0)">웹 개발</a>
+							<ul class="dropdown">
+								<li><a href="javascript:void(0)">JavaScript</a></li>
+								<li><a href="javascript:void(0)">Java</a></li>
+								<li><a href="javascript:void(0)">HTML/CSS</a></li>
+								<li><a href="javascript:void(0)">React</a></li>
+								<li><a href="javascript:void(0)">Spring</a></li>
+								<li><a href="javascript:void(0)">국비지원 부트캠프</a></li>
+								<li><a href="javascript:void(0)">Python</a></li>
+								<li><a href="javascript:void(0)">Spring Boot</a></li>
+								<li><a href="javascript:void(0)">Node.js</a></li>
+								<li><a href="javascript:void(0)">TypeScript</a></li>
+								<li><a href="javascript:void(0)">AWS</a></li>
+								<li><a href="javascript:void(0)">Vue.js</a></li>
+								<li><a href="javascript:void(0)">Next.js</a></li>
+								<li><a href="javascript:void(0)">backend</a></li>
+							</ul> 
+						</li>
+						<li><a href="javascript:void(0)">프론트엔드</a></li>
+						<li><a href="javascript:void(0)">백엔드</a></li>
+						<li><a href="javascript:void(0)">풀스택</a></li>
+						<li><a href="javascript:void(0)">모바일 앱 개발</a></li>
+						<li><a href="javascript:void(0)">프로그래밍 언어</a></li>
+						<li><a href="javascript:void(0)">알고리즘·자료구조</a></li>
+						<li><a href="javascript:void(0)">데이터베이스</a></li>
+						<li><a href="javascript:void(0)">데브옵스·인프라</a></li>
+						<li><a href="javascript:void(0)">소프트웨어 테스트</a></li>
+						<li><a href="javascript:void(0)">개발 도구</a></li>
+						<li><a href="javascript:void(0)">웹 퍼블리싱</a></li>
+						<li><a href="javascript:void(0)">데스크톱 앱 개발</a></li>
+						<li><a href="javascript:void(0)">VR/AR</a></li>
+				 	</ul>  
+				</li>
+                <li><a href="javascript:void(0)">게임 개발</a>
+					<ul class="dropdown">
+						<li><a href="javascript:void(0)">개발·프로그래밍</a></li>
+						<li><a href="javascript:void(0)">게임 개발</a></li>
+						<li><a href="javascript:void(0)">데이터 사이언스</a></li>
+						<li><a href="javascript:void(0)">인공지능</a></li>
+						<li><a href="javascript:void(0)">보안·네트워크</a></li>
+						<li><a href="javascript:void(0)">하드웨어</a></li>
+						<li><a href="javascript:void(0)">디자인 아트</a></li>
+						<li><a href="javascript:void(0)">기획·경영·마케팅</a></li>
+						<li><a href="javascript:void(0)">업무 생산성</a></li>
+						<li><a href="javascript:void(0)">커리어·자기계발</a></li>
+						<li><a href="javascript:void(0)">대학 교육</a></li>
+					</ul>  
+				</li>
+                <li><a href="javascript:void(0)">데이터 사이언스</a></li>
+                <li><a href="javascript:void(0)">인공지능</a></li>
+                <li><a href="javascript:void(0)">보안·네트워크</a></li>
+                <li><a href="javascript:void(0)">하드웨어</a></li>
+				<li><a href="javascript:void(0)">디자인 아트</a></li>
+				<li><a href="javascript:void(0)">기획·경영·마케팅</a></li>
+				<li><a href="javascript:void(0)">업무 생산성</a></li>
+				<li><a href="javascript:void(0)">커리어·자기계발</a></li>
+				<li><a href="javascript:void(0)">대학 교육</a></li>
+				<hr class="social-line">
+				<li><a href="javascript:void(0)">모임/부트캠프</a></li>
+				<li><a href="javascript:void(0)">국비지원교육</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <span>로드맵</span>
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                <span>멘토링</span>
+              </a>
+            </li>
+            <li class="community">
+              <a href="javascript:void(0)">
+                <span>커뮤니티</span>
+              </a>
+              <ul class="dropdown">
+                <li><a href="javascript:void(0)">질문 & 답변</a></li>
+                <li><a href="javascript:void(0)">고민있어요</a></li>
+                <li><a href="javascript:void(0)">스터디</a></li>
+                <li><a href="javascript:void(0)">팀 프로젝트</a></li>
+                <li><a href="javascript:void(0)">수강평</a></li>
+                <li><a href="javascript:void(0)">멘토링 후기</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="menu__right">
+          <div class="search">
+            <input type="text" placeholder="나의 진짜 성장을 도와줄 실무 강의를 찾아보세요">
+            <div class="search-icon">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="nav-btns">
+            <% if user_signed_in? %>
+			  	<button class="dashbord">대시보드</button>
+			  <div class="profile">
+				  <!-- <img src="https://cdn.inflearn.com/public/main/profile/default_profile.png" alt="profile_img" class="profile-img"> -->
+				  <!-- <div class="profile-details" style="display: none;"> -->
+					<!-- 토글될 내용 -->
+					<svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="play" class="svg-inline--fa fa-play " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="font-size: 10px;color: inherit; height: 20px; cursor: pointer;"><path fill="currentColor" d="M56.3 66.3c-4.9-3-11.1-3.1-16.2-.3s-8.2 8.2-8.2 14V432c0 5.8 3.1 11.1 8.2 14s11.2 2.7 16.2-.3l288-176c4.8-2.9 7.7-8.1 7.7-13.7s-2.9-10.7-7.7-13.7l-288-176zM24.5 38.1C39.7 29.6 58.2 30 73 39L361 215c14.3 8.7 23 24.2 23 41s-8.7 32.2-23 41L73 473c-14.8 9.1-33.4 9.4-48.5 .9S0 449.4 0 432V80C0 62.6 9.4 46.6 24.5 38.1z"></path></svg>
+				  	<%= link_to baskets_path, class: 'cart-link' do %>
+					  <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="cart-shopping" class="svg-inline--fa fa-cart-shopping " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="font-size: 20px; color: inherit; height: 20px;"><path fill="currentColor" d="M16 0C7.2 0 0 7.2 0 16s7.2 16 16 16H53.9c7.6 0 14.2 5.3 15.7 12.8l58.9 288c6.1 29.8 32.3 51.2 62.7 51.2H496c8.8 0 16-7.2 16-16s-7.2-16-16-16H191.2c-15.2 0-28.3-10.7-31.4-25.6L152 288H466.5c29.4 0 55-20 62.1-48.5L570.6 71.8c5-20.2-10.2-39.8-31-39.8H99.1C92.5 13 74.4 0 53.9 0H16zm90.1 64H539.5L497.6 231.8C494 246 481.2 256 466.5 256H145.4L106.1 64zM168 456a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0zm200-24a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112z"></path></svg>
+					<% end %>
+				  	<div class="profile-menu">
+					  <div class="mantine-Avatar-root mantine-6ur5yj" onclick="toggleDropdown()">
+						<img class="mantine-9rx0rd mantine-Avatar-image" src="https://cdn.inflearn.com/public/main/profile/default_profile.png" alt="박재성님의 프로필 이미지">
+					  </div>
+					  <div id="dropdown" class="dropdown-content" style="display: none;">
+						<div class="profilebottom">
+						  <% if user_signed_in? %>
+							<p><%= link_to current_user, mypage_path, class: "profile-link" %></p>
+						  <% else %>
+							<p>User not logged in</p>
+						  <% end %>
+					    </div>
+						<a href="#내학습"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="books" class="svg-inline--fa fa-books " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 14px; color: inherit; margin-right: 10px;"><path fill="currentColor" d="M128 416v48c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16V416h96zm-16 96c12.3 0 23.5-4.6 32-12.2c8.5 7.6 19.7 12.2 32 12.2h64c26.5 0 48-21.5 48-48V416 400 384 193.8l51.4 198.1 4 15.5 18 69.2c6.6 25.5 32 40.6 56.7 33.8l59.6-16.5c24.7-6.8 39.3-33 32.7-58.5l-13.9-53.7-4-15.5-63.9-246-4-15.5-18-69.2C400 9.9 374.6-5.2 349.9 1.6L290.3 18.1c-3.5 1-6.8 2.3-9.9 4C271.9 8.8 257 0 240 0H176c-12.3 0-23.5 4.6-32 12.2C135.5 4.6 124.3 0 112 0H48C21.5 0 0 21.5 0 48V96v16 16V384v16 16 48c0 26.5 21.5 48 48 48h64zM288 64.8V63.5c.3-7.2 5.1-13 10.8-14.6l59.6-16.5c6.6-1.8 14.8 2 17.2 11l14.1 54.2-87.3 24.2L288.6 68.6c-.3-1.3-.5-2.6-.6-3.8zm-32-.6c0 0 0 0 0 0V96H160V48c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16V64.2zM176 480c-8.8 0-16-7.2-16-16V416h96v48c0 8.8-7.2 16-16 16H176zM128 128V384H32V128h96zm0-80V96H32V48c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16zM256 384H160V128h96V384zM397.7 128.7l59.8 230.5-87.3 24.2L310.4 152.8l87.3-24.2zm67.9 261.5l13.8 53.2c2.4 9.4-3.2 17.7-10.3 19.6l-59.6 16.5c-6.6 1.8-14.8-2-17.2-11l-14.1-54.2 87.3-24.2z"></path></svg>내 학습</a>
+						<a href="#최근강의"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="magnifying-glass-location" class="svg-inline--fa fa-magnifying-glass-location " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 14px; color: inherit; margin-right: 10px;"><path fill="currentColor" d="M208 32a176 176 0 1 1 0 352 176 176 0 1 1 0-352zm0 384c51.7 0 99-18.8 135.3-50L484.7 507.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L366 343.3c31.2-36.4 50-83.7 50-135.3C416 93.1 322.9 0 208 0S0 93.1 0 208S93.1 416 208 416zm26.2-178.4c-8.3 14.5-17.7 28.2-26.2 39.6c-8.5-11.4-17.9-25.1-26.2-39.6c-13.7-24-21.8-45.9-21.8-61.6c0-26.5 21.5-48 48-48s48 21.5 48 48c0 15.7-8.1 37.6-21.8 61.6zm-14.8 77c22.1-27 68.6-89.8 68.6-138.6c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 48.8 46.5 111.6 68.6 138.6c6 7.3 16.8 7.3 22.7 0zM232 184a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z"></path></svg>추천 강의 찾기</a>
+						<a href="#대시보드"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="chart-pie" class="svg-inline--fa fa-chart-pie " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="height: 16px; color: inherit; margin-right: 10px;"><path fill="currentColor" d="M511.3 208H336V32.7c93.3 7.7 167.6 82.1 175.3 175.3zM320 240H528.5c8.4 0 15.4-6.5 15.5-14.9l0-1.1C544 100.3 443.7 0 320 0l-1.1 0C310.5 0 304 7.1 304 15.5V224c0 8.8 7.2 16 16 16zm-86.6 70.6L375.3 452.6C344.9 470 309.6 480 272 480C157.1 480 64 386.9 64 272c0-98.3 68.3-180.8 160-202.4V288c0 8.5 3.4 16.6 9.4 22.6zM239 34.3C122.1 50.3 32 150.7 32 272c0 132.5 107.5 240 240 240c51.8 0 99.8-16.4 139-44.3c7.7-5.5 8.2-16.5 1.5-23.1L256 288V49.6c0-9.2-7.8-16.6-17-15.4zM489.6 412.3L397.3 320H538.4c-8.3 35-25.4 66.6-48.9 92.3zM573.8 305c1.3-9.2-6.1-17-15.4-17H358.6c-14.3 0-21.4 17.2-11.3 27.3L478.7 446.7c5.8 5.8 15.2 6.3 21.2 .7c39.3-36.7 66.2-86.5 73.9-142.3z"></path></svg>대시보드</a>
+						  
+						<a href="#구매내역"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="receipt" class="svg-inline--fa fa-receipt " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="height: 16px; color: inherit; margin-right: 10px;"><path fill="currentColor" d="M26.5 4C21.8-.2 15.1-1.2 9.4 1.4S0 9.7 0 16V496c0 6.3 3.7 12 9.4 14.6s12.4 1.6 17.1-2.5l52.7-46.1 45.4 45.4c6.2 6.2 16.4 6.2 22.6 0L192 462.6l44.7 44.7c6.2 6.2 16.4 6.2 22.6 0l45.4-45.4L357.5 508c4.7 4.1 11.4 5.1 17.1 2.5s9.4-8.3 9.4-14.6V16c0-6.3-3.7-12-9.4-14.6S362.2-.2 357.5 4L304.7 50.1 259.3 4.7c-6.2-6.2-16.4-6.2-22.6 0L192 49.4 147.3 4.7c-6.2-6.2-16.4-6.2-22.6 0L79.3 50.1 26.5 4zM32 460.7V51.3L69.5 84c6.3 5.5 15.9 5.2 21.8-.7L136 38.6l44.7 44.7c6.2 6.2 16.4 6.2 22.6 0L248 38.6l44.7 44.7c6 6 15.5 6.3 21.8 .7L352 51.3V460.7L314.5 428c-6.3-5.5-15.9-5.2-21.8 .7L248 473.4l-44.7-44.7c-6.2-6.2-16.4-6.2-22.6 0L136 473.4 91.3 428.7c-6-6-15.5-6.3-21.8-.7L32 460.7zM96 144c-8.8 0-16 7.2-16 16s7.2 16 16 16H288c8.8 0 16-7.2 16-16s-7.2-16-16-16H96zM80 352c0 8.8 7.2 16 16 16H288c8.8 0 16-7.2 16-16s-7.2-16-16-16H96c-8.8 0-16 7.2-16 16zM96 240c-8.8 0-16 7.2-16 16s7.2 16 16 16H288c8.8 0 16-7.2 16-16s-7.2-16-16-16H96z"></path></svg>구매 내역</a>
+						<a href="#좋아요"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="heart" class="svg-inline--fa fa-heart " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 16px; color: inherit; margin-right: 10px;"><path fill="currentColor" d="M244 130.6l-12-13.5-4.2-4.7c-26-29.2-65.3-42.8-103.8-35.8c-53.3 9.7-92 56.1-92 110.3v3.5c0 32.3 13.4 63.1 37.1 85.1L253 446.8c.8 .7 1.9 1.2 3 1.2s2.2-.4 3-1.2L443 275.5c23.6-22 37-52.8 37-85.1v-3.5c0-54.2-38.7-100.6-92-110.3c-38.5-7-77.8 6.6-103.8 35.8l-4.2 4.7-12 13.5c-3 3.4-7.4 5.4-12 5.4s-8.9-2-12-5.4zm34.9-57.1C311 48.4 352.7 37.7 393.7 45.1C462.2 57.6 512 117.3 512 186.9v3.5c0 36-13.1 70.6-36.6 97.5c-3.4 3.8-6.9 7.5-10.7 11l-184 171.3c-.8 .8-1.7 1.5-2.6 2.2c-6.3 4.9-14.1 7.5-22.1 7.5c-9.2 0-18-3.5-24.8-9.7L47.2 299c-3.8-3.5-7.3-7.2-10.7-11C13.1 261 0 226.4 0 190.4v-3.5C0 117.3 49.8 57.6 118.3 45.1c40.9-7.4 82.6 3.2 114.7 28.4c6.7 5.3 13 11.1 18.7 17.6l4.2 4.7 4.2-4.7c4.2-4.7 8.6-9.1 13.3-13.1c1.8-1.5 3.6-3 5.4-4.5z"></path></svg>좋아요</a>
+						<%= link_to edit_user_registration_path, class: 'cart-link' do%>
+						  <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="gear" class="svg-inline--fa fa-gear " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 16px; color: inherit; margin-right: 10px;"><path fill="currentColor" d="M223.3 37.8c.4-1.5 1.3-2.8 2.4-3.8c9.9-1.3 20-2 30.3-2s20.4 .7 30.3 2c1.1 1 1.9 2.3 2.4 3.8l13.7 47.7c3.5 12.1 12.2 21.1 22.5 26.1c7.6 3.6 14.8 7.8 21.7 12.5c9.4 6.5 21.7 9.5 33.9 6.5l48.2-12c1.5-.4 3-.3 4.4 .2c5.4 6.9 10.4 14.2 14.9 21.8l4.3 7.4c4.2 7.5 7.9 15.3 11.2 23.3c-.3 1.5-1 2.9-2.1 4L426.8 211c-8.7 9-12.2 21.1-11.3 32.5c.3 4.1 .5 8.3 .5 12.5s-.2 8.4-.5 12.5c-.9 11.4 2.6 23.5 11.3 32.5l34.5 35.7c1.1 1.1 1.8 2.5 2.1 4c-3.3 8-7 15.8-11.2 23.4l-4.2 7.3c-4.6 7.6-9.6 14.8-14.9 21.8c-1.4 .5-2.9 .5-4.4 .2l-48.2-12c-12.2-3-24.4 0-33.9 6.5c-6.9 4.7-14.1 8.9-21.7 12.5c-10.3 4.9-19.1 14-22.5 26.1l-13.7 47.7c-.4 1.5-1.3 2.8-2.4 3.8c-9.9 1.3-20 2-30.3 2s-20.4-.7-30.3-2c-1.1-1-1.9-2.3-2.4-3.8l-13.7-47.7c-3.5-12.1-12.2-21.1-22.5-26.1c-7.6-3.6-14.8-7.8-21.7-12.5c-9.4-6.5-21.7-9.5-33.9-6.5l-48.2 12c-1.5 .4-3 .3-4.4-.2c-5.4-7-10.4-14.2-15-21.8l-4.2-7.3c-4.2-7.5-7.9-15.3-11.2-23.4c.3-1.5 1-2.9 2.1-4L85.2 301c8.7-9 12.2-21.1 11.3-32.5c-.3-4.1-.5-8.3-.5-12.5s.2-8.4 .5-12.5c.9-11.4-2.6-23.5-11.3-32.5L50.7 175.2c-1.1-1.1-1.8-2.5-2.1-4c3.3-8 7-15.8 11.2-23.4l4.2-7.3c4.6-7.6 9.6-14.8 15-21.8c1.4-.5 2.9-.5 4.4-.2l48.2 12c12.2 3 24.4 0 33.9-6.5c6.9-4.7 14.1-8.9 21.7-12.5c10.3-4.9 19.1-14 22.5-26.1l13.7-47.7zM256 0c-13 0-25.9 1-38.4 2.9c-1.7 .3-3.4 .8-5 1.6c-9.5 4.9-16.9 13.6-20 24.5L178.9 76.7c-.6 2.2-2.5 4.5-5.6 6c-9.1 4.3-17.8 9.4-26 15c-2.8 1.9-5.8 2.4-8 1.8l-48.2-12C80.2 84.8 69 86.9 60 92.6c-1.5 .9-2.8 2.1-3.9 3.5C49 105 42.4 114.3 36.5 124.1l-.1 .3L32 132l-.1 .3c-5.4 9.8-10.2 19.9-14.3 30.4c-.6 1.6-1 3.3-1.1 5c-.5 10.8 3.3 21.6 11.2 29.8l34.5 35.7c1.6 1.7 2.7 4.4 2.4 7.8c-.4 5-.6 10-.6 15s.2 10.1 .6 15c.3 3.4-.8 6.2-2.4 7.8L27.7 314.6c-7.9 8.2-11.7 19-11.2 29.8c.1 1.7 .5 3.4 1.1 5c4.1 10.5 8.9 20.6 14.3 30.4l.1 .3 4.4 7.6 .1 .3c5.9 9.8 12.4 19.2 19.6 28.1c1.1 1.4 2.4 2.6 3.9 3.5c9 5.7 20.2 7.8 31.1 5.1l48.2-12c2.2-.6 5.2-.1 8 1.8c8.2 5.7 16.9 10.7 26 15c3.1 1.5 4.9 3.8 5.6 6L192.6 483c3.1 10.8 10.5 19.5 20 24.5c1.6 .8 3.2 1.4 5 1.6C230.1 511 243 512 256 512s25.9-1 38.4-2.9c1.7-.3 3.4-.8 5-1.6c9.5-4.9 16.9-13.6 20-24.5l13.7-47.7c.6-2.2 2.5-4.5 5.6-6c9.1-4.3 17.8-9.4 26-15c2.8-1.9 5.8-2.4 8-1.8l48.2 12c10.9 2.7 22.1 .7 31.1-5.1c1.5-.9 2.8-2.1 3.9-3.5c7.1-8.9 13.6-18.2 19.5-28l.1-.3L480 380l.1-.3c5.4-9.7 10.2-19.9 14.3-30.4c.6-1.6 1-3.3 1.1-5c.5-10.8-3.3-21.6-11.2-29.8l-34.5-35.7c-1.6-1.7-2.7-4.4-2.4-7.8c.4-5 .6-10 .6-15s-.2-10.1-.6-15c-.3-3.4 .8-6.2 2.4-7.8l34.5-35.7c7.9-8.2 11.7-19 11.2-29.8c-.1-1.7-.5-3.4-1.1-5c-4.1-10.5-8.9-20.6-14.3-30.4l-.1-.3-4.4-7.6-.1-.3c-5.9-9.8-12.4-19.2-19.5-28c-1.1-1.4-2.4-2.6-3.9-3.5c-9-5.7-20.2-7.8-31.1-5.1l-48.2 12c-2.2 .6-5.2 .1-8-1.8c-8.2-5.7-16.9-10.7-26-15c-3.1-1.5-4.9-3.8-5.6-6L319.4 29c-3.1-10.8-10.5-19.5-20-24.5c-1.6-.8-3.2-1.4-5-1.6C281.9 1 269 0 256 0zM200 256a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm144 0a88 88 0 1 0 -176 0 88 88 0 1 0 176 0z"></path></svg>설정
+						<% end %>
+					  <div class="profilebottom">
+						  <%= button_to '로그아웃', destroy_user_session_path, method: :delete, class: "logoutbtn" %>
+					    </div>
+					  </div>
+					</div>
+
+			  		
+					<!-- 추가적인 내용 -->
+				  </div>
+				</div>
+
+				<!-- <%= link_to "회원정보", edit_user_registration_path %> |
+			  	<%= button_to '로그아웃', destroy_user_session_path, method: :delete, class: "logoutbtn" %> -->
+
+				<!-- 아이디 : <%= current_user.email %> -->
+				<!-- 유저 NO. : <%= current_user.id %> -->
+		  <% else %>
+				<%= link_to "로그인", user_session_path, class: "login" %>
+				<!-- <%= link_to "회원가입", "/users/sign_up" %> -->
+		  <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <% end %>
     <%= yield %>
   </body>
 </html>
