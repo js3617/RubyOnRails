@@ -1,0 +1,117 @@
+.content{
+	display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info{
+	display: flex;
+	gap: 10px;
+}
+
+.paycards{
+	background-color: transparent;
+    border: 1px solid rgb(233, 236, 239);
+    border-radius: 8px;
+	display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+	width: 70vh;
+}
+
+.paycardheader{
+	display: flex;
+	justify-content: space-between;
+	padding: 0.75rem;
+	align-items: center;
+}
+
+.paycardheader p{
+	font-weight: bold;
+}
+
+.cancle{
+  background-color: transparent;
+  color: #000000;
+  border: 1px solid rgb(233, 236, 239);
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  height: 3vh;
+}
+
+.paybody{
+	background-color:#f9f9f9;
+	padding: 0.875rem;
+}
+
+.courscard{
+	background-color: #ffffff;
+    border: 1px solid rgb(233, 236, 239);
+    border-radius: 8px;
+	display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+	padding: 1rem;
+	gap: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.summary-row:last-child {
+    margin-bottom: 0;
+}
+
+.label {
+    color: #5f5f5f;
+}
+
+.value {
+    color: #5f5f5f;
+}
+
+.value.negative, .label.negative {
+    color: #5f5f5f;
+	font-weight: bold;
+}
+
+.method, .time {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.status{
+	background-color: #00c471;
+	font-size: 0.75rem;
+	color: #ffffff;
+	padding: 0.2rem;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+.courinfo{
+	flex-grow: 1;
+}
+
+.courinfo > p > a{
+	color: #000000;
+}
+
+.courinfoimg{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.courinfoimg img{
+	width: 150px;
+    height: 120px;
+    border-radius: 5px;
+}

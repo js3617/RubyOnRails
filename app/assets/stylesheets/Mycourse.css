@@ -1,0 +1,347 @@
+.mycourse{
+	display: flex;
+	flex-direction: column;
+}
+
+.mycourseinfo{
+	display: grid;
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+    gap: 48px 16px;
+    width: 600px;
+}
+
+.mycourse-thumbnail{
+	width: 17rem;
+    height: 10rem;
+}
+
+.mycoursetext{
+	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    text-underline-position: under;
+}
+
+.mycoursetext a{
+	color: #000000;
+}
+
+.category{
+	display: table;
+	gap: 15px;
+	min-width: 100%;
+}
+
+.categoryman{
+	display: flex;
+    flex-flow: row;
+    justify-content: flex-start;
+    border-bottom: 0.125rem solid rgb(233, 236, 239);
+}
+
+.mycategory a:first-child{
+	padding: 14px 16px;
+	font-weight: bold;
+}
+.mycategory a{
+	padding: 14px 16px;
+	cursor: pointer;
+}
+
+.mycategory{
+	padding: 14px 16px;
+}
+
+
+
+.mantine-1oo286g {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.mantine-jmvtai {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.mantine-pj8oux {
+    position: relative;
+    display: inline-flex;
+    width: auto;
+    flex-direction: row;
+    background-color: rgb(241, 243, 245);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    padding: 4px;
+}
+
+.mantine-1xkg0b8 {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.mantine-1413w3y {
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    position: absolute;
+    z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0.0625rem 0.1875rem, rgba(0, 0, 0, 0.1) 0px 0.0625rem 0.125rem;
+    transition: transform 200ms, width 100ms;
+    background-color: rgb(255, 255, 255);
+    width: 56px;
+    height: 30.8322px;
+    transform: translate(0px, 0px);
+}
+
+.mantine-8wnolt {
+    position: relative;
+    box-sizing: border-box;
+    flex: 1 1 0%;
+    z-index: 2;
+    transition: border-left-color 200ms;
+    border-radius: 0.5rem;
+    border-left-color: transparent !important;
+    border-top-color: transparent !important;
+}
+
+.mantine-8wnolt + .___ref-control {
+    border-left-color: transparent !important;
+}
+
+.mantine-1ryipl8:not(:first-of-type) {
+    border-style: solid;
+    border-width: 0px 0px 0px 0.0625rem;
+    border-color: rgb(222, 226, 230);
+}
+
+.mantine-1ryipl8 {
+    position: relative;
+    box-sizing: border-box;
+    flex: 1 1 0%;
+    z-index: 2;
+    transition: border-left-color 200ms;
+}
+
+[type="checkbox"], [type="radio"] {
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+.mantine-1tajl6a {
+    height: 0px;
+    width: 0px;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+.mantine-ran72y[data-active], .mantine-ran72y[data-active]:hover {
+    color: rgb(0, 0, 0);
+}
+
+.mantine-ran72y {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    padding: 0.3125rem 0.625rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+    color: rgb(73, 80, 87);
+    transition: color 200ms;
+}
+
+.mantine-1zf70c {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    cursor: pointer;
+    appearance: none;
+    font-size: 1rem;
+    text-align: left;
+    text-decoration: none;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 0.5rem;
+    padding: 0px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.25rem;
+    min-height: 2.25rem;
+    width: 2.25rem;
+    min-width: 2.25rem;
+    border: 0.0625rem solid rgb(206, 212, 218);
+    background-color: rgb(255, 255, 255);
+    color: rgb(33, 37, 41);
+}
+
+.mantine-z25kyd {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.css-i9gxme {
+    flex-grow: 1;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.mantine-10iyh6d {
+    height: 30px;
+}
+
+.mantine-qf87zb {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+    border: 0.0625rem solid rgb(206, 212, 218);
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    line-height: calc(1.375rem);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 100ms;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+}
+
+.mantine-kx6ox4 {
+    display: flex;
+}
+
+.mantine-1y7fzyr {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    line-height: 1.5;
+}
+
+.mantine-1vx6ebi {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    display: inline-flex;
+    flex-direction: column;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(0, 0, 0);
+    cursor: default;
+    order: 2;
+}
+
+.mantine-1vf457v {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    order: 1;
+}
+
+.mantine-1n6cz5l:checked {
+    background-color: rgb(0, 196, 113);
+    border-color: rgb(0, 196, 113);
+}
+
+.mantine-1n6cz5l:checked + .___ref-icon {
+    opacity: 1;
+    color: rgb(255, 255, 255);
+    transform: translateY(0px) scale(1);
+}
+
+.mantine-1qj7q0z {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 2.25rem;
+    pointer-events: none;
+}
+
+.mantine-hqx0d1 {
+    display: flex;
+}
+
+button, input {
+    overflow: visible;
+	display: hidden;
+}
+
+.mantine-1g44gv1 {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.mantine-xjutu9 {
+    position: relative;
+    height: 0.5rem;
+    background-color: rgb(233, 236, 239);
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+.mantine-r8gj5s:first-of-type {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.mantine-r8gj5s:last-of-type {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.mantine-r8gj5s {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 196, 113);
+    transition: width 100ms linear;
+}
+
+.mantine-wfw6r2 {
+    width: 100%;
+    display: flex;
+}
+.mantine-jo24o3 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0rem;
+    width: 100%;
+}
+
+.mantine-mhdxd6 {
+    display: flex;
+    gap: 0.125rem;
+}

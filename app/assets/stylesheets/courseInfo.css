@@ -1,3 +1,7 @@
+a{
+	color: #000000;
+}
+
 .css-ks8w16 {
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -80,6 +84,10 @@
 	background: #101113;
 }
 
+.card{
+	display: flex;
+}
+
 .card-title{
 	font-weight: 700;
     font-size: 2.125rem;
@@ -133,22 +141,27 @@
     gap: 1rem;
     width: 23rem;
     min-width: 23rem;
-    height: 100%;
     position: fixed;
-    top: 566px;
+    top: 430px;
 	display: flex;
 	align-items: stretch;
+	right: 100px;
 }
 
 .css-ks8w16 {
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
 }
 
 .css-y48vtv {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: unset;
+	background-color: #ffffff;
+	padding: 1rem;
 }
 
 .css-1ncs04q {
@@ -171,6 +184,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.5rem 0.5rem;
+	margin-top: 25px;
 }
 
 .css-6n12g {
@@ -186,6 +200,7 @@
     text-decoration: none;
     line-height: 1.5;
     text-underline-position: under;
+	margin: 0;
 }
 
 .mantine-e3wuc0 {
@@ -202,4 +217,138 @@
     text-decoration: none;
     line-height: 1.5;
     text-underline-position: under;
+}
+
+.mantine-Group-root{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.css-17vuvug{
+	color: #000000;
+	font-size: 0.875rem;
+}
+
+.css-c2m0s9{
+	background-color: #E5F9F1;
+    color: #00894F;
+    border: 1px solid #BFF0DB;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 14px;
+	text-align: center;
+}
+
+.coursecard-body{
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.btncour{
+	cursor: pointer;
+    border: 0.0625rem solid transparent;
+    background-color: #00C471;
+    color: #fff;
+    width: 100%;
+    padding-right: 26px;
+    height: 3.125rem;
+    padding-left: 1.625rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    position: relative;
+    line-height: 1;
+    font-size: 1.125rem;
+    width: 334px;
+}
+	
+.mantine-e3wuc0{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.mantine-504z0y{
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+	
+.mantine-1937ak2 p{
+	margin: 0;
+	min-width: 6.875rem;
+}
+
+.mantine-uet3or{
+	gap: 0.25rem;
+}
+
+.mantine-1n7ftt8{
+	gap: 0.25rem;
+}
+
+.card-text{
+	font-size: inherit;
+    line-height: 1.5;
+	font-weight: 700;
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    color: white;
+    margin-left: 0.5rem;
+    text-underline-position: under
+}
+
+.shap{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.blue{
+	text-transform: none;
+    cursor: pointer;
+    background: rgba(25, 113, 194, 0.20);
+    color: #a5d8ff;
+    border-radius: 32px;
+	font-size: 0.6875rem;
+    height: 1.25rem;
+    line-height: calc(1.25rem - 0.125rem);
+    text-decoration: none;
+    padding: 0 calc(1rem / 1.5);
+	width: 61px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pricecount{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.mountprice{
+	font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+	font-size: 20px;
+    line-height: 1.35;
+    font-weight: 600;
+	margin: 0;
+}
+
+.installment{
+	color: #495057;
+    font-size: 0.75rem;
+	margin: 0;
+}
+
+.thumbnail{
+	width: 10rem;
+	margin: auto;
+}
+
+.fa-star.checked {
+  color: gold; /* 활성화된 별의 색상을 금색으로 설정 */
 }

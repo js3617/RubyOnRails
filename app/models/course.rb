@@ -17,4 +17,8 @@ class Course < ApplicationRecord
 	def average_rating
 		reviews.average(:rating)&.round(2) || 0.0
 	end
+	
+	def total_lectures
+		class_lists.count
+    end 
 end

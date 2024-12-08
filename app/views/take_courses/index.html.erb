@@ -1,14 +1,190 @@
-<h1>내학습</h1>
+<div class="containers">
+  <div class="row">
+    <div class="col">
+      <ul class="nav flex-column ml-3">
+        <li class="nav-item">
+          <h5>
+            <h5 class="nav-link" href="#">HOME</h5>
+          </h5>
+        </li>
+        <li class="nav-item">
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">대시보드</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">알림</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link" href="#">학습 관리</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="/take_courses" class="nav-link text-dark">내학습</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">내 로드맵</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">강의 노트</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">멘토링</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">작성한 게시글</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">수강전 문의</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <h5 class="nav-link">수강신청 관리</h5>
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="/baskets" class="nav-link text-dark">수강바구니</a>
+            </li>
+            <li class="nav-item">
+              <a href="/baskets" class="nav-link text-dark">좋아요</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">쿠폰함</a>
+            </li>
+			<li class="nav-item">
+              <a href="#" class="nav-link text-dark">포인트</a>
+            </li>
+			<li class="nav-item">
+              <a href="/payments" class="nav-link text-dark">구매내역</a>
+            </li>
+          </ul>
+        </li>
+		<li class="nav-item">
+          <h5>
+            <h5 class="nav-link" href="#">설정</h5>
+          </h5>
+        </li>
+        <li class="nav-item">
+          <ul class="nav flex-column ml-3">
+            <li class="nav-item">
+              <a href="/mypage" class="nav-link text-dark">계정 정보</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link text-dark">알림 설정</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
 
-<% if @take_courses.any? %>
-  <ul>
-    <% @take_courses.each do |take_course| %>
-      <li>
-        <h3><%= link_to take_course.course.class_name, course_path(take_course.course.id) %></h3>
-        <p>수강 시작일: <%= take_course.start_date.strftime('%Y-%m-%d %H:%M') %></p>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>현재 수강 중인 강의가 없습니다.</p>
-<% end %>
+	<div class="containers">
+		<h2>내학습</h2>
+		<div class="category">
+			<div class="categoryman">
+				<div class="mycategory">
+					<a>보유한 강의</a>
+					<a>내 강의 폴더</a>
+					<a>성장 로그</a>
+					<a>수강확인증</a>
+					<a>수료증</a>
+				</div>
+			</div>
+		</div>
+		<div class="mycourse">
+			<div class="mantine-Stack-root mantine-1oo286g">
+				<div class="mantine-jmvtai">
+					<div class="mantine-SegmentedControl-root mantine-pj8oux">
+						<span class="mantine-SegmentedControl-indicator mantine-1413w3y"></span>
+						<div class="___ref-control mantine-SegmentedControl-control mantine-SegmentedControl-controlActive mantine-8wnolt">
+							<input class="mantine-1tajl6a mantine-SegmentedControl-input" type="radio" name="mantine-rdqwb1ct4" id="mantine-rdqwb1ct4-ON" value="ON" checked="">
+							<label class="___ref-label mantine-ran72y mantine-SegmentedControl-label" for="mantine-rdqwb1ct4-ON" data-active="true">온라인</label>
+						</div>
+						<div class="___ref-control mantine-1ryipl8 mantine-SegmentedControl-control">
+							<input class="mantine-1tajl6a mantine-SegmentedControl-input" type="radio" name="mantine-rdqwb1ct4" id="mantine-rdqwb1ct4-OFF" value="OFF">
+							<label class="___ref-label mantine-ran72y mantine-SegmentedControl-label" for="mantine-rdqwb1ct4-OFF">모임/부트캠프</label>
+						</div>
+					</div>
+					<div class="mantine-1xkg0b8">
+						<button class="mantine-UnstyledButton-root mantine-ActionIcon-root mantine-1zf70c" type="button" aria-label="키워드 검색열기">
+							<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="magnifying-glass" class="svg-inline--fa fa-magnifying-glass " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 14px; color: inherit;">
+								<path fill="currentColor" d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z"></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+				<div class="mantine-jmvtai">
+					<div class="mantine-z25kyd">
+						<div class="mantine-Chip-root mantine-10iyh6d">
+							<input type="checkbox" class="mantine-1y6xvnx mantine-Chip-input" id="mantine-ty6zn9gp7" value="" style="visibility: hidden;">
+							<label for="mantine-ty6zn9gp7" class="___ref-label mantine-qf87zb mantine-Chip-label">학습중</label>
+						</div>
+						<div class="mantine-Chip-root mantine-10iyh6d">
+							<input type="checkbox" class="mantine-1y6xvnx mantine-Chip-input" id="mantine-mf6h5vz70" value="" style="visibility: hidden;">
+							<label for="mantine-mf6h5vz70" class="___ref-label mantine-qf87zb mantine-Chip-label">완강</label>
+						</div>
+						<div class="mantine-Chip-root mantine-10iyh6d">
+							<input type="checkbox" class="mantine-1y6xvnx mantine-Chip-input" id="mantine-2uiappd3o" value="" style="visibility: hidden;">
+							<label for="mantine-2uiappd3o" class="___ref-label mantine-qf87zb mantine-Chip-label">수강평 작성 가능</label>
+						</div>
+					</div>
+					<div class="css-i9gxme mantine-8td4f7">
+						<div class="mantine-Checkbox-root mantine-kx6ox4">
+							<div class="mantine-hqx0d1 mantine-Checkbox-body">
+								<div class="mantine-1vf457v mantine-Checkbox-inner">
+									<input id="mantine-oglbm7oft" type="checkbox" class="mantine-1n6cz5l mantine-Checkbox-input" checked="">
+								</div>
+								<div class="mantine-1vx6ebi mantine-Checkbox-labelWrapper">
+									<label class="mantine-1cy1n70 mantine-Checkbox-label" for="mantine-oglbm7oft">만료 제외</label>
+								</div>
+							</div>
+						</div>
+						<div class="mantine-InputWrapper-root mantine-Select-root mantine-1y7fzyr">
+							<div role="combobox" aria-haspopup="listbox" aria-controls="mantine-7vew3yhwc" aria-expanded="false" tabindex="-1" class="">
+								<input type="hidden" value="RECENT_STUDYING">
+								<div class="mantine-Input-wrapper mantine-Select-wrapper mantine-1v7s5f8">
+									<input class="mantine-Input-input mantine-Select-input mantine-zr0xdk" autocomplete="off" type="search" id="mantine-7vew3yhwc" aria-autocomplete="list" readonly="" data-mantine-stop-propagation="false" aria-invalid="false" value="최근 학습순" style="padding: 10px 14px; border-radius: 5px; border: 1px solid #ddd;">
+									<div class="mantine-1qj7q0z mantine-Input-rightSection mantine-Select-rightSection">
+										<svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" data-chevron="true" style="color: rgb(134, 142, 150); width: 1.125rem; height: 1.125rem;">
+											<path d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
+										</svg>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% if @take_courses.any? %>
+			<ul class="mycourseinfo">
+				<% @take_courses.each do |take_course| %>
+				 <li>
+					<% if take_course.course.thumbnail_url.present? %>
+					  	<%= link_to course_path(take_course.course) do %>
+							<%= image_tag(take_course.course.thumbnail_url, alt: "#{take_course.course.class_name} Thumbnail", class: "mycourse-thumbnail") %>
+					  	<% end %>
+						<% else %>
+					  	<%= link_to course_path(take_course.course) do %>
+							<%= image_tag("default_thumbnail.png", alt: "Default Thumbnail", class: "course-thumbnail") %>
+						<% end %>
+					<% end %>
+					<p class="mycoursetext"><%= link_to take_course.course.class_name, course_path(take_course.course.id) %></p>
+					<div class="mantine-Progress-root mantine-xjutu9"><div role="progressbar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="1.22" aria-label="진도율" class="mantine-r8gj5s mantine-Progress-bar" style="width: 1.22%;"></div></div>
+					<div class="mantine-wfw6r2">
+						<div class="mantine-Stack-root css-1max160 mantine-jo24o3">
+							<div class="mantine-mhdxd6">
+								<span class="mantine-Text-root mantine-1cuc0qu">1</span>
+								<span class="mantine-Text-root mantine-1coc85u">/ <%= @total_lectures %>강</span>
+								<span class="mantine-Text-root mantine-1coc85u">(1.22%)</span>
+							</div><p class="mantine-Text-root mantine-6274m">무제한</p>
+						</div>
+					 </div>
+					<p>수강 시작일 <%= take_course.start_date.strftime('%Y-%m-%d %H:%M') %></p>
+				</li>
+				<% end %>
+			</ul>
+			<% else %>
+			    <p>현재 수강 중인 강의가 없습니다.</p>
+			<% end %>
+		</div>
+	</div>

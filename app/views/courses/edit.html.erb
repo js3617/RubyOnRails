@@ -1,6 +1,11 @@
-<h1>Editing Course</h1>
+<div class="editcontent">
+	<h2>강의 정보 변경</h2>
 
-<%= render 'form', course: @course %>
+	<div class="editcourse">
+		<%= render 'form', course: @course %>
+	</div>
 
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>
+	<div class="showback">
+		<%= link_to '취소', @course %>
+	</div>
+</div>

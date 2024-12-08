@@ -21,7 +21,7 @@
           <h5 class="nav-link" href="#">학습 관리</h5>
           <ul class="nav flex-column ml-3">
             <li class="nav-item">
-              <a href="#" class="nav-link text-dark">내학습</a>
+              <a href="/take_courses" class="nav-link text-dark">내학습</a>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link text-dark">내 로드맵</a>
@@ -87,6 +87,7 @@
 				  <p>이미지
 				  <picture class="css-18ks7za mantine-1slvdou"><div class="mantine-Image-root mantine-yxmaw9" style="width: 100%;"><figure class="mantine-qenwvq mantine-Image-figure"><div class="mantine-1iugybl mantine-Image-imageWrapper"><img src="https://cdn.inflearn.com/public/main/profile/default_profile.png" class="mantine-62uu7b mantine-Image-image" style="object-fit: cover; width: 100px%; height: 100px;"></div></figure></div></picture>
 				  </p>
+				  <p>닉네임 | <%= @user.username %></p>
 				  <p>이메일 | <%= @user.email %></p>
                 <div>
                   <a href="/users/edit" class="btn btn-warning btn-sm px-4 d-block mb-1 shadow cari">회원 정보 수정</a>

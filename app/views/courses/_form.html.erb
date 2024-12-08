@@ -11,57 +11,59 @@
     </div>
   <% end %>
 
+<div class="editinput">
   <div class="field">
-    <%= form.label :class_name %>
+    <%= form.label :강의명 %>
     <%= form.text_field :class_name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label :강의소개 %>
     <%= form.text_area :description %>
   </div>
 
   <div class="field">
-    <%= form.label :youtube_playlist_id %>
+    <%= form.label :강의주소 %>
     <%= form.text_field :youtube_playlist_id %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
+    <%= form.label :가격 %>
     <%= form.number_field :price %>
   </div>
 
   <div class="field">
-    <%= form.label :rating %>
+    <%= form.label :평가 %>
     <%= form.number_field :rating %>
   </div>
 
   <div class="field">
-    <%= form.label :like %>
+    <%= form.label :좋아요 %>
     <%= form.number_field :like %>
   </div>
 
   <div class="field">
-    <%= form.label :level %>
+    <%= form.label :난이도 %>
     <%= form.text_field :level %>
   </div>
 
   <div class="field">
-    <%= form.label :certificate %>
+    <%= form.label :자격증 %>
     <%= form.check_box :certificate %>
   </div>
 
   <div class="field">
-    <%= form.label :sessions_count %>
+    <%= form.label :강의수 %>
     <%= form.number_field :sessions_count %>
   </div>
 
   <div class="field">
-    <%= form.label :provider %>
+    <%= form.label :제공자 %>
     <%= form.text_field :provider %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+	<%= form.submit "강의 업데이트", class: "btn-cashe"%>
   </div>
 <% end %>
+</div>

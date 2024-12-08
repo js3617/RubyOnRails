@@ -1,21 +1,173 @@
-<h2><%= @class_list.lesson_name %></h2>
-<p><%= @class_list.description %></p>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var curriculumButton = document.getElementById('curriculumButton');
+  var curriculumContent = document.getElementById('curriculumContent');
 
-<div class="youtube-player">
-  <iframe
-    width="100%"
-    height="400"
-    src="https://www.youtube.com/embed/<%= @class_list.youtube_video_id %>"
-    title="<%= @class_list.lesson_name %>"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
+  curriculumButton.addEventListener('click', function() {
+    var isDisplayed = curriculumContent.style.display === 'block';
+    curriculumContent.style.display = isDisplayed ? 'none' : 'block';
+  });
+});
+</script>
+
+<div class="main">
+	<div class="play">
+		<div class="youtubeheader">
+			<div class="youheader">
+				<%= link_to course_path(@course), class: "btn btn-secondary" do %>
+				  <div class="mantine-1yjkc967 mantine-Button-inner">
+					<span class="mantine-Button-icon mantine-Button-leftIcon mantine-19ok7fu">
+					  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up-right-from-square" class="svg-inline--fa fa-arrow-up-right-from-square " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 12px; color: inherit;">
+						<path fill="currentColor" d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z"></path>
+					  </svg>
+					</span>
+					<span class="mantine-1ryt1ht mantine-Button-label">대시 보드</span>
+				  </div>
+				<% end %>
+				강의소개
+			</div>
+			<div class="youheader">
+				<div class="mantine-1yjkc967 mantine-Button-inner">
+					<span class="mantine-Button-icon mantine-Button-leftIcon mantine-19ok7fu">
+					  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell-slash" class="svg-inline--fa fa-bell-slash " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width: 16px; color: inherit;">
+						  <path fill="currentColor" d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7l-90.2-70.7c.2-.4 .4-.9 .6-1.3c5.2-11.5 3.1-25-5.3-34.4l-7.4-8.3C497.3 319.2 480 273.9 480 226.8l0-18.8c0-77.4-55-142-128-156.8L352 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 19.2c-42.6 8.6-79 34.2-102 69.3L38.8 5.1zM406.2 416L160 222.1l0 4.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S115.4 416 128 416l278.2 0zm-40.9 77.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"></path>
+						</svg>
+					</span>
+					<span class="mantine-1ryt1ht mantine-Button-label">학습 알림</span>
+				</div>
+				<div class="mantine-1yjkc967 mantine-Button-inner">
+					<span class="mantine-Button-icon mantine-Button-leftIcon mantine-19ok7fu">
+					  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="share" class="svg-inline--fa fa-share " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 12px; color: inherit;">
+						  <path fill="currentColor" d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"></path>
+						</svg>
+					</span>
+					<span class="mantine-1ryt1ht mantine-Button-label">공유</span>
+				</div>
+			</div>
+		</div>
+		<div class="youtube-player">
+		  <iframe
+			width="100%"
+			height="928"
+			src="https://www.youtube.com/embed/<%= @class_list.youtube_video_id %>"
+			title="<%= @class_list.lesson_name %>"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen>
+		  </iframe>
+		</div>
+
+		<% previous_class_list = @course.class_lists.where('id < ?', @class_list.id).last %>
+		<% next_class_list = @course.class_lists.where('id > ?', @class_list.id).first %>
+
+		<div class="youtubebtn">
+			<% if previous_class_list %>
+			  <%= link_to course_class_list_path(@course, previous_class_list), class: "btn" do %>
+				<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="chevron-left" class="svg-inline--fa fa-chevron-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="width: 10px; color: inherit;">
+					<path fill="currentColor" d="M15 239c-9.4 9.4-9.4 24.6 0 33.9L207 465c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L65.9 256 241 81c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L15 239z"></path>
+				</svg>
+				이전 강의
+				<% end %>
+			<% end %>
+
+			<p style="color: #ffffff;">
+				<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 10px; color: inherit;"><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path>
+				</svg>
+			</p>
+			<% if next_class_list %>
+				<%= link_to course_class_list_path(@course, next_class_list), class: "btn" do %>
+					다음 강의
+					<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" style="width: 10px; color: inherit;">
+						<path fill="currentColor" d="M305 239c9.4 9.4 9.4 24.6 0 33.9L113 465c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l175-175L79 81c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L305 239z"></path>
+					</svg>
+				<% end %>
+			<% else %>
+			  <p>마지막 강의입니다.</p>
+			<% end %>
+		</div>
+	</div>
+	<!-- 탭 버튼 컨테이너 -->
+	<div class="courlist">
+		<div id="curriculumContent" style="display:none;">
+			<div class="class-lists">
+				<h3>커리큘럼</h3>
+				<p>강의 이름</p>
+				<ul class="courlistrevers">
+				<% @course.class_lists.each do |class_list| %>
+					<li <%= 'class="current"' if class_list == @class_list %>>
+					<%= link_to class_list.lesson_name, course_class_list_path(@course, class_list) %>
+					</li>
+				<% end %>
+				</ul>
+			</div>
+		</div>
+	</div>
+<div class="css-1eow1bo mantine-5n4x4z">
+  <ul class="css-fp2hl2">
+    <!-- 각 탭 버튼 -->
+    <li class="css-zl1inp">
+      <button type="button" id="curriculumButton" title="커리큘럼" aria-label="curriculum-tab-toggle-button">
+		  <div>
+			<span>
+			  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="list-check" class="svg-inline--fa fa-list-check " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 25px; color: rgb(134, 142, 150);">
+				<path fill="currentColor" d="M153.8 72.1c8.9-9.9 8.1-25-1.8-33.9s-25-8.1-33.9 1.8L63.1 101.1 41 79C31.6 69.7 16.4 69.7 7 79s-9.4 24.6 0 33.9l40 40c4.7 4.7 11 7.2 17.6 7s12.8-3 17.2-7.9l72-80zm0 160c8.9-9.9 8.1-25-1.8-33.9s-25-8.1-33.9 1.8L63.1 261.1 41 239c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l40 40c4.7 4.7 11 7.2 17.6 7s12.8-3 17.2-7.9l72-80zM216 120H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H216c-13.3 0-24 10.7-24 24s10.7 24 24 24zM192 256c0 13.3 10.7 24 24 24H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H216c-13.3 0-24 10.7-24 24zM160 416c0 13.3 10.7 24 24 24H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H184c-13.3 0-24 10.7-24 24zm-64 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path>
+			  </svg>
+			  <p>커리큘럼</p>
+			</span>
+		  </div>
+		</button>
+    </li>
+    <li class="css-zl1inp">
+      <button type="button" title="커뮤니티" aria-label="community-tab-toggle-button">
+        <div>
+          <span>
+            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="comment" class="svg-inline--fa fa-comment " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 25px; color: rgb(134, 142, 150);">
+				<path fill="currentColor" d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160s-83.3-160-208-160S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8 .2-1.6 .3-2.4 .5c-4.4 .8-8.7 1.5-13.2 1.9c-.2 0-.5 .1-.7 .1c-5.1 .5-10.2 .8-15.3 .8c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2 .2-.3 .3-.5z"></path>
+			  </svg>
+            <p>커뮤니티</p>
+          </span>
+        </div>
+      </button>
+    </li>
+    
+    <li class="css-zl1inp">
+      <button type="button" title="노트" aria-label="note-tab-toggle-button">
+        <div>
+          <span>
+            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="book" class="svg-inline--fa fa-book " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width: 25px; color: rgb(134, 142, 150);">
+				<path fill="currentColor" d="M0 88C0 39.4 39.4 0 88 0H392c30.9 0 56 25.1 56 56V344c0 22.3-13.1 41.6-32 50.6V464h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H80c-44.2 0-80-35.8-80-80c0-2.7 .1-5.4 .4-8H0V88zM80 400c-17.7 0-32 14.3-32 32s14.3 32 32 32H368V400H80zM48 358.7c9.8-4.3 20.6-6.7 32-6.7H392c4.4 0 8-3.6 8-8V56c0-4.4-3.6-8-8-8H88C65.9 48 48 65.9 48 88V358.7zM152 112H328c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80H328c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z"></path>
+			  </svg>
+            <p>노트</p>
+          </span>
+        </div>
+      </button>
+    </li>
+    
+    <li class="css-zl1inp">
+      <button type="button" title="성장 로그" aria-label="activity-log-tab-toggle-button">
+        <div>
+          <span>
+            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="leaf" class="svg-inline--fa fa-leaf " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 25px; color: rgb(134, 142, 150);">
+				<path fill="currentColor" d="M149.6 234.4c20.9-6.7 43.2-10.4 66.4-10.4h80c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-25.4 0-49.5 5.6-71 15.7C152.7 351 206.6 400 271.9 400h.1l.8 0 .1 0C370.2 399.5 464 299.7 464 156.6c0-12.8-.8-25.3-2.3-37.5C437 134.9 407.6 144 376 144l-104 0c-57.6 0-106.3 38.1-122.4 90.4zM96.4 260.1C102.5 168.5 178.8 96 272 96l104 0c28.7 0 54.8-10.8 74.6-28.5c.7-.6 1.4-1.3 2.1-1.9c6.6-6.2 12.5-13.2 17.4-20.9c1.6-2.5 3.2-5.1 4.6-7.8c3.5-6.5 13.6-6.8 16.2 .1c1.3 3.5 2.5 7 3.7 10.6c2.9 8.9 5.5 17.9 7.8 27.2c.5 1.9 .9 3.8 1.3 5.6c5.4 24.3 8.3 49.8 8.3 76.2C512 317.1 405.1 447.3 273 448l-1 0c-81.7 0-150.4-55.7-170.2-131.2C68.7 347.5 48 391.3 48 440v16c0 13.3-10.7 24-24 24s-24-10.7-24-24V440c0-75.1 38.3-141.2 96.4-179.9z"></path>
+			  </svg>
+            <p>성장 로그</p>
+          </span>
+        </div>
+      </button>
+    </li>
+	  
+	<li class="css-zl1inp">
+      <button type="button" title="스크립트" aria-label="activity-log-tab-toggle-button">
+        <div>
+          <span>
+            <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="closed-captioning" class="svg-inline--fa fa-closed-captioning " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width: 25px; color: rgb(134, 142, 150);">
+			  <path fill="currentColor" d="M512 80c8.8 0 16 7.2 16 16V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16H512zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 208c14.2 0 27 6.1 35.8 16c8.8 9.9 24 10.7 33.9 1.9s10.7-24 1.9-33.9c-17.5-19.6-43.1-32-71.5-32c-53 0-96 43-96 96s43 96 96 96c28.4 0 54-12.4 71.5-32c8.8-9.9 8-25-1.9-33.9s-25-8-33.9 1.9c-8.8 9.9-21.6 16-35.8 16c-26.5 0-48-21.5-48-48s21.5-48 48-48zm144 48c0-26.5 21.5-48 48-48c14.2 0 27 6.1 35.8 16c8.8 9.9 24 10.7 33.9 1.9s10.7-24 1.9-33.9c-17.5-19.6-43.1-32-71.5-32c-53 0-96 43-96 96s43 96 96 96c28.4 0 54-12.4 71.5-32c8.8-9.9 8-25-1.9-33.9s-25-8-33.9 1.9c-8.8 9.9-21.6 16-35.8 16c-26.5 0-48-21.5-48-48z"></path>
+			</svg>
+            <p>스크립트</p>
+          </span>
+        </div>
+      </button>
+    </li>
+  </ul>
 </div>
-
-<p>
-  <strong>영상 길이:</strong>
-  <%= @class_list.duration %>
-</p>
-
-<%= link_to "뒤로 가기", course_path(@course), class: "btn btn-secondary" %>
+</div>

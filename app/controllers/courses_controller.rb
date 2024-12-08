@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
 	@course = Course.find(params[:id])
+	@total_lectures = @course.total_lectures
     @reviews = @course.reviews.includes(:user, :replies).where(parent_id: nil)
   end
 
@@ -117,6 +118,12 @@ class CoursesController < ApplicationController
   end
 
   private
+	
+	def authenticate_user!
+		unless user_signed_in?
+		  redirect_to new_user_session_path, alert: '로그인이 필요합니다.'
+		end
+	end
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
