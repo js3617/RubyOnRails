@@ -55,6 +55,10 @@
 				</div>
 			</p>
 		</div>
+	  <div class="editbackwrapper">
+	  	<%= link_to 'Edit', edit_course_path(@course), class: 'editbtn' %>
+		<%= link_to 'Back', courses_path, class: 'backbtn' %>
+	  </div>
     </div>
 	<div class="thumbnail">
 		<img src="<%= @course.thumbnail_url %>" alt="<%= @course.class_name %> thumbnail" style="width: 300px; height: auto;">
@@ -66,54 +70,50 @@
 	<div class="half">
 		<h2>강의 목록</h2>
 
-		<table class="table">
-		  <thead>
-			<tr>
-			  <th>썸네일</th>
-			  <th>강의명</th>
-			  <!-- <th>강의 설명</th> -->
-			  <th>영상 길이</th>
-			  <th>보기</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			  <% @course.class_lists.order(:created_at).each do |lesson| %>
-				<tr>
-				  <td>
-					<% if lesson.thumbnail_url.present? %>
-					  <% if user_signed_in? %>
-						<%= link_to course_class_list_path(@course, lesson) do %>
-						  <img src="<%= lesson.thumbnail_url %>" alt="Thumbnail" style="width: 120px; height: auto;">
-						<% end %>
-					  <% else %>
-						<img src="<%= lesson.thumbnail_url %>" alt="Thumbnail" style="width: 120px; height: auto;">
-					  <% end %>
-					<% else %>
-					  <span>썸네일 없음</span>
+		<div class="course-list">
+		  <% @course.class_lists.order(:created_at).each do |lesson| %>
+			<div class="course-item">
+			  <div class="course-thumbnail">
+				<% if lesson.thumbnail_url.present? %>
+				  <% if user_signed_in? %>
+					<%= link_to course_class_list_path(@course, lesson) do %>
+					  <img src="<%= lesson.thumbnail_url %>" alt="Thumbnail" style="width: 150px; height: auto;">
 					<% end %>
-				  </td>
-				  <td>
-					<% if user_signed_in? %>
-					  <%= link_to lesson.lesson_name, course_class_list_path(@course, lesson), class: "text-primary" %>
-					<% else %>
-					  <%= lesson.lesson_name %>
-					<% end %>
-				  </td>
-				  <td><%= lesson.duration %></td>
-				  <td>
-					<% if user_signed_in? %>
+				  <% else %>
+					<img src="<%= lesson.thumbnail_url %>" alt="Thumbnail" style="width: 150px; height: auto;">
+				  <% end %>
+				<% else %>
+				  <span>썸네일 없음</span>
+				<% end %>
+			  </div>
+			  <div class="course-detail">
+				<div class="course-name">
+				  <% if user_signed_in? %>
+					<%= link_to lesson.lesson_name, course_class_list_path(@course, lesson), class: "text-primary" %>
+				  <% else %>
+					<%= lesson.lesson_name %>
+				  <% end %>
+				</div>
+				<div class="course-duration">
+				  <%= lesson.duration %>
+				</div>
+				<div class="course-action">
+				  <% if user_signed_in? %>
+					<% if current_user.take_courses.exists?(course_id: @course.id) %>
 					  <%= link_to "강의 보기", course_class_list_path(@course, lesson), class: "btn btn-primary" %>
 					<% else %>
-					  <span class="text-danger">로그인 후 이용 가능</span>
+					  <span class="btn btn-primary">결제 후 이용 가능</span>
 					<% end %>
-				  </td>
-				</tr>
-			  <% end %>
-			</tbody>
-		</table>
-
+				  <% else %>
+					<span class="btn btn-primary">로그인 후 이용 가능</span>
+				  <% end %>
+				</div>
+			  </div>
+			</div>
+		  <% end %>
+		</div>
 		<h2>수강평</h2>
-
+		<div class="courserivew">
 		<% if @reviews.present? && @reviews.any? %>
 		  <ul class="list-group">
 			<% @reviews.each do |review| %>
@@ -167,26 +167,31 @@
 			<% end %>
 		  </ul>
 		<% else %>
-		  <p>등록된 수강평이 없습니다.</p>
+		  <p style="color: #212529; font-size: 1rem;">등록된 수강평이 없습니다.</p>
 		<% end %>
 
 		<!-- 수강평 작성 -->
-		<% if user_signed_in? && current_user.take_courses.exists?(course_id: @course.id) %>
-		  <h3>수강평 작성</h3>
-		  <%= form_with model: @review, url: course_reviews_path(@course), method: :post, local: true do |f| %>
-			<div class="form-group">
-			  <%= f.label :rating, "평점 (1~5)" %>
-			  <%= f.number_field :rating, min: 1, max: 5, required: true, class: "form-control" %>
+			<div class="coursesub">
+				<% if user_signed_in? && current_user.take_courses.exists?(course_id: @course.id) %>
+				  <h3>수강평 작성</h3>
+				  <%= form_with model: @review, url: course_reviews_path(@course), method: :post, local: true do |f| %>
+					<div class="form-group" style=" display: flex; gap:10px; margin-bottom: 20px; ">
+					  <%= f.label :rating, "평점:" %>
+					  <%= f.number_field :rating, min: 1, max: 5, required: true, class: "form-control" %>
+					</div>
+					<div class="form-group">
+					  <%= f.label :review, "수강평" %>
+					  <%= f.text_area :review, required: true, class: "form-control" %>
+					</div>
+					<div class="btnwrapper">
+						<%= f.submit "등록", class: "registrationbtn btn-success mt-2" %>
+					</div>
+				  <% end %>
+				<% else %>
+				  <p style="display:flex;color: #adb5bd; font-size: 0.875rem;justify-content: center; align-items: center;">수강평을 작성하려면 강의를 수강해야 합니다.</p>
+				<% end %>
 			</div>
-			<div class="form-group">
-			  <%= f.label :review, "수강평" %>
-			  <%= f.text_area :review, required: true, class: "form-control" %>
-			</div>
-			<%= f.submit "등록", class: "btn btn-success mt-2" %>
-		  <% end %>
-		<% else %>
-		  <p>수강평을 작성하려면 강의를 수강해야 합니다.</p>
-		<% end %>
+		</div>
 	</div>
 	<div class="css-ks8w16 mantine-1avyp1d">
 		<div class="mantine-Stack-root css-y48vtv mantine-14kdbyl">
@@ -210,7 +215,7 @@
 					<% elsif current_user&.payment_items&.exists?(course_id: @course.id) %>
 					  <button class="btncour btn-secondary" disabled>이미 수강신청된 강의</button>
 					<% else %>
-					  <%= link_to '수강신청 하기', baskets_path(course_id: @course.id), method: :post, class: "btn btn-primary" unless current_user.nil? %>
+					  <%= button_to '수강신청 하기', baskets_path(course_id: @course.id), method: :post, class: "btncour btn-primary" unless current_user.nil? %>
 					<% end %>
 				</div>
 			</div>
@@ -299,5 +304,3 @@
 		</div>
 	</div>
 </div>
-<%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-primary' %> |
-<%= link_to 'Back', courses_path, class: 'btn btn-secondary' %>

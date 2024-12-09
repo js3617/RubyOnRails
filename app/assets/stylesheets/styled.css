@@ -40,6 +40,7 @@ button {
   margin: 0 auto;
   box-sizing: border-box;
   position: relative;
+	overflow: hidden;
 }
 
 
@@ -112,7 +113,7 @@ nav {
 }
 
 .dropdown-content {
-  position: absolute;
+  position: fixed;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -614,12 +615,12 @@ header .inner__links li a.active {
 }
 
 .welcome-course__swiper {
-  overflow: hidden;
 	width: 20%
 }
 
 .welcome-course__swiper .swiper-wrapper {
   padding: 6px 0;
+	gap: 10px;
 }
 
 .welcome-course__prev-btn,
@@ -997,12 +998,12 @@ header .inner__links li a.active {
 }
 
 .new-course .new-course__swiper {
-  overflow: hidden;
-	width: 25%;
+	width: 20%;
 }
 
 .new-course .new-course__swiper .swiper-wrapper {
   padding: 6px 0;
+	gap: 10px;
 }
 
 .new-course .new-course__prev-btn,
@@ -2147,3 +2148,115 @@ footer .info__right a {
   align-items: center;
 }
 /* footer */
+
+
+
+
+.inyoutube{
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+
+.inyoutubn {
+	padding: 0px 1.125rem;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    display: flex;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: 0.0625rem solid rgb(206, 212, 218);
+    background-color: rgb(255, 255, 255);
+    color: rgb(33, 37, 41);
+}
+
+.course-item{
+	display: flex;
+}
+
+.course-list{
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.course-detail{
+	flex-grow: 1;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.courserivew{
+	padding-top: 3.4375rem;
+    padding-bottom: 3.4375rem;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.editbtn{
+	color: #ffffff;
+}
+
+.backbtn{
+	color: #ffffff;
+}
+
+.editbackwrapper{
+	display: flex;
+	gap: 20px;
+}
+
+.course-name{
+	font-size: 0.825rem;
+	font-weight: bold;
+}
+
+.course-duration{
+	font-size: 0.75rem;
+}
+
+.coursesub{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.btnwrapper{
+	display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.registrationbtn{
+	cursor: pointer;
+    border: 0.0625rem solid #dbdbdb;
+    background-color: transparent;
+    color: #000000;
+    height: 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+
+.form-control{
+	border: 0.0625rem solid #dbdbdb;
+	border-radius: 0.5rem;
+}
+
+.cuponwrapper{
+	display: flex;
+	gap: 5px;
+}
+
+.userinfowrapper{
+	display: flex;
+	justify-content: space-between;
+}
