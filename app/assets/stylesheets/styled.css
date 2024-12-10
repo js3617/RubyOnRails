@@ -43,6 +43,19 @@ button {
 	overflow: hidden;
 }
 
+.inners{
+	color: #616568;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -.3px;
+  line-height: 1.43;
+  max-width: 1200px;
+  padding: 0 32px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
 
 /* nav */
 nav {
@@ -144,46 +157,46 @@ nav {
 	padding: 8px 16px;
 }
 
-nav .inner {
+nav .inners {
   height: 64px;
   display: flex;
 }
 
-nav .inner .logo {
+nav .inners .logo {
   margin-right: 10px;
   display: flex;
 }
 
-nav .inner .logo a {
+nav .inners .logo a {
   width: 110px;
   display: flex;
 }
 
-nav .inner .logo a img {
+nav .inners .logo a img {
   max-width: 100%;
   object-fit: contain;
 }
 
-nav .inner .menu {
+nav .inners .menu {
   display: flex;
   flex-grow: 1;
 }
 
-nav .inner .menu__left {
+nav .inners .menu__left {
   display: flex;
 }
 
-nav .inner .menu__left > ul {
+nav .inners .menu__left > ul {
   display: flex;
 }
 
-nav .inner .menu__left > ul > li {
+nav .inners .menu__left > ul > li {
   padding: 8px 0;
   display: flex;
   position: relative;
 }
 
-nav .inner .menu__left > ul > li a {
+nav .inners .menu__left > ul > li a {
   color: #4a4a4a;
   font-size: 16px;
   line-height: 24px;
@@ -193,18 +206,18 @@ nav .inner .menu__left > ul > li a {
   align-items: center;
 }
 
-nav .inner .menu__left > ul > li a:hover { color: #00c471; }
+nav .inners .menu__left > ul > li a:hover { color: #00c471; }
 
-nav .inner .menu__left > ul > li.lecture:hover > .dropdown,
-nav .inner .menu__left > ul > li.community:hover > .dropdown,
-nav .inner .menu__left > ul > li.lecture:hover::before,
-nav .inner .menu__left > ul > li.community:hover::before,
-nav .inner .menu__left > ul > li.lecture:hover::after,
-nav .inner .menu__left > ul > li.community:hover::after {
+nav .inners .menu__left > ul > li.lecture:hover > .dropdown,
+nav .inners .menu__left > ul > li.community:hover > .dropdown,
+nav .inners .menu__left > ul > li.lecture:hover::before,
+nav .inners .menu__left > ul > li.community:hover::before,
+nav .inners .menu__left > ul > li.lecture:hover::after,
+nav .inners .menu__left > ul > li.community:hover::after {
   display: block;
 }
 
-nav .inner .menu__left > ul > li .dropdown {
+nav .inners .menu__left > ul > li .dropdown {
   display: none;
   width: max-content;
   border-radius: 2px;
@@ -216,14 +229,14 @@ nav .inner .menu__left > ul > li .dropdown {
   right: 0;
 }
 
-nav .inner .menu__left > ul > li .dropdown > li a {
+nav .inners .menu__left > ul > li .dropdown > li a {
   color: #4a4a4a;
   font-size: 14px;
   padding: 6px 16px;
   line-height: 1.5;
 }
 
-nav .inner .menu__left > ul > li .dropdown .separator {
+nav .inners .menu__left > ul > li .dropdown .separator {
   width: calc(100% - 20px);
   height: 1px;
   margin: 12px auto;
@@ -231,37 +244,37 @@ nav .inner .menu__left > ul > li .dropdown .separator {
   opacity: .3;
 }
 
-nav .inner .menu__left > ul > li .dropdown i {
+nav .inners .menu__left > ul > li .dropdown i {
   font-size: 14px;
   margin-left: auto;
 }
 
-nav .inner .menu__left > ul > li.lecture .dropdown {
+nav .inners .menu__left > ul > li.lecture .dropdown {
   width: 180px;
   box-shadow: 8px 5px 8px 1px rgba(0,10,18,.1), 0 0 0 1px rgba(0,10,18,.1);
 }
 
-nav .inner .menu__left > ul > li.lecture > .dropdown {
+nav .inners .menu__left > ul > li.lecture > .dropdown {
   left: 0;
   right: auto;
 }
 
-nav .inner .menu__left > ul > li.lecture .dropdown .dropdown {
+nav .inners .menu__left > ul > li.lecture .dropdown .dropdown {
   height: 100%;
   top: 0;
   left: 180px;
 }
 
-nav .inner .menu__left > ul > li.lecture li:hover > .dropdown {
+nav .inners .menu__left > ul > li.lecture li:hover > .dropdown {
   display: block;
 }
 
-nav .inner .menu__right {
+nav .inners .menu__right {
   flex-grow: 1;
   display: flex;
 }
 
-nav .inner .menu__right .search {
+nav .inners .menu__right .search {
   padding: 8px;
   flex-grow: 1;
   position: relative;
@@ -269,7 +282,7 @@ nav .inner .menu__right .search {
   align-items: center;
 }
 
-nav .inner .menu__right .search input {
+nav .inners .menu__right .search input {
   color: #5f5f5f;
   font-size: 16px;
   line-height: 24px;
@@ -283,32 +296,32 @@ nav .inner .menu__right .search input {
   box-sizing: border-box;
 }
 
-nav .inner .menu__right .search input:focus {
+nav .inners .menu__right .search input:focus {
   outline: .04rem auto #1dc078;
 }
 
-nav .inner .menu__right .search input:hover {
+nav .inners .menu__right .search input:hover {
   border-color: #b5b5b5;
 }
 
-nav .inner .menu__right .search .search-icon {
+nav .inners .menu__right .search .search-icon {
   position: absolute;
   top: 21px;
   right: 20px;
   cursor: pointer;
 }
 
-nav .inner .menu__right .search .search-icon i {
+nav .inners .menu__right .search .search-icon i {
   font-size: 18px;
 }
 
-nav .inner .menu__right .nav-btns {
+nav .inners .menu__right .nav-btns {
   padding: 8px 0 8px 12px;
   display: flex;
   align-items: center;
 }
 
-nav .inner .menu__right .nav-btns button {
+nav .inners .menu__right .nav-btns button {
   font-size: 16px;
   line-height: 1;
   text-align: center;
@@ -319,13 +332,13 @@ nav .inner .menu__right .nav-btns button {
   display: block;
 }
 
-nav .inner .menu__right .nav-btns button.signin {
+nav .inners .menu__right .nav-btns button.signin {
   color: #363636;
   margin-right: 8px;
   background-color: #fff;
 }
 
-nav .inner .menu__right .nav-btns button.joinin {
+nav .inners .menu__right .nav-btns button.joinin {
   color: #fff;
   background-color: #ff7867;
 }
@@ -339,7 +352,7 @@ header {
   box-sizing: border-box;
 }
 
-header .inner {
+header .inners {
   height: 40px;
   display: flex;
   justify-content: space-between;
@@ -2194,7 +2207,6 @@ footer .info__right a {
 }
 
 .courserivew{
-	padding-top: 3.4375rem;
     padding-bottom: 3.4375rem;
 	display: flex;
 	justify-content: center;
@@ -2259,4 +2271,83 @@ footer .info__right a {
 .userinfowrapper{
 	display: flex;
 	justify-content: space-between;
+}
+
+.list-group{
+	display: flex;
+    width: 100%;
+    padding: 0;
+	flex-direction: column;
+}
+
+.list-group-item{
+	width: 100%;
+	border-bottom: 1px solid #dddddd;
+    padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: rgb(33, 37, 41);
+  margin: 10px 0 10px 0;
+}
+
+.like-svg {
+  padding: 0px 1.125rem;
+    appearance: none;
+    text-align: left;
+    text-decoration: none;
+    box-sizing: border-box;
+    height: 2.25rem;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    display: flex;
+    width: auto;
+    border-radius: 9999px;
+    position: relative;
+    line-height: 1;
+    font-size: 0.725rem;
+    user-select: none;
+    cursor: pointer;
+    border: 0.0625rem solid rgb(206, 212, 218);
+    background-color: rgb(255, 255, 255);
+    color: rgb(33, 37, 41);
+	justify-content: center;
+	align-items: center;
+}
+
+.like-svg svg {
+  font-size: 14px; /* Adjust size as needed */
+  margin-right: 8px; /* Spacing between icon and text */
+}
+
+.like-count {
+  font-size: 14px;
+}
+
+
+.commentimg{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.commentinfo{
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.commentdate{
+	display: flex;
+	flex-direction: column;
+}
+
+.datetime{
+	margin: 0;
+	color: rgb(33, 37, 41);
 }

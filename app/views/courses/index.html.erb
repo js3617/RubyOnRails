@@ -63,7 +63,7 @@
 	</script>
 	<script>
 	  document.addEventListener("DOMContentLoaded", function () {
-		const swiper = new Swiper('.swiper-container', {
+		const swiper = new Swiper('.swiper-containers', {
 		  slidesPerView: 5, // 한번에 보여줄 슬라이드 개수
 		  spaceBetween: 7, // 슬라이드 간 간격(px)
 		  navigation: {
@@ -502,7 +502,7 @@
 		  </div>
 		<% end %>
 
-		<div class="swiper-container">
+		<div class="swiper-containers">
 		  <div class="swiper-wrapper">
 			<% @courses.each do |course|%>
 			  <div class="swiper-slide" style="margin-left: 5px;">
